@@ -1,0 +1,760 @@
+body {
+	color: #333;
+}
+
+.clearfix {
+	clear: both;
+}
+
+.largeText {
+	font-size: 108%;
+}
+
+a {
+	color: #3B5998;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/* 
+------------------------------------------
+=HEADER
+------------------------------------------*/
+#hd {
+	background:transparent url(../images/fb_menubar_background.png) no-repeat center bottom;
+	font-size: 93%;
+}
+
+#hd #logo {
+	display: block;
+	float: left;
+	width: 105px;
+}
+
+#hd #logo a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 153.9%;
+	display: block;
+	padding: 3px 0px 5px 15px;
+}
+
+#primaryNavigation {
+	float: left;
+}
+
+#auxillaryNavigation {
+	float: right;
+	padding-right: 10px;
+}
+
+.navigationNode {
+	float:left;
+	margin: 0px 4px 0px 0px;
+}
+
+.navigationNode a {
+	color: #fff;
+	display: block;
+	padding: 7px 7px 7px 8px;
+}
+
+.navigationNode a:hover {
+	text-decoration: none;
+	background: #5C75AA;
+}
+
+/* 
+------------------------------------------
+=BODY
+------------------------------------------*/
+#bd {
+	margin:0pt auto;
+	width: 920px;
+	padding-top: 10px;
+}
+
+/* 
+------------------------------------------
+=FOOTER
+------------------------------------------*/
+#ft {
+	clear: both;
+	text-align: center;
+	color: #bbb;
+	border-top: 1px solid #eee;
+	margin: 10px 0px;
+	padding-top: 10px;
+}
+
+#ft p.copy {
+	margin: 10px;
+}
+
+
+/* 
+------------------------------------------
+=ADS
+------------------------------------------*/
+#ads {
+	background: #3a3a3a;
+	height: 600px;
+	color: #fff;
+}
+
+/* 
+------------------------------------------
+=FILTER
+------------------------------------------*/
+#filters {
+	background: #F7F7F7;
+	padding: 10px 10px 10px 10px;
+	font-size: 85%;
+	border: 1px solid #eee;
+}
+
+#filters h2 {
+	font-size: 121.1%;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+#filters .filter {
+	padding: 5px;
+	border: 1px solid #eee;
+	background: #fff;
+	border-bottom: none;
+}
+
+#filters .filter .title {
+	font-weight: bold;
+	padding-bottom: 3px;
+	color: #000;
+}
+
+#filters input.submit {
+	display: block;
+	margin-top: 10px;
+}
+
+#zipcodeForm .milesWrapper {
+	margin-bottom: 5px;
+}
+
+#zipcodeForm .zipcodeWrapper {
+}
+
+/* 
+------------------------------------------
+=PROFILES
+------------------------------------------*/
+#profileWrapper {
+	border-left: 1px solid #eee; 
+	border-right: 1px solid #eee; 
+	padding: 10px;
+	background: #f7f7f7;
+	margin: 10px 0px;
+}
+
+#profiles {
+	text-align: left;
+}
+
+#profiles .profile {
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+	border: 1px solid #eee;
+	padding-bottom: 5px;
+	background: #fff;
+}
+
+.profile .img {
+	float: left;
+	width: 115px;
+	text-align: center;
+}
+
+.profile .img img {	
+	padding: 4px;
+	border: 1px solid #ccc;
+	background: #fff;
+	margin-bottom: 5px;
+}
+
+.profile .summary {
+	float: left;
+	padding: 2px 0px 0px 10px;
+	overflow: hidden;
+}
+
+.profile .summary .info {
+	font-weight: bold;
+}
+
+.profile .summary .info .location {
+	display: block;
+}
+
+.profile .summary .lastLogin {
+	color: #aaa;
+	font-size: 93%;
+}
+
+.profile .summary .lastLogin .onlineNow {
+	color: #080;
+}
+
+.profile .summary ul.facts {
+	margin-bottom: 5px;
+}
+
+.profile .summary ul.facts li {
+	list-style-type: disc;
+	margin-left: 30px;
+}
+
+.profile .summary a.fave, .profile .summary a.email,
+.profile .summary a.moreInfoLink {
+	margin-right: 5px;
+}
+
+.profile .moreInfo {
+	float: left;
+	clear: both;
+	width: 100%;
+	margin-top: 5px;
+	padding-top: 5px;
+	padding-left: 10px;
+	display: none;
+}
+
+.profile .moreInfo .info {
+	margin-bottom: 5px;
+}
+
+.profile .moreInfo .info h3 {
+	font-weight: bold;
+}
+
+.profile .moreInfo .info p {
+	margin-left: 10px;
+}
+
+
+/* 
+------------------------------------------
+=PAGINATION
+------------------------------------------*/
+.paginationBox {
+	clear: both;
+	margin: 0px auto;
+	width: 100%;
+	text-align: right;
+	background-color: #f2f2f2;
+	padding: 3px 0px 3px 3px;
+	font-weight: bold;
+	font-size: 0.9em;
+}
+ 
+.paginationBox a:link, .paginationBox a:visited { 
+	padding: 2px 6px; 
+	border: 1px solid #ddd; 
+	background: #fff; 
+	text-decoration: none;
+}
+ 
+.paginationBox a:hover {
+	color: #fff; 
+	background: #03c; 
+	border-color: #000; 
+	text-decoration: none;
+}
+ 
+.paginationBox .thisPage {
+	padding: 2px 6px; 
+	font-weight: bold; 
+	background: #f2f2f2; 
+	color: #800000; 
+}
+ 
+.paginationBox .label {
+	padding-right: 5px;
+}
+ 
+.paginationBox .prev { 
+	margin-right: 5px;
+	padding: 2px 6px; 
+	background: #fff; 
+}
+ 
+.paginationBox .next { 
+	margin-left: 5px;
+	padding: 2px 6px; 
+	background: #fff;
+}
+ 
+.paginationBox .nResults {
+	float: left;
+	color: #000;
+}
+ 
+.page {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 
+------------------------------------------
+=BASIC FORM STYLING
+------------------------------------------*/
+.standardForm {
+	background: #f2f2f2;
+	border: 1px solid #ddd;
+	padding: 10px 5px 5px 5px;
+}
+
+html .standardForm legend {
+	position: absolute;
+	top: -1em;
+	left: 0.5em;
+	padding: 0.4em 1.0em;
+	background: #a5cc7a;
+	color: #fff;
+	font-weight: bold;
+}
+
+html .standardForm fieldset {
+	position: relative;
+	margin-top: 1em;
+	padding: 2em 0em 2em 0em;
+	border: 2px solid #a5cc7a;
+}
+
+p.allFieldsRequiredMsg {
+	color: #880000;
+}
+
+.standardForm label {
+	width: 10em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block;
+	font-weight: bold;
+}
+
+.standardForm label.required {
+	color: #880000;
+}
+
+.standardForm input {
+	font-size: 1.0em;
+}
+
+.standardForm input:focus {
+	background: #fff9d8;
+}
+
+.standardForm .formRow {
+	white-space: nowrap;
+	padding-bottom: 0.5em;
+}
+
+.standardForm .submit {
+	margin-left: 10.5em;
+}
+
+.standardForm .fieldWithErrors {
+	margin: 2px;
+	padding: 2px;
+	background-color: #a30000;
+	display: table;
+}
+
+.standardForm #errorExplanation {
+	width: 400px;
+	margin: 0 auto;
+	border: 2px solid #a30000;
+	padding: 7px;
+	padding-bottom: 12px;
+	margin-bottom: 20px;
+}
+
+.standardForm #errorExplanation h2 {
+	text-align: left;
+	font-weight: bold;
+	padding: 5px 5px 5px 15px;
+	font-size: 14px;
+	margin: -7px;
+	background-color: #a30000;
+	color: #fff;
+}
+
+.standardForm #errorExplanation p {
+	color: #000;
+	margin: 1em 0 0 0;
+	padding: 5px;
+}
+
+.standardForm #errorExplanation ul li {
+	font-size: 12px;
+	list-style: disc;
+}
+
+textarea.large {
+	width: 50%;
+	height: 100px;
+}
+
+/* 
+------------------------------------------
+=REGISTER
+------------------------------------------*/
+#register h2, #whatIs h2 {
+	font-size: 146.5%;
+	margin-bottom: 10px;
+}
+
+#register p, #whatIs p {
+	margin-bottom: 10px;
+}
+
+#whatIs ul li {
+	list-style-type: disc;
+	margin-left: 30px;
+}
+
+#whatIs h3 {
+	margin: 10px 0px;
+	font-weight: bold;
+}
+
+/* 
+------------------------------------------
+=ACCOUNT
+------------------------------------------*/
+#editAccountInfo .selector {
+	margin-top: 25px;
+}
+
+#editAccountInfo .selector.first {
+	margin-top: 0px;
+}
+
+
+/* 
+------------------------------------------
+=INFO SECTIONS
+------------------------------------------*/
+.selector {
+	background: transparent url(../images/tab-line.gif) repeat-x scroll 0 50%;
+	float: left;
+	width: 100%;
+}
+
+.selector h2 {
+	background: #FFFFFF none repeat scroll 0 0;
+	clear: left;
+	color: #4E463F;
+	float: left;
+	font-size: 153.9%;
+	font-weight: normal;
+	margin: 0 0 0.2em;
+	padding-right: 5px;
+}
+
+.selector .tool, .selector .tool:visited {
+	background:#FFFFFF none repeat scroll 0 0;
+	border: 4px solid #FFFFFF;
+	color: #E37400;
+	float: right;
+	font-weight: bold;
+	height: 20px;
+	margin-top: 2px;
+	padding: 2px 1px;
+	text-decoration: none;
+	word-spacing: -0.1em;
+}
+
+.tool {
+	display:block;
+	float:left;
+	font-size:85%;
+	min-height:20px;
+	padding:4px 6px;
+}
+
+.selector span.tool {
+	background:#E37400 url(../images/menu-current.gif) no-repeat scroll 100% -90px;
+	height:auto;
+	padding:0;
+}
+
+.selector span.tool strong {
+	background: transparent url(../images/menu-current.gif) no-repeat scroll 0 -90px;
+	color: #FFFFFF;
+	display: block;
+	height: 16px;
+	padding: 2px 6px;
+	font-weight: bold;
+}
+
+.selector a  {
+	text-decoration: none;
+}
+
+.infoSection {
+	margin-left: 15px;
+}
+
+.infoSection .infoRow .label {
+	font-weight: bold;
+}
+
+/* 
+------------------------------------------
+=EDIT PROFILE
+------------------------------------------*/
+.tips {
+	color: #4E463F;
+	margin-bottom: 10px;
+}
+
+/* 
+------------------------------------------
+=PHOTO GALLERY
+------------------------------------------*/
+ul#galleries, ul#gallery {
+	background: #F7F7F7;
+	border: 1px solid #ddd;
+	width: 100%;
+	margin: 0px auto 0 auto;
+	clear: both;
+}
+
+ul#gallery {
+	margin-bottom: 10px;
+}
+
+.paginationBox.galleryPagination {
+	width: 100%;
+}
+
+ul#galleries li, ul#gallery li {
+	float: left;
+	width: 160px;
+	text-align: center;
+	vertical-align: middle;
+	padding:8px 16px 8px 8px;
+	position: relative;
+}
+
+ul#galleries li img, ul#gallery li img {
+	padding: 4px;
+	background: #fff;
+	border: 1px solid #ccc;
+	margin-bottom: 5px;
+}
+
+ul#galleries li a.title, ul#galleries li span.count, ul#gallery li span.description {
+	padding-left: 4px;
+	text-align: left;
+	display: block;
+}
+
+ul#galleries li a.title {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+ul#galleries li .count, #galleryInfo .count, #gallery .photo .description {
+	color: #6F6F6F;
+}
+
+#galleryInfo {
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	margin: 0px auto 10px auto;
+	position: relative;
+	padding-left: 25px;
+}
+
+#galleryInfo .title {
+	font-size: 138.5%;
+	font-weight: bold;
+	display: block;
+	color: #3B5998;
+}
+
+.newMedia {
+	float: right;
+	background: transparent url(../images/new_media_button_plus.gif) no-repeat scroll 9px center;
+	color: #333333;
+	display: block;
+	font-weight: bold;
+	padding: 5px 9px 5px 22px;
+}
+
+#galleryInfo .actions {
+	position: absolute;
+	top: 2px;
+	left: 0;
+}
+
+#galleryInfo a.delete {
+	background: transparent url(../images/x_to_hide.gif) no-repeat scroll 0%;
+	display: block;
+	height: 14px;
+	width: 13px;
+}
+
+#galleryInfo a.delete:hover {
+	background: #3B5998 url(../images/x_to_hide_hover.gif) no-repeat scroll 0%;
+}
+
+.edit_link {
+	display: none;
+	position: absolute;
+	background: url(../images/editor_icon.gif) no-repeat 0px top;
+	height: 18px;
+	width: 18px;
+	top: 9px;
+	right: 22px;
+	border-bottom:1px solid #F7F7F7;
+	border-left:1px solid #F7F7F7;
+}
+
+.mouseover .edit_link {
+	display: block;
+}
+.mouseover .edit_link:hover {
+	background-position: 0px -18px;
+	text-decoration: none;
+}
+
+/* 
+------------------------------------------
+=PRIVATE MESSAGES
+------------------------------------------*/
+#mailboxes {
+	clear: both;
+}
+
+#mailboxes li {
+	float: left;
+	padding: 5px 0px;
+	text-align: center;
+}
+
+#mailboxes li a {
+	padding: 5px 10px 6px 10px;
+	width: 120px;
+	background: #ccc;
+	color: #333;
+	font-weight: bold;
+	font-size: 93%;
+	border-color: #898989;
+	border-style: solid solid solid none;
+	border-width: 1px 1px 1px 0pt;
+}
+
+#mailboxes li a.current {
+	background: #6D84B4;
+	color: #fff;
+	border: 1px solid #3B5998;
+	border-left: 1px solid #36538F;
+	border-right: 1px solid #5973A9;
+}
+
+#mailboxes li a.current:hover {
+	text-decoration: none;
+}
+
+#inbox, #messageDetails {
+	background: #F7F7F7;
+	border: 1px solid #ddd;
+	border-top: 1px solid #ccc;
+	margin: 0px auto 0 auto;
+	padding: 10px;
+}
+
+ul.messages li {
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 5px;
+	float: left;
+	width: 695px;
+	margin-bottom: 10px;
+}
+
+.messages .photo {
+	float: left;
+	width: 80px;
+	text-align: center;
+	padding-right: 15px;
+}
+
+.messages .photo img {
+	padding: 4px;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.messages .metadata {
+	float: left;
+	width: 175px;
+}
+
+.messages .metadata .from {
+	display: block;
+}
+
+.messages .metadata .sentOn {
+	display: block;
+	color: #777;
+	font-size: 85%;
+}
+
+.messages .message {
+	float: left;
+	width: 400px;
+}
+
+.messages .message .subject {
+	display: block;
+}
+
+.messages .message .snippet {
+	display: block;
+	color: #8D9CCF;
+}
+
+.messages .messageActions {
+	float: right;
+}
+
+.messages a.delete {
+	background: transparent url(../images/x_to_hide.gif) no-repeat scroll 0%;
+	display: block;
+	height: 14px;
+	width: 13px;
+}
+
+.messages a.delete:hover {
+	background: #3B5998 url(../images/x_to_hide_hover.gif) no-repeat scroll 0%;
+}
+
+#messageHeader {
+	font-size: 108%;
+	font-weight: bold;
+	width: 500px;
+	margin: 0 auto 10px auto;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 5px;
+}
