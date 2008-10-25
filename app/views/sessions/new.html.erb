@@ -1,16 +1,39 @@
-<h1>Log In</h1>
-
-<% form_tag session_path do -%>
-<p><%= label_tag 'login' %><br />
-<%= text_field_tag 'login', @login %></p>
-
-<p><%= label_tag 'password' %><br/>
-<%= password_field_tag 'password', nil %></p>
-
-<!-- Uncomment this if you want this functionality
-<p><%= label_tag 'remember_me', 'Remember me' %>
-<%= check_box_tag 'remember_me', '1', @remember_me %></p>
--->
-
-<p><%= submit_tag 'Log in' %></p>
-<% end -%>
+<div class="yui-g">
+	<div class="yui-u first">
+		<div id="register">
+			<h2>Member Login</h2>
+			<p>Login to access your account</p>
+			<% form_tag session_path, :class => "standardForm" do %>
+				<div class="formRow">
+					<label for="username">Username:</label> 
+					<%= text_field_tag 'login', @login %></p>
+				</div>
+				
+				<div class="formRow">
+					<label for="password">Password:</label> 
+					<%= password_field_tag 'password', nil %></p>
+				</div>
+				<div class="formRow">
+					<%= submit_tag 'Login', :class => "submit" %>
+					or <%= link_to 'Forgot your login info?', forgot_path %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="yui-u">
+		<div id="whatIs">
+			<h2>What Is Singles?</h2>
+			<p class="largeText">Singles is a tool for tracking your restaurant experiences:</p>
+			<ul class="largeText">
+				<li><b>Organize</b> your restaurant visits by cusine type, tags, and location</li>
+				<li><b>Add photos</b> from your experiences</li>
+				<li><b>Create a wishlist</b> of the places you want to visit next</li>
+				<li><b>View maps</b> of your visits</li>
+			</ul>
+			<h3>
+				<%= link_to 'Sign up now', new_user_path %>
+				to get started.
+			</h3>
+		</div>
+	</div>
+</div>

@@ -1,7 +1,19 @@
-<% form_tag url_for(:action => "update", :id => params[:id]) do %>
-    Password:<br />
-    <%= password_field_tag :password %><br />
-    Confirm Password:<br />
-    <%= password_field_tag :password_confirmation %><br />
-    <%= submit_tag "Reset Your Password" %>
-<% end %>
+<% @user.password = @user.password_confirmation = nil %>
+<div class="yui-g">
+	<p>Change your password below.</p>
+	
+	<% form_for :user, :url => {:action => "update", :id => params[:id]}, :html => {:class => "standardForm"} do |f| -%>
+		<%= error_messages_for :user %>
+		<div class="formRow">
+			<%= label_tag 'password' %>
+			<%= f.password_field :password %>
+		</div>
+		<div class="formRow">
+			<%= label_tag 'password_confirmation', 'Confirm Password' %>
+			<%= f.password_field :password_confirmation %>
+		</div>
+		<div class="formRow">
+			<%= submit_tag "Reset Password", :class => "submit" %>
+		</div>
+	<% end %>
+</div>

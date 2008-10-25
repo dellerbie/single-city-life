@@ -2,69 +2,68 @@
 <html>
 	<head>
 		<title><%= @title || "#{APP_NAME}" %></title>
+		<%= stylesheet_link_tag "reset-fonts-grids.css" %>
 		<%= stylesheet_link_tag "application.css" %>
 	</head>
 	<body>
-		<div id="page">
-			<div id="header">
+		<div id="doc4" class="yui-t1">
+			<div id="hd">
 				<div id="logo">
-					<a class="homeLink" href="/">Home</a>
+					<%= link_to "Singles", root_url %>
 				</div>
-				<div id="nav">
-					<ul>
+				<div id="navigation">
 					<% if logged_in? %>
-						<li>Logged in as: <%= link_to h(current_user.login.capitalize), user_path(current_user) %></li>
-						<li><%= link_to 'Edit Profile', edit_user_path(current_user) %></li>
-						<li><%= link_to 'Log Out', logout_url %></li>
-					<% else %>
-						<li><%= link_to 'Log In', new_session_path %></li>
-						<li><%= link_to 'Sign Up', new_user_path %></li>      
-						<li><%= link_to 'Forgot Password?', forgot_password_path %></li>    
-					<% end %>     
-					</ul>
+					<div id="primaryNavigation">
+						<div class="navigationNode">
+							<a href="myprofile.html">Profile</a>
+						</div>
+						<div class="navigationNode">
+							<a href="myphotos.html">Photos</a>
+						</div>
+						<div class="navigationNode">
+							<a href="messages.html">Messages (322)</a>
+						</div>
+					</div>
+					<% end %>
+					<div id="auxillaryNavigation">
+						<% if logged_in? %>
+							<div class="navigationNode">
+								<%= link_to 'Logout', session_url, :method => :delete %>
+							</div>
+							<div class="navigationNode">
+								<a href="myaccount.html">Account</a>
+							</div>
+						<% else %>
+							<div class="navigationNode">
+								<%= link_to 'Login', new_session_path %>
+							</div>
+							<div class="navigationNode">
+								<%= link_to 'Register', new_user_path %>
+							</div>
+							<div class="navigationNode">
+								<%= link_to 'Forgot Password?', forgot_path %>
+							</div>
+						<% end %>
+					</div>
 				</div>
+				<div class="clearfix"></div>
 			</div>
-
-			<div id="content">
-				<% if flash[:notice] -%>
-					<p class="notice"><%= flash[:notice] %></p>
+			<div id="bd">
+				<% if flash[:notice] || flash[:error] -%>
+					<p class="notice"><%= flash[:notice] || flash[:error] %></p>
 				<% end -%>
 				<%= @content_for_layout %>
 			</div>
-			
-			<% if ENV["RAILS_ENV"] == "development" %>
-			<div id="debugConsole">
-					<h3>Debug</h3>
-					<a href="#" onclick="Element.toggle('params_debug_info');return false;">params</a> |
-					<a href="#" onclick="Element.toggle('session_debug_info');return false;">session</a> |
-					<a href="#" onclick="Element.toggle('request_debug_info');return false;">request</a>				
-				
-					<div id="params_debug_info" class="debugInfo" style="display: none;">
-						<span class="heading">Params</span>
-						<%= debug(params) %>
-					</div>
-				
-					<div id="session_debug_info" class="debugInfo" style="display: none;">
-						<span class="heading">Session</span>
-						<%= debug(session) %>
-					</div>
-				
-					<div id="request_debug_info" class="debugInfo" style="display: none;">
-						<span class="heading">Request</span>
-						<%= debug(request) %>
-					</div>					
-			</div>
-			<% end %>
-			
-			<div id="footer">
+			<div id="ft">
 				<div class="about">
-					<%= link_to "About Us", :controller => "index" %> |
-					<%= link_to "Help", :controller => "index" %>
-				</div>
-				<p>
-					&copy; 2008 <%= link_to "dellerbie", "http://www.dellerbie.com/" %>
-				</p>
+	                <a href="#">About Us</a> | 
+	                <a href="#">Contact Us</a> | 
+	                <a href="#">Terms of Service</a> | 
+	                <a href="#">Privacy Policy</a> | 
+	                <a href="#">Advertise</a> | 
+	                <a href="#">Help</a>
+	            </div>
+	            <p class="copy">&copy; 2008 <a href="/">dellerbie</a></p>
 			</div>
-		</div>
 	</body>
 </html>

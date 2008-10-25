@@ -1,19 +1,48 @@
-<h1>Sign up as a new user</h1>
 <% @user.password = @user.password_confirmation = nil %>
 
-<%= error_messages_for :user %>
-<% form_for :user, :url => users_path do |f| -%>
-<p><%= label_tag 'login' %><br/>
-<%= f.text_field :login %></p>
-
-<p><%= label_tag 'email' %><br/>
-<%= f.text_field :email %></p>
-
-<p><%= label_tag 'password' %><br/>
-<%= f.password_field :password %></p>
-
-<p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
-<%= f.password_field :password_confirmation %></p>
-
-<p><%= submit_tag 'Sign up' %></p>
-<% end -%>
+<div class="yui-g">
+	<div class="yui-u first">
+		<div id="register">
+			<h2>
+				Create Your Single's Account
+			</h2>
+			<p class="allFieldsRequiredMsg">
+				All fields are required
+			</p>
+			
+			<% form_for :user, :url => users_path, :html => {:class => "standardForm"} do |f| -%>
+				<%= error_messages_for :user %>
+				<%= text_field_for f, "login", HTML_TEXT_FIELD_SIZE, DB_STRING_MAX_LENGTH %>
+				<%= text_field_for f, "email", HTML_TEXT_FIELD_SIZE, DB_STRING_MAX_LENGTH %>
+				<%= text_field_for f, "email_confirmation", HTML_TEXT_FIELD_SIZE, DB_STRING_MAX_LENGTH %>
+				
+				<div class="formRow">
+					<%= label_tag 'password' %>
+					<%= f.password_field :password %>
+				</div>
+				<div class="formRow">
+					<%= label_tag 'password_confirmation', 'Confirm Password' %>
+					<%= f.password_field :password_confirmation %>
+				</div>
+				<div class="formRow">
+					<%= recaptcha_tags %>
+				</div>
+				<div class="formRow">
+					<%= submit_tag "Register", :class => "submit" %>
+				</div>
+			<% end -%>
+		</div>
+	</div>
+	<div class="yui-u">
+		<div id="whatIs">
+			<h2>What Is Singles?</h2>
+			<p class="largeText">Singles is a tool for tracking your restaurant experiences:</p>
+			<ul class="largeText">
+				<li><b>Organize</b> your restaurant visits by cusine type, tags, and location</li>
+				<li><b>Add photos</b> from your experiences</li>
+				<li><b>Create a wishlist</b> of the places you want to visit next</li>
+				<li><b>View maps</b> of your visits</li>
+			</ul>
+		</div>
+	</div>
+</div>
