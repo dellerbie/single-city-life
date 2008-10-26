@@ -4,28 +4,46 @@ class User < ActiveRecord::Base
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
+  
+  has_one :profile
+  
+  VALID_GENDERS = ["Male", "Female"]
+  START_YEAR = 1900
+  VALID_DATES = DateTime.new(START_YEAR)..DateTime.now
+  ZIP_CODE_LENGTH = 5
 
   validates_presence_of     :login
-  validates_length_of       :login,    :within => 3..40
+  validates_length_of       :login,    :within => 6..15
   validates_uniqueness_of   :login
   validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
-
-  validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
-  validates_length_of       :name,     :maximum => 100
 
   validates_presence_of     :email
   validates_length_of       :email,    :within => 6..100 #r@a.wk
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
-  validates_confirmation_of  :email
+  validates_confirmation_of :email
+  
+
+  validates_presence_of   :gender
+  validates_inclusion_of  :gender,
+                          :in => VALID_GENDERS,
+                          :allow_nil => false,
+                          :message => "must be Male or Female"
+                          
+  validates_presence_of   :birthdate
+  validates_inclusion_of  :birthdate,
+                          :in => VALID_DATES,
+                          :allow_nil => true,
+                          :message => "is invalid"
+                          
+  validates_presence_of   :zipcode
+  validates_format_of     :zipcode, 
+                          :with => /(^$|^[0-9]{#{ZIP_CODE_LENGTH}}$)/,
+                          :message => "must be a five digit number"
 
   before_create :make_activation_code
 
-  # HACK HACK HACK -- how to do attr_accessible from here?
-  # prevents a user from submitting a crafted form that bypasses activation
-  # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :email_confirmation, :name, :password, :password_confirmation
-
+  attr_accessible :login, :email, :email_confirmation, :password, :password_confirmation, :gender, :birthdate, :zipcode
 
   # Activates the user in the database.
   def activate!

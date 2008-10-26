@@ -46,6 +46,27 @@ class UserTest < ActiveSupport::TestCase
       assert u.errors.on(:email)
     end
   end
+  
+  def test_should_require_birthdate
+    assert_no_difference 'User.count' do
+      u = create_user(:birthdate => nil)
+      assert u.errors.on(:birthdate)
+    end
+  end
+  
+  def test_should_require_gender
+    assert_no_difference 'User.count' do
+      u = create_user(:gender => nil)
+      assert u.errors.on(:gender)
+    end
+  end
+  
+  def test_should_require_zipcode
+    assert_no_difference 'User.count' do
+      u = create_user(:zipcode => nil)
+      assert u.errors.on(:zipcode)
+    end
+  end
 
   def test_should_reset_password
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
@@ -102,7 +123,13 @@ class UserTest < ActiveSupport::TestCase
 
 protected
   def create_user(options = {})
-    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
+    record = User.new({ :login => 'qquire', 
+                        :email => 'quire@example.com', 
+                        :password => 'quire69', 
+                        :password_confirmation => 'quire69',
+                        :birthdate => Date.new(1981, 9, 11),
+                        :gender => "Female",
+                        :zipcode => "90210" }.merge(options))
     record.save
     record
   end

@@ -1,5 +1,3 @@
-<% @user.password = @user.password_confirmation = nil %>
-
 <div class="yui-g">
 	<div class="yui-u first">
 		<div id="register">
@@ -24,6 +22,22 @@
 					<%= label_tag 'password_confirmation', 'Confirm Password' %>
 					<%= f.password_field :password_confirmation %>
 				</div>
+				<div class="formRow">
+					<label for="gender">Gender:</label>
+					<%= radio_button :user, :gender, "Male" %> Male
+					<%= radio_button :user, :gender, "Female" %> Female
+				</div>
+				<div class="formRow">
+					<label for="birthdate">Birthdate:</label>
+					<%= date_select :user,
+									:birthdate,
+									:start_year => User::START_YEAR,
+									:end_year => Time.now.year,
+									:order => [:month, :day, :year], 
+									:include_blank => true %>
+				</div>
+				<%= text_field_for f, "zipcode", User::ZIP_CODE_LENGTH %>
+				
 				<div class="formRow">
 					<%= recaptcha_tags %>
 				</div>

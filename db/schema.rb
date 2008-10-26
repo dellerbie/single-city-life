@@ -9,7 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081022000601) do
+ActiveRecord::Schema.define(:version => 20081026200135) do
+
+  create_table "profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "ethnicity"
+    t.string   "best_feature"
+    t.string   "loves_when"
+    t.string   "hates_when"
+    t.string   "thinks"
+    t.string   "my_kinda"
+    t.string   "turn_ons"
+    t.string   "turn_offs"
+    t.string   "msg_me_if"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -22,8 +37,7 @@ ActiveRecord::Schema.define(:version => 20081022000601) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "login",                     :limit => 40
-    t.string   "name",                      :limit => 100, :default => ""
+    t.string   "login",                     :limit => 15
     t.string   "email",                     :limit => 100
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
@@ -35,6 +49,10 @@ ActiveRecord::Schema.define(:version => 20081022000601) do
     t.datetime "activated_at"
     t.string   "password_reset_code",       :limit => 40
     t.boolean  "enabled",                                  :default => true
+    t.date     "birthdate"
+    t.string   "gender"
+    t.string   "zipcode"
+    t.string   "orientation"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

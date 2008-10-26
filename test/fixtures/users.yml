@@ -10,10 +10,13 @@ quentin:
   remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
   activation_code:           
   activated_at:              <%= 5.days.ago.to_s :db %>
+  gender:                   Male
+  birthdate:                1980-02-12
+  zipcode:                  95134
       
-aaron:
+aaaron:
   id:                        2
-  login:                     aaron
+  login:                     aaaron
   email:                     aaron@example.com
   salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('1')
   crypted_password:          b7c0ad152cef34b3ddfbeb093592bd21996df933 # 'monkey'
@@ -22,6 +25,9 @@ aaron:
   remember_token:            
   activation_code:           1b6453892473a467d07372d45eb05abc2031647a
   activated_at:              
+  gender:                   Female
+  birthdate:                1972-11-06
+  zipcode:                  07306
 
 
 old_password_holder:
@@ -31,8 +37,10 @@ old_password_holder:
   salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password:          00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at:                <%= 1.days.ago.to_s :db %>
-
   activation_code:           
   activated_at:              <%= 5.days.ago.to_s :db %>
+  gender:                   Male
+  birthdate:                1985-08-12
+  zipcode:                  10010
 
 

@@ -59,11 +59,11 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   def test_should_activate_user
-    assert_nil User.authenticate('aaron', 'test')
-    get :activate, :activation_code => users(:aaron).activation_code
+    assert_nil User.authenticate('aaaron', 'test')
+    get :activate, :activation_code => users(:aaaron).activation_code
     assert_redirected_to '/session/new'
     assert_not_nil flash[:notice]
-    assert_equal users(:aaron), User.authenticate('aaron', 'monkey')
+    assert_equal users(:aaaron), User.authenticate('aaaron', 'monkey')
   end
   
   def test_should_not_activate_user_without_key
@@ -82,7 +82,14 @@ class UsersControllerTest < ActionController::TestCase
 
   protected
     def create_user(options = {})
-      post :create, :user => { :login => 'quire', :email => 'quire@example.com',
-        :password => 'quire69', :password_confirmation => 'quire69' }.merge(options)
+      post  :create, 
+            :user => { 
+              :login => 'qquire', 
+              :email => 'quire@example.com',
+              :password => 'quire69', 
+              :password_confirmation => 'quire69',
+              :birthdate => Date.new(1981, 9, 11),
+              :gender => "Female",
+              :zipcode => "90210"}.merge(options)
     end
 end
