@@ -12,9 +12,9 @@ class UsersController < ApplicationController
 
   # render new.rhtml
   def new
-    @user = User.new
-    @user.password = @user.password_confirmation = nil
-    @user.birthdate = nil
+    #@user = User.new
+    #@user.password = @user.password_confirmation = nil
+    #@user.birthdate = nil
   end
  
   def create

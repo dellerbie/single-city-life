@@ -125,6 +125,7 @@ protected
   def create_user(options = {})
     record = User.new({ :login => 'qquire', 
                         :email => 'quire@example.com', 
+                        :email_confirmation => 'quire@example.com', 
                         :password => 'quire69', 
                         :password_confirmation => 'quire69',
                         :birthdate => Date.new(1981, 9, 11),

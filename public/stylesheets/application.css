@@ -370,7 +370,7 @@ p.allFieldsRequiredMsg {
 }
 
 .standardForm .fieldWithErrors {
-	background: #FF7A66;
+	background: #974B3B;
 	display: inline;
 	padding: 5px;
 }
@@ -378,7 +378,7 @@ p.allFieldsRequiredMsg {
 .standardForm #errorExplanation {
 	width: 400px;
 	margin: 0 auto;
-	border: 2px solid #FF7A66;
+	border: 2px solid #974B3B;
 	padding: 7px;
 	padding-bottom: 12px;
 	margin-bottom: 20px;
@@ -390,7 +390,7 @@ p.allFieldsRequiredMsg {
 	padding: 5px 5px 5px 15px;
 	font-size: 14px;
 	margin: -7px;
-	background-color: #FF7A66;
+	background-color: #974B3B;
 	color: #fff;
 }
 

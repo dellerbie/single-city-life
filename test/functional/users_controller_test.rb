@@ -50,8 +50,6 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
   
-
-  
   def test_should_sign_up_user_with_activation_code
     create_user
     assigns(:user).reload
@@ -86,6 +84,7 @@ class UsersControllerTest < ActionController::TestCase
             :user => { 
               :login => 'qquire', 
               :email => 'quire@example.com',
+              :email_confirmation => 'quire@example.com', 
               :password => 'quire69', 
               :password_confirmation => 'quire69',
               :birthdate => Date.new(1981, 9, 11),
