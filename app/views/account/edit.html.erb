@@ -1,0 +1,61 @@
+<div class="yui-g"> 
+	<div id="editAccountInfo">
+		<%= error_messages_for :user %>
+		
+		<div class="selector first">
+			<h2>Change Email</h2>
+		</div>
+		
+		<% form_for :user, :url => {:action => 'update_email'}, :html => { :class => "standardForm", :style => "clear:both;" } do |f| %>
+			<div class="formRow">
+				<%= label_tag :email, 'New Email' %>
+				<%= f.text_field :email %>
+			</div>
+			<div class="formRow">
+				<%= label_tag :email_confirmation, 'Confirm New Email' %>
+				<%= f.text_field :email_confirmation %>
+			</div>
+			<div class="formRow">
+				<%= submit_tag "Change", :class => "submit" %>
+			</div>
+		<% end %>
+		
+		<div class="selector">
+			<h2>
+				Change Password
+			</h2>
+		</div>
+		<% form_for :user, :url => {:action => 'update_password'}, :html => { :class => "standardForm", :style => "clear:both;" } do |f| %>
+			<div class="formRow">
+				<%= label_tag :old_password, 'Old Password' %>
+				<%= f.password_field :old_password %>
+			</div>
+			<div class="formRow">
+				<%= label_tag :password, 'New Password' %>
+				<%= f.password_field :password %>
+			</div>
+			<div class="formRow">
+				<%= label_tag :password_confirmation, 'Confirm New Password' %>
+				<%= f.password_field :password_confirmation %>
+			</div>
+			<div class="formRow">
+				<%= submit_tag "Change", :class => "submit" %>
+			</div>
+		<% end %>
+		
+		<div class="selector">
+			<h2>
+				Deactivate My Account
+			</h2>
+		</div>
+		<form method="post" class="standardForm" action="/user/register" style="clear: both;">
+			<div class="formRow">
+				<input type="checkbox" name="" value="1"/>I want to deactivate my account<br/>
+			</div>
+			<div class="formRow">
+				<input type="submit" value="Deactivate" name="commit" class="submit" /> or <a href="#">Cancel</a>
+			</div>
+		</form>
+		
+	</div>
+</div>

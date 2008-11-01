@@ -12,9 +12,9 @@ class UsersController < ApplicationController
 
   # render new.rhtml
   def new
-    #@user = User.new
-    #@user.password = @user.password_confirmation = nil
-    #@user.birthdate = nil
+    @user = User.new
+    @user.password = @user.password_confirmation = nil
+    @user.birthdate = nil
   end
  
   def create
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.update_attribute(:enabled, false)
-      flash[:notice] = "User disabled"
+      flash[:notice] = "Your account has been disabled and will not be visible to the community.  You can enable your account at any time."
     else
       flash[:error] = "There was a problem disabling this user."
     end

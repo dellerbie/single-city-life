@@ -28,10 +28,10 @@
 					<div id="auxillaryNavigation">
 						<% if logged_in? %>
 							<div class="navigationNode">
-								<%= link_to 'Logout', session_url, :method => :delete %>
+								<%= link_to 'Logout', session_path, :method => :delete %>
 							</div>
 							<div class="navigationNode">
-								<a href="myaccount.html">Account</a>
+								<%= link_to 'Account', account_path(current_user) %>
 							</div>
 						<% else %>
 							<div class="navigationNode">

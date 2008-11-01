@@ -5,6 +5,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :users
   map.resource :session
+  
+  map.account 'users/:id/account', :controller => 'account'
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

@@ -21,7 +21,6 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 6..100 #r@a.wk
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
-  #validates_presence_of     :email_confirmation
   validates_confirmation_of :email
 
   validates_presence_of   :gender
@@ -40,10 +39,20 @@ class User < ActiveRecord::Base
   validates_format_of     :zipcode, 
                           :with => /(^$|^[0-9]{#{ZIP_CODE_LENGTH}}$)/,
                           :message => "must be a five digit number"
-
+                          
+                        
+  validates_presence_of :old_password, :if => :changing_password?
+  validates_each :old_password, :if => :changing_password? do |model, attr, value|
+      model.errors.add(:old_password, 'does not match current password') unless model.correct_password?(value)
+  end
+  
   before_create :make_activation_code
+  
+  attr_accessor :old_password
 
-  attr_accessible :login, :email, :email_confirmation, :password, :password_confirmation, :gender, :birthdate, :zipcode
+  attr_accessible :login, :email, :email_confirmation, :password, 
+                  :password_confirmation, :old_password, :gender, 
+                  :birthdate, :zipcode
 
   # Activates the user in the database.
   def activate!
@@ -99,6 +108,25 @@ class User < ActiveRecord::Base
     # reset_password flag to avoid duplicate email notifications.
     update_attribute(:password_reset_code, nil)
     @reset_password = true
+  end
+  
+  def correct_password?(password)
+    self.crypted_password == encrypt(password)
+  end
+  
+  def changing_password?
+    @changing_password
+  end
+  
+  def changing_password(changing)
+    @changing_password = changing
+  end
+  
+  def change_password(params)
+    changing_password(true)
+    self.old_password = params[:user][:old_password]
+    self.password = params[:user][:password]
+    self.password_confirmation = params[:user][:password_confirmation]
   end
 
   #used in user_observer

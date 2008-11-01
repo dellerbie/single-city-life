@@ -1,0 +1,24 @@
+<div class="yui-g">
+	<div id="accountInfo">
+		<div class="selector">
+			<h2>
+				Account Info - 
+				<%= link_to 'edit', :action => 'edit' %>
+			</h2>
+		</div>
+		<div class="infoSection">
+			<div class="infoRow">
+				<span class="label">Username:</span> 
+				<span class="value"><%= current_user.login %></span>
+			</div>
+			<div class="infoRow">
+				<span class="label">Email:</span> 
+				<span class="value"><%= current_user.email %></span>
+			</div>
+			<div class="infoRow">
+				<span class="label">Password:</span>
+				<span class="value">*********</span>
+			</div>
+		</div>
+	</div>
+</div>
