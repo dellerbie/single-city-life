@@ -9,7 +9,7 @@ class AccountController < ApplicationController
   
   def update_password
     @user = current_user
-    @user.change_password(params)
+    @user.change_password!(params)
     if @user.save
       flash[:notice] = "Password successfully updated."
       redirect_to :action => :edit
@@ -20,8 +20,7 @@ class AccountController < ApplicationController
   
   def update_email
     @user = current_user
-    @user.email = params[:user][:email]
-    @user.email_confirmation = params[:user][:email_confirmation]
+    @user.change_email!(params)
     if @user.save
       flash[:notice] = "Email successfully updated."
       redirect_to :action => :edit

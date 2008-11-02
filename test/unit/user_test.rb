@@ -125,7 +125,7 @@ class UserTest < ActiveSupport::TestCase
     u = create_user
     u.changing_password(true)
     params = {:user => {:old_password => 'abc123', :password => '111111', :password_confirmation => '111111'}}
-    u.change_password(params)
+    u.change_password!(params)
     assert !u.valid?
     assert u.errors.on(:old_password)
   end
@@ -134,7 +134,7 @@ class UserTest < ActiveSupport::TestCase
     u = create_user
     u.changing_password(true)
     params = {:user => {:old_password => u.password, :password => '111111', :password_confirmation => '111111'}}
-    u.change_password(params)
+    u.change_password!(params)
     assert u.valid?
   end
   
@@ -146,6 +146,21 @@ class UserTest < ActiveSupport::TestCase
   def test_should_not_be_correct_password
     u = create_user
     assert !u.correct_password?('abc123')
+  end
+  
+  def test_should_not_change_email
+    u = create_user
+    params = {:user => {:email => '', :email_confirmation => ''}}
+    u.change_email!(params)
+    assert !u.valid?
+    assert u.errors.on(:email)
+  end
+  
+  def test_should_change_email
+    u = create_user
+    params = {:user => {:email => 'quire@e.com', :email_confirmation => 'quire@e.com'}}
+    u.change_email!(params)
+    assert u.valid?
   end
 
   protected
