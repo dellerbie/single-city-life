@@ -46,21 +46,21 @@ class UserTest < ActiveSupport::TestCase
       assert u.errors.on(:email)
     end
   end
-  
+
   def test_should_require_birthdate
     assert_no_difference 'User.count' do
       u = create_user(:birthdate => nil)
       assert u.errors.on(:birthdate)
     end
   end
-  
+
   def test_should_require_gender
     assert_no_difference 'User.count' do
       u = create_user(:gender => nil)
       assert u.errors.on(:gender)
     end
   end
-  
+
   def test_should_require_zipcode
     assert_no_difference 'User.count' do
       u = create_user(:zipcode => nil)
@@ -121,16 +121,43 @@ class UserTest < ActiveSupport::TestCase
     assert users(:quentin).remember_token_expires_at.between?(before, after)
   end
 
-protected
+  def test_should_not_change_password
+    u = create_user
+    u.changing_password(true)
+    params = {:user => {:old_password => 'abc123', :password => '111111', :password_confirmation => '111111'}}
+    u.change_password(params)
+    assert !u.valid?
+    assert u.errors.on(:old_password)
+  end
+
+  def test_should_change_password
+    u = create_user
+    u.changing_password(true)
+    params = {:user => {:old_password => u.password, :password => '111111', :password_confirmation => '111111'}}
+    u.change_password(params)
+    assert u.valid?
+  end
+  
+  def test_should_be_correct_password
+    u = create_user
+    assert u.correct_password?(u.password)
+  end
+  
+  def test_should_not_be_correct_password
+    u = create_user
+    assert !u.correct_password?('abc123')
+  end
+
+  protected
   def create_user(options = {})
-    record = User.new({ :login => 'qquire', 
-                        :email => 'quire@example.com', 
-                        :email_confirmation => 'quire@example.com', 
-                        :password => 'quire69', 
-                        :password_confirmation => 'quire69',
-                        :birthdate => Date.new(1981, 9, 11),
-                        :gender => "Female",
-                        :zipcode => "90210" }.merge(options))
+    record = User.new({ :login => 'qquire',
+      :email => 'quire@example.com',
+      :email_confirmation => 'quire@example.com',
+      :password => 'quire69',
+      :password_confirmation => 'quire69',
+      :birthdate => Date.new(1981, 9, 11),
+      :gender => "Female",
+    :zipcode => "90210" }.merge(options))
     record.save
     record
   end
