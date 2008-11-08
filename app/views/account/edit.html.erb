@@ -45,17 +45,18 @@
 		
 		<div class="selector">
 			<h2>
-				Deactivate My Account
+				Enable My Account
 			</h2>
 		</div>
-		<form method="post" class="standardForm" action="/user/register" style="clear: both;">
+		<% form_for :user, :url => {:action => 'enable'}, :html => { :class => "standardForm", :style => "clear:both;" } do |f| %>
 			<div class="formRow">
-				<input type="checkbox" name="" value="1"/>I want to deactivate my account<br/>
+				Enable
+				<%= f.check_box :enabled %>
 			</div>
 			<div class="formRow">
-				<input type="submit" value="Deactivate" name="commit" class="submit" /> or <a href="#">Cancel</a>
+				<%= submit_tag "Update", :class => "submit" %>
 			</div>
-		</form>
+		<% end %>
 		
 	</div>
 </div>

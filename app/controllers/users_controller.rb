@@ -61,7 +61,7 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update_attribute(:enabled, false)
       flash[:notice] = "Your account has been disabled and will not be visible to the community.  You can enable your account at any time."
     else
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
   end
   
   def enable
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update_attribute(:enabled, true)
       flash[:notice] = "User enabled"
     else

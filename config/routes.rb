@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.forgot '/forgot', :controller => 'forgot', :action => 'new'
   
   map.resources :users
+  
   map.resource :session
   
   map.account 'users/:id/account', :controller => 'account'

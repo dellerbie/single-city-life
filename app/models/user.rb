@@ -122,14 +122,14 @@ class User < ActiveRecord::Base
     @changing_password = changing
   end
   
-  def change_password!(params)
+  def change_password(params)
     changing_password(true)
     self.old_password = params[:user][:old_password]
     self.password = params[:user][:password]
     self.password_confirmation = params[:user][:password_confirmation]
   end
   
-  def change_email!(params) 
+  def change_email(params) 
     self.email = params[:user][:email]
     self.email_confirmation = params[:user][:email_confirmation]
   end
