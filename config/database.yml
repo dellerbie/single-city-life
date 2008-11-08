@@ -18,8 +18,8 @@ development:
   adapter: mysql
   encoding: utf8
   database: singles_development
-  username: root
-  password: hGb81wDy
+  username: singles
+  password: mauuisun6
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -29,8 +29,8 @@ test:
   adapter: mysql
   encoding: utf8
   database: singles_test
-  username: root
-  password: hGb81wDy
+  username: singles
+  password: mauisun6
   host: localhost
 
 production:
