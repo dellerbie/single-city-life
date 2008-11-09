@@ -1,0 +1,6 @@
+[submodule "vendor/plugins/recaptcha"]
+	path = vendor/plugins/recaptcha
+	url = git://github.com/ambethia/recaptcha.git
+[submodule "vendor/plugins/restful_authentication"]
+	path = vendor/plugins/restful_authentication
+	url = git://github.com/technoweenie/restful-authentication.git
