@@ -1,4 +1,4 @@
-# This controller handles the login/logout function of the site.  
+# This controller handles the login/logout function of the site.
 class SessionsController < ApplicationController
   before_filter :login_required, :only => :destroy
 
@@ -29,7 +29,8 @@ class SessionsController < ApplicationController
     redirect_back_or_default('/')
   end
 
-protected
+  protected
+
   # Track failed login attempts
   def note_failed_signin
     flash[:notice] = "Invalid username/password combination"

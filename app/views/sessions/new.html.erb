@@ -5,12 +5,11 @@
 			<p>Login to access your account</p>
 			<% form_tag session_path, :class => "standardForm" do %>
 				<div class="formRow">
-					<label for="username">Username:</label> 
+					<%= label_tag 'login', 'Username' %>
 					<%= text_field_tag 'login', @login %></p>
 				</div>
-				
 				<div class="formRow">
-					<label for="password">Password:</label> 
+					<%= label_tag 'password' %>
 					<%= password_field_tag 'password', nil %></p>
 				</div>
 				<div class="formRow">
@@ -20,20 +19,5 @@
 			<% end %>
 		</div>
 	</div>
-	<div class="yui-u">
-		<div id="whatIs">
-			<h2>What Is Singles?</h2>
-			<p class="largeText">Singles is a tool for tracking your restaurant experiences:</p>
-			<ul class="largeText">
-				<li><b>Organize</b> your restaurant visits by cusine type, tags, and location</li>
-				<li><b>Add photos</b> from your experiences</li>
-				<li><b>Create a wishlist</b> of the places you want to visit next</li>
-				<li><b>View maps</b> of your visits</li>
-			</ul>
-			<h3>
-				<%= link_to 'Sign up now', new_user_path %>
-				to get started.
-			</h3>
-		</div>
-	</div>
+	<%= render :partial => 'sessions/whatis'%>
 </div>

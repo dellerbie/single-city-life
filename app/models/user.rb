@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   VALID_GENDERS = ["Male", "Female"]
   START_YEAR = 1900
   VALID_DATES = DateTime.new(START_YEAR)..DateTime.now
-  ZIP_CODE_LENGTH = 5
+  ZIPCODE_LENGTH = 5
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 6..15
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
                           
   validates_presence_of   :zipcode
   validates_format_of     :zipcode, 
-                          :with => /(^$|^[0-9]{#{ZIP_CODE_LENGTH}}$)/,
+                          :with => /(^$|^[0-9]{#{ZIPCODE_LENGTH}}$)/,
                           :message => "must be a five digit number"
                           
                         
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :login, :email, :email_confirmation, :password, 
                   :password_confirmation, :old_password, :gender, 
-                  :birthdate, :zipcode
+                  :birthdate, :zipcode, :enabled
 
   # Activates the user in the database.
   def activate!

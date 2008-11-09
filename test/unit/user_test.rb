@@ -159,10 +159,6 @@ class UserTest < ActiveSupport::TestCase
     u.change_email(params)
     assert u.valid?
   end
-  
-  def test_should_deactivate
-
-  end
 
   protected
   def create_user(options = {})

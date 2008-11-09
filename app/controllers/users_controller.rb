@@ -5,12 +5,10 @@ class UsersController < ApplicationController
     @users = User.find(:all)
   end
   
-  # This show action only allows users to view their own profile
   def show
     @user = current_user
   end
 
-  # render new.rhtml
   def new
     @user = User.new
     @user.password = @user.password_confirmation = nil
@@ -26,20 +24,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Thanks for signing up!  Please check your email in order to activate your account."
     else
       render :action => 'new'
-    end
-  end
-  
-  def edit
-    @user = current_user
-  end
-  
-  def update
-    @user = User.find(current_user)
-    if @user.update_attributes(params[:user])
-      flash[:notice] = "User updated"
-      redirect_to :action => 'show', :id => current_user
-    else
-      render :action => 'edit'
     end
   end
   

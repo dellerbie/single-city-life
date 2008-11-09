@@ -5,14 +5,13 @@
 		<div class="selector first">
 			<h2>Change Email</h2>
 		</div>
-		
 		<% form_for :user, :url => {:action => 'update_email'}, :html => { :class => "standardForm", :style => "clear:both;" } do |f| %>
 			<div class="formRow">
 				<%= label_tag :email, 'New Email' %>
 				<%= f.text_field :email %>
 			</div>
 			<div class="formRow">
-				<%= label_tag :email_confirmation, 'Confirm New Email' %>
+				<%= label_tag :email_confirmation, 'Confirm' %>
 				<%= f.text_field :email_confirmation %>
 			</div>
 			<div class="formRow">
@@ -21,9 +20,7 @@
 		<% end %>
 		
 		<div class="selector">
-			<h2>
-				Change Password
-			</h2>
+			<h2>Change Password</h2>
 		</div>
 		<% form_for :user, :url => {:action => 'update_password'}, :html => { :class => "standardForm", :style => "clear:both;" } do |f| %>
 			<div class="formRow">
@@ -35,28 +32,12 @@
 				<%= f.password_field :password %>
 			</div>
 			<div class="formRow">
-				<%= label_tag :password_confirmation, 'Confirm New Password' %>
+				<%= label_tag :password_confirmation, 'Confirm' %>
 				<%= f.password_field :password_confirmation %>
 			</div>
 			<div class="formRow">
 				<%= submit_tag "Change", :class => "submit" %>
 			</div>
 		<% end %>
-		
-		<div class="selector">
-			<h2>
-				Enable My Account
-			</h2>
-		</div>
-		<% form_for :user, :url => {:action => 'enable'}, :html => { :class => "standardForm", :style => "clear:both;" } do |f| %>
-			<div class="formRow">
-				Enable
-				<%= f.check_box :enabled %>
-			</div>
-			<div class="formRow">
-				<%= submit_tag "Update", :class => "submit" %>
-			</div>
-		<% end %>
-		
 	</div>
 </div>
