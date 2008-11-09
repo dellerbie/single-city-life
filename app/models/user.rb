@@ -142,6 +142,10 @@ class User < ActiveRecord::Base
   def recently_reset_password?
     @reset_password
   end
+  
+  def password_required?
+    crypted_password.blank? || !password.blank? || changing_password?
+  end
 
   def self.find_for_forget(email)
     find :first, :conditions => ['email = ? and activated_at IS NOT NULL', email]
