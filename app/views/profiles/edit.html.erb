@@ -1,0 +1,45 @@
+<div class="yui-g"> 
+	<div class="selector first">
+		<h2>Your Profile</h2>
+	</div>
+	<p class="allFieldsRequiredMsg">All fields are required.</p>
+	<p class="tips">Remember to be fun and interesting with your answers!</p>
+	
+	<% form_for :profile, :url => user_profile_path(current_user),  :html => { :method => :put, :class => 'standardForm' } do |f| %>
+		<%= error_messages_for :profile %>
+		<div class="formRow">
+			<%= label_tag 'interested_in' %>
+			<%= f.select 'interested_in', Profile::INTERESTED_IN, :include_blank => 'Select One' %>
+		</div>
+		<div class="formRow">
+			<%= label_tag 'ethnicity' %>
+			<%= f.select 'ethnicity', Profile::ETHNICITIES, :include_blank => 'Select One' %>
+		</div>
+		<div class="formRow">
+			<%= label_tag 'body_type' %>
+			<%= f.select 'body_type', Profile::BODY_TYPES, :include_blank => 'Select One' %>
+		</div>
+		<div class="formRow">
+			<%= label_tag 'best_feature' %>
+			<%= f.select 'best_feature', Profile::BEST_FEATURES, :include_blank => 'Select One' %>
+		</div>
+		
+		<%= render :partial => 'string_field', :collection => Profile::STRING_FIELDS, :locals => { :form => f } %>
+		
+		<% interested_sex = current_user.gender == "Male" ? 'girl' : 'guy' %>
+		
+		<div class="formRow">
+			<%= label_tag 'thinks', "Thinks #{interested_sex.pluralize}" %>
+			<%= f.text_area 'thinks' %>
+		</div>
+		
+		<div class="formRow">
+			<%= label_tag 'my_kinda', "My kinda #{interested_sex}" %>
+			<%= f.text_area 'my_kinda' %>
+		</div>
+		
+		<div class="formRow">
+			<%= submit_tag "Update", :class => "submit" %> or <%= link_to 'Cancel', '/' %>
+		</div>
+	<% end %>
+</div>

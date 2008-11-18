@@ -224,13 +224,12 @@ a:hover {
 }
 
 .profile .moreInfo {
-	float: left;
 	clear: both;
 	width: 100%;
-	margin-top: 5px;
+	margin-top: 5px; 
 	padding-top: 5px;
 	padding-left: 10px;
-	display: none;
+/*	display: none; */
 }
 
 .profile .moreInfo .info {
@@ -245,6 +244,18 @@ a:hover {
 	margin-left: 10px;
 }
 
+.profileWrapper.standalone {
+	border: 1px solid;
+	width: 680px;
+	margin: 0 auto;
+	background: #f7f7f7;
+	border: 1px solid #eee;
+	padding: 10px;
+}
+
+.profileWrapper.standalone .profile {
+	background: #fff;
+}
 
 /* 
 ------------------------------------------
@@ -369,6 +380,11 @@ p.allFieldsRequiredMsg {
 	margin-left: 10.5em;
 }
 
+.standardForm textarea {
+	width: 50%;
+	height: 75px;
+}
+
 .standardForm .fieldWithErrors {
 	background: #974B3B;
 	display: inline;
@@ -404,11 +420,6 @@ p.allFieldsRequiredMsg {
 	font-size: 12px;
 	list-style: disc;
 	margin-left: 40px;
-}
-
-textarea.large {
-	width: 50%;
-	height: 100px;
 }
 
 #recaptcha_area {
@@ -768,10 +779,10 @@ ul.messages li {
 =FLASH NOTICES
 ------------------------------------------*/
 .notice {
-	border: 2px solid #ccc;
-	padding: 0.5em;
+	border: 1px solid #E2C822;
+	padding: 10px;
 	margin: 0.5em;
-	background: #fff9d8;
+	background: #FFF9D7;
 	font-weight: bold;
 }
 

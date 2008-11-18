@@ -13,8 +13,10 @@ ActiveRecord::Schema.define(:version => 20081026200135) do
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
+    t.string   "interested_in"
     t.string   "ethnicity"
     t.string   "best_feature"
+    t.string   "body_type"
     t.string   "loves_when"
     t.string   "hates_when"
     t.string   "thinks"
@@ -52,7 +54,6 @@ ActiveRecord::Schema.define(:version => 20081026200135) do
     t.date     "birthdate"
     t.string   "gender"
     t.string   "zipcode"
-    t.string   "orientation"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

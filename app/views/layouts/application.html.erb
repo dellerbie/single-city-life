@@ -15,7 +15,7 @@
 					<% if logged_in? %>
 					<div id="primaryNavigation">
 						<div class="navigationNode">
-							<a href="myprofile.html">Profile</a>
+							<%= link_to 'Profile', edit_user_profile_path(current_user) %>
 						</div>
 						<div class="navigationNode">
 							<a href="myphotos.html">Photos</a>

@@ -1,0 +1,11 @@
+derrick:
+    id:                     1000
+    login:                  derrick
+    email:                  slowblues@gmail.com
+    crypted_password:       712b4c433304d7cbbfba2b584f0771bea5b49ec8    # '111111'
+    salt:                   97d02adfadc11cd9d6178b1e8bb02120a3b82a20
+    activated_at:           <%= 5.days.ago.to_s :db %>
+    enabled:                true 
+    birthdate:              1902-03-03
+    gender:                 Male
+    zipcode:                95136

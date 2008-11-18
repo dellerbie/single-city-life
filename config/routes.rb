@@ -3,12 +3,11 @@ ActionController::Routing::Routes.draw do |map|
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil 
   map.forgot '/forgot', :controller => 'forgot', :action => 'new'
   
-  map.resources :users
+  map.resources :users, :has_one => :profile
   
   map.resource :session
   
   map.account 'users/:id/account', :controller => 'account'
-
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end
