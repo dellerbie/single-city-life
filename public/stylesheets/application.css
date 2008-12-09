@@ -781,7 +781,8 @@ ul.messages li {
 .notice {
 	border: 1px solid #E2C822;
 	padding: 10px;
-	margin: 0.5em;
+	margin: 0.5em auto;
+	width: 450px;
 	background: #FFF9D7;
 	font-weight: bold;
 }

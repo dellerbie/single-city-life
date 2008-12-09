@@ -6,13 +6,11 @@ class User < ActiveRecord::Base
     self.login
   end
   
-  # Returns a user's age
   def age
     return if birthdate.nil?
     today = Date.today
-    
     if (today.month > birthdate.month) or (today.month == birthdate.month and today.day >= birthdate.day)   
-      # Birthday has already happened this year   
+      # Birthday has already happened this year
       today.year - birthdate.year
     else
       today.year - birthdate.year - 1
@@ -20,6 +18,6 @@ class User < ActiveRecord::Base
   end
   
   def interested_sex
-    
+    gender.downcase == "male" ? "girl" : "guy"
   end  
 end
