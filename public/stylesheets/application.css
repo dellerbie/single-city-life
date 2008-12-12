@@ -246,7 +246,7 @@ a:hover {
 
 .profileWrapper.standalone {
 	border: 1px solid;
-	width: 680px;
+	width: 480px;
 	margin: 0 auto;
 	background: #f7f7f7;
 	border: 1px solid #eee;
@@ -255,6 +255,10 @@ a:hover {
 
 .profileWrapper.standalone .profile {
 	background: #fff;
+}
+
+.profileInput {
+	width: 400px;
 }
 
 /* 
@@ -614,6 +618,8 @@ ul#galleries li .count, #galleryInfo .count, #gallery .photo .description {
 	font-weight: bold;
 	padding: 5px 9px 5px 22px;
 }
+
+
 
 #galleryInfo .actions {
 	position: absolute;

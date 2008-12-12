@@ -1,5 +1,3 @@
-<% interested_sex = @user.interested_sex %>
-
 <div class="yui-g"> 
 	<div class="profileWrapper standalone">
 		<div class="profile">
@@ -12,57 +10,40 @@
 				<div class="info">
 					<span class="name"><%= @user.login %>,</span>
 					<span class="age">&nbsp;<%= @user.age %></span> 
-					<span class="location"><%= @user.zipcode %></span>
 				</div>
 				<div class="lastLogin">
 					<span class="onlineNow">Online Now</span>
 				</div>
 				
 				<ul class="facts">
+					<li>Best feature is <%= @user.gender == "Male" ? "his" : "her"%> <%= h @user.profile.best_feature.downcase %></li>
 					<li>
-						Thinks guys should always make the first move on the eastside
+						Loves when <%= h @user.profile.loves_when %>
 					</li>
 					<li>
-						Loves dorks
-					</li>
-					<li>
-						Hates when girls fight over guys
+						Hates when <%= h @user.profile.hates_when %>
 					</li>
 				</ul>
-				
-				<a class="email" href="#">Msg</a>
 			</div>
 
 			<div class="moreInfo">
 				<div class="info">
 					<h3>
-						Why Me?
+						Turn Ons:
 					</h3>
-					<p>Because I'm the coolest girl on the block!<p>
+					<p><%= h @user.profile.turn_ons %></p>
 				</div>
 				<div class="info">
 					<h3>
-						Best Feature:
+						Turn Offs:
 					</h3>
-					<p>Butt</p>
-				</div>
-				<div class="info">
-					<h3>
-						My Kinda Guy:
-					</h3>
-					<p>Strong, sexy, and confident</p>
-				</div>
-				<div class="info">
-					<h3>
-						Major Turn Ons:
-					</h3>
-					<p>Big smiles</p>
+					<p><%= h @user.profile.turn_offs %></p>
 				</div>
 				<div class="info">
 					<h3>
 						Msg Me If:
 					</h3>
-					<p>You know how to handle a girl like me!</p>
+					<p><%= h @user.profile.msg_me_if %></p>
 				</div>
 			</div>
 		</div>

@@ -8,7 +8,6 @@ class User
   VALID_GENDERS = ["Male", "Female"]
   START_YEAR = 1900
   VALID_DATES = DateTime.new(START_YEAR)..DateTime.now
-  ZIPCODE_LENGTH = 5
 
   validates_presence_of     :login
   validates_uniqueness_of   :login
@@ -41,11 +40,6 @@ class User
                             :allow_nil => true,
                             :message => "is invalid"
 
-  validates_presence_of     :zipcode
-  validates_format_of       :zipcode,
-                            :with => /(^$|^[0-9]{#{ZIPCODE_LENGTH}}$)/,
-                            :message => "must be a five digit number"
-
   validates_presence_of     :old_password, :if => :changing_password?
   validates_each            :old_password,
                             :if => :changing_password? do |model, attr, value|
@@ -53,11 +47,12 @@ class User
                             end
 
   before_create             :make_activation_code
+  
   attr_accessor             :old_password
   
   attr_accessible           :login, :email, :email_confirmation, :password,
                             :password_confirmation, :old_password, :gender,
-                            :birthdate, :zipcode, :enabled
+                            :birthdate, :enabled
 
   def activate!
     @activated = true

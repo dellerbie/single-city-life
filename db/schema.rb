@@ -19,8 +19,6 @@ ActiveRecord::Schema.define(:version => 20081026200135) do
     t.string   "body_type"
     t.string   "loves_when"
     t.string   "hates_when"
-    t.string   "thinks"
-    t.string   "my_kinda"
     t.string   "turn_ons"
     t.string   "turn_offs"
     t.string   "msg_me_if"
@@ -53,7 +51,6 @@ ActiveRecord::Schema.define(:version => 20081026200135) do
     t.boolean  "enabled",                                  :default => true
     t.date     "birthdate"
     t.string   "gender"
-    t.string   "zipcode"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

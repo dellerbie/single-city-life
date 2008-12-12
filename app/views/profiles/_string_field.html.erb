@@ -1,4 +1,4 @@
 <div class="formRow">
 	<%= label_tag string_field %>
-	<%= form.text_area string_field %>
+	<%= form.text_field string_field, :maxlength => Profile::MAX_STRING_LENGTH, :class => "profileInput" %>
 </div>

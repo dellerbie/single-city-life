@@ -15,7 +15,6 @@ class CreateUsers < ActiveRecord::Migration
       t.column :enabled,                    :boolean, :default => true
       t.column :birthdate,                  :date
       t.column :gender,                     :string
-      t.column :zipcode,                    :string
     end
     add_index :users, :login, :unique => true
   end

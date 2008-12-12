@@ -58,13 +58,6 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  def test_should_require_zipcode
-    assert_no_difference 'User.count' do
-      u = create_user(:zipcode => nil)
-      assert u.errors.on(:zipcode)
-    end
-  end
-
   def test_should_reset_password
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
     assert_equal users(:quentin), User.authenticate('quentin', 'new password')

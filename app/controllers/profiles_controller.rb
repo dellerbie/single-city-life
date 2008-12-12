@@ -10,13 +10,15 @@ class ProfilesController < ApplicationController
   end
   
   def edit
-    @profile = current_user.profile || current_user.build_profile
+    @profile = current_user.profile || Profile.new
   end
   
   def update
-    @profile = Profile.new(params[:profile])
-    @profile.user = current_user
-    if @profile.save
+    @profile = current_user.profile
+    
+    
+    
+    if current_user.profile.update_attributes(params[:profile])
       flash[:notice] = "Your profile has been updated."
       redirect_to user_profile_path(current_user)
     else

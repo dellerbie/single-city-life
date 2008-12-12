@@ -88,7 +88,6 @@ class UsersControllerTest < ActionController::TestCase
               :password => 'quire69', 
               :password_confirmation => 'quire69',
               :birthdate => Date.new(1981, 9, 11),
-              :gender => "Female",
-              :zipcode => "90210"}.merge(options)
+              :gender => "Female"}.merge(options)
     end
 end

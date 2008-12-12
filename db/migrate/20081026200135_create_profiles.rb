@@ -8,8 +8,6 @@ class CreateProfiles < ActiveRecord::Migration
       t.column :body_type,          :string
       t.column :loves_when,         :string
       t.column :hates_when,         :string
-      t.column :thinks,             :string
-      t.column :my_kinda,           :string
       t.column :turn_ons,           :string
       t.column :turn_offs,          :string
       t.column :msg_me_if,          :string

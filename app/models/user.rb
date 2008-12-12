@@ -16,8 +16,4 @@ class User < ActiveRecord::Base
       today.year - birthdate.year - 1
     end
   end
-  
-  def interested_sex
-    gender.downcase == "male" ? "girl" : "guy"
-  end  
 end

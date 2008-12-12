@@ -39,10 +39,6 @@
 										:order => [:month, :day, :year], 
 										:include_blank => true %>
 				</div>
-				<div class="formRow">
-					<%= label_tag 'zipcode' %>
-					<%= f.text_field 'zipcode', :size => User::ZIPCODE_LENGTH %>
-				</div>
 				
 				<div class="formRow">
 					<%= recaptcha_tags %>

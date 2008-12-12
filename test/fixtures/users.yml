@@ -12,7 +12,6 @@ quentin:
   activated_at:              <%= 5.days.ago.to_s :db %>
   gender:                   Male
   birthdate:                1980-02-12
-  zipcode:                  95134
       
 aaaron:
   id:                        2
@@ -27,7 +26,6 @@ aaaron:
   activated_at:              
   gender:                   Female
   birthdate:                1972-11-06
-  zipcode:                  07306
 
 
 old_password_holder:
@@ -41,6 +39,5 @@ old_password_holder:
   activated_at:              <%= 5.days.ago.to_s :db %>
   gender:                   Male
   birthdate:                1985-08-12
-  zipcode:                  10010
 
 
