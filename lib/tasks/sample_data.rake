@@ -5,7 +5,7 @@ require 'active_record/fixtures'
 namespace :db do
   DATA_DIRECTORY = "#{RAILS_ROOT}/lib/tasks/sample_data"
   namespace :sample_data do
-    TABLES = %w(users)
+    TABLES = %w(users profiles)
     
     # Starting id for the sample data
     MIN_SAMPLE_DATA_ID = 1000
@@ -17,8 +17,7 @@ namespace :db do
         fixture = Fixtures.new(ActiveRecord::Base.connection,
                                table_name, 
                                class_name, 
-                               File.join(DATA_DIRECTORY, 
-                               table_name.to_s))
+                               File.join(DATA_DIRECTORY, table_name.to_s))
         fixture.insert_fixtures
         puts "Loaded data from #{table_name}.yml"
       end
@@ -26,6 +25,7 @@ namespace :db do
     
     desc "Remove sample data"
     task :delete => :environment do |t|
+      Profile.delete_all("id >= #{MIN_SAMPLE_DATA_ID}")
       User.delete_all("id >= #{MIN_SAMPLE_DATA_ID}")
     end
   end

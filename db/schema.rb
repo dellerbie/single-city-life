@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20081026200135) do
     t.string   "turn_ons"
     t.string   "turn_offs"
     t.string   "msg_me_if"
+    t.boolean  "completed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

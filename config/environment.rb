@@ -11,7 +11,7 @@ Rails::Initializer.run do |config|
     :secret      => 'fccec3abfd7b95b61e6e35ce5b761d92481118679b8d0490db5120735cef1f3d1b670276c7c46d713d592034662bb07685a494fede9e1b9b97d949be2b8521eb'
   }
   
-  config.active_record.observers = :user_observer
+  # config.active_record.observers = :user_observer
   
   APP_NAME = "Singles"
   DB_STRING_MAX_LENGTH = 255
