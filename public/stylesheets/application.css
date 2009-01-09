@@ -380,6 +380,10 @@ p.allFieldsRequiredMsg {
 	padding-bottom: 0.5em;
 }
 
+.standardForm .formRow .fieldCounter {
+	font-weight: bold;
+}
+
 .standardForm .submit {
 	margin-left: 10.5em;
 }

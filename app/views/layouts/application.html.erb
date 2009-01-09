@@ -2,8 +2,15 @@
 <html>
 	<head>
 		<title><%= @title || "#{APP_NAME}" %></title>
+		
+		<%= stylesheet_link_tag "/javascripts/ext-2.2/resources/css/ext-all.css" %>
 		<%= stylesheet_link_tag "reset-fonts-grids.css" %>
 		<%= stylesheet_link_tag "application.css" %>
+		<%= yield :stylesheets %>
+		
+		<%= javascript_include_tag "ext-2.2/adapter/ext/ext-base.js"%>
+		<%= javascript_include_tag "ext-2.2/ext-all-debug.js"%>
+		<%= yield :javascripts %>
 	</head>
 	<body>
 		<div id="doc4" class="yui-t1">

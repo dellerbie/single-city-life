@@ -107,19 +107,8 @@ describe Profile do
     should_have_valid_length(@profile, :msg_me_if)
   end
   
-  it "should not be complete after creation" do
-    # @profile.should_receive(:mark_incomplete).and_return(true)
-    # @profile.save!
-    # @profile.reload
-    # puts "yo bitch #{@profile.completed}"
-    # #@profile.completed.should be_false
-    
-  end
+  it "should not be complete after creation"
   
-  it "should be completed when filled out" do
-    # @profile.stub!(:save?).and_return(true)
-    # @profile.save?
-    # @profile.completed.should == true
-  end
+  it "should be completed when filled out"
 
 end
