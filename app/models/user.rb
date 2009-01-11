@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   concerned_with :authentication
   has_one :profile, :dependent => :destroy
+  has_many :photos, :dependent => :destroy
   
   after_create :make_profile
   
