@@ -25,8 +25,13 @@ class PhotosController < ApplicationController
     @photo = user.photos.build(:uploaded_data => params[:Filedata])
     
     if @photo.save
-      render :text => @photo.public_filename(:thumb)
+      # render :text => @photo.public_filename(:thumb)
+      render :json => {
+        :src => @photo.public_filename(:thumb),
+        :edit_url => edit_user_photo_path(user, @photo)
+      }.to_json
     else 
+      # should render an error response?
       render :text => "There was an error uploading your photo.  Please try again later."
     end
   end
