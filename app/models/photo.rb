@@ -9,4 +9,6 @@ class Photo < ActiveRecord::Base
                     :processor      => 'Rmagick'
                     
   validates_as_attachment
+  
+  named_scope :latest, :order => 'created_at DESC'
 end

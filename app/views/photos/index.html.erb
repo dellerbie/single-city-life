@@ -6,9 +6,12 @@
 
 		window.onload = function () {
 		  swfu = new SWFUpload({
-		    upload_url : '<%= user_photos_path(current_user) -%>?singles_session_key=<%= session.session_id %>',
+		    upload_url : '<%= user_photos_path(current_user) -%>?_singles_session=<%= u session.session_id %>',
+			post_params : {
+				authenticity_token : '<%= u form_authenticity_token -%>',
+			},
 		    flash_url : '/flash/swfupload_f9.swf',
-		    file_size_limit : '1 MB',
+		    file_size_limit : '3 MB',
 		    file_types : '*.jpg',
 		    file_types_description : 'JPG Images',
 		    file_upload_limit : '0',
@@ -38,6 +41,6 @@
 	</div>
 
 	<ul id="gallery">
-		<%= render :partial => 'photo', :collection => current_user.photos %>
+		<%= render :partial => 'photo', :collection => @photos %>
 	</ul>
 </div>

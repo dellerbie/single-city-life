@@ -1,11 +1,10 @@
 class PhotosController < ApplicationController
-  
-  before_filter :login_required, :except => :create
-  
+
   session :cookie_only => false, :only => :create
+  before_filter :login_required, :except => :create
 
   def index
-    @photos = current_user.photos
+    @photos = current_user.photos.latest
   end
 
   def show
@@ -17,18 +16,12 @@ class PhotosController < ApplicationController
   end
 
   def create
-    # this sucks, swfupload + restful_authentication don't play nice together
-    # currently there is no way to use current_user with swfupload
-    # this can be a MAJOR security hole, as someone can just
-    # forge the user_id in the request params....
-    user = User.find_by_login(params[:user_id])
-    @photo = user.photos.build(:uploaded_data => params[:Filedata])
+    @photo = current_user.photos.build(:uploaded_data => params[:Filedata])
     
     if @photo.save
-      # render :text => @photo.public_filename(:thumb)
       render :json => {
         :src => @photo.public_filename(:thumb),
-        :edit_url => edit_user_photo_path(user, @photo)
+        :edit_url => edit_user_photo_path(current_user, @photo)
       }.to_json
     else 
       # should render an error response?
