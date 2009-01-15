@@ -5,6 +5,22 @@ class PhotosController < ApplicationController
 
   def index
     @photos = current_user.photos.latest
+    
+    respond_to do |format|
+      format.html
+      format.json  { 
+        json = {}
+        json[:photos] = @photos.collect do |photo|
+          {
+            :id => photo.id,
+            :thumb => photo.public_filename(:thumb),
+            :tiny => photo.public_filename(:tiny),
+            :full => photo.public_filename()
+          }
+        end
+        render :json => json.to_json
+      }
+    end
   end
 
   def show
@@ -20,12 +36,17 @@ class PhotosController < ApplicationController
     
     if @photo.save
       render :json => {
-        :src => @photo.public_filename(:thumb),
-        :edit_url => edit_user_photo_path(current_user, @photo)
+        :thumb => @photo.public_filename(:thumb),
+        :tiny => @photo.public_filename(:tiny),
+        :full => @photo.public_filename(),
+        :id => @photo.id,
+        :success => true
       }.to_json
     else 
-      # should render an error response?
-      render :text => "There was an error uploading your photo.  Please try again later."
+      render :json => { 
+        :success => false,
+        :msg => @photo.errors.full_messages
+      }.to_json
     end
   end
 

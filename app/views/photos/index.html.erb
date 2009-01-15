@@ -1,32 +1,91 @@
+<% content_for(:stylesheets) do %>
+	<%= stylesheet_link_tag 'photos/photos.css' %>
+<% end %>
+
 <% content_for(:javascripts) do %>
 	<%= javascript_include_tag 'swfupload/swfupload' %>
 	<%= javascript_include_tag 'swfupload/handlers' %>
-	<script type='text/javascript'>
+	<%= javascript_include_tag 'photos/PhotoBrowser.js' %>
+	<script type="text/javascript">
 		var swfu;
 
-		window.onload = function () {
-		  swfu = new SWFUpload({
-		    upload_url : '<%= user_photos_path(current_user) -%>?_singles_session=<%= u session.session_id %>',
-			post_params : {
-				authenticity_token : '<%= u form_authenticity_token -%>',
-			},
-		    flash_url : '/flash/swfupload_f9.swf',
-		    file_size_limit : '3 MB',
-		    file_types : '*.jpg',
-		    file_types_description : 'JPG Images',
-		    file_upload_limit : '0',
-			file_queue_error_handler : fileQueueError,
-			file_dialog_complete_handler : fileDialogComplete,
-			upload_progress_handler : uploadProgress,
-			upload_error_handler : uploadError,
-			upload_success_handler : uploadSuccess,
-			upload_complete_handler : uploadComplete,
-		    custom_settings : { 
-			  upload_target : "fileProgressContainer"
-		    },
-		    debug: false
-		  });
-		};
+		Ext.onReady(function() {
+			swfu = new SWFUpload({
+				upload_url : '<%= user_photos_path(current_user) -%>?_singles_session=<%= u session.session_id %>',
+				post_params : {
+					authenticity_token : '<%= u form_authenticity_token -%>',
+				},
+				flash_url : '/flash/swfupload_f9.swf',
+				file_size_limit : '3 MB',
+				file_types : '*.jpg',
+				file_types_description : 'JPG Images',
+				file_upload_limit : '10',
+				file_queue_error_handler : fileQueueError,
+				file_dialog_complete_handler : fileDialogComplete,
+				upload_progress_handler : uploadProgress,
+				upload_error_handler : uploadError,
+				upload_success_handler : uploadSuccess,
+				upload_complete_handler : uploadComplete,
+				custom_settings : { 
+					upload_target : "fileProgressContainer"
+				},
+				debug: false
+			});
+			
+			
+			var store = new Ext.data.JsonStore({
+			    url: '/users/<%= current_user.to_param %>/photos.json',
+			    root: 'photos',
+			    fields: ['thumb', 'title','full', 'tiny', 'id']
+			});
+			store.load();
+
+			var tpl = new Ext.XTemplate(
+			    '<tpl for=".">',
+					'<li class="photo">',
+						'<img src="{thumb}" alt="{title}"/>',
+					'</li>',
+			    '</tpl>'
+			);
+			
+			var photoBrowser;
+
+			var galleryView = new Ext.DataView({
+				id: 'gallery-data-view',
+				renderTo: Ext.select('.gallery').first(),
+		        store: store,
+		        tpl: tpl,
+		        autoHeight: true,
+		        singleSelect: true,
+		        overClass: 'photo-over',
+		        itemSelector: 'li.photo',
+		        emptyText: 'You have not uploaded any photos yet.  What are you waiting for?  Chop chop!',
+				listeners: {
+					selectionchange: function(dv, selections) {
+						var selectedIndex = dv.getSelectedIndexes()[0];
+						
+						if(!photoBrowser) {
+							photoBrowser = new PhotoBrowser({
+						        tbar: [{
+						            text: 'Delete Photo',
+						            handler: function() {
+						            }
+						        },{
+						            text: 'Make Profile Photo',
+						            handler: function() {
+						            }
+						        }],
+								store: store,
+								thumbTemplate: tpl
+							});
+						}
+						photoBrowser.show();
+						photoBrowser.imagesView.select(selectedIndex);
+						photoBrowser.imagesView.getNode(selectedIndex).scrollIntoView(photoBrowser.imagesRegion, false);
+					}
+				}
+		    });
+		});
 	</script>
 <% end %>
 
@@ -40,7 +99,7 @@
 		<input id="addPhotosBtn" type="button" onclick="swfu.selectFiles();" value="Add Photos"/>
 	</div>
 
-	<ul id="gallery">
-		<%= render :partial => 'photo', :collection => @photos %>
+	<ul class="gallery">
+		
 	</ul>
 </div>
