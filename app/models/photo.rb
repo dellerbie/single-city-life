@@ -15,7 +15,8 @@ class Photo < ActiveRecord::Base
       :id => self.id,
       :thumb => self.public_filename(:thumb),
       :tiny => self.public_filename(:tiny),
-      :full => self.public_filename()
+      :full => self.public_filename(),
+      :title => self.filename
     }
   end
 end
