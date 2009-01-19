@@ -93,24 +93,8 @@ ul.gallery li.photo-over img, ul.gallery li.photo-selected img {
 	background: #3B5998 url(../images/x_to_hide_hover.gif) no-repeat scroll 0%;
 }
 
-.edit_link {
-	display: none;
-	position: absolute;
-	background: url(../images/editor_icon.gif) no-repeat 0px top;
-	height: 18px;
-	width: 18px;
-	top: 9px;
-	right: 22px;
-	border-bottom:1px solid #F7F7F7;
-	border-left:1px solid #F7F7F7;
-}
-
-.mouseover .edit_link {
-	display: block;
-}
-.mouseover .edit_link:hover {
-	background-position: 0px -18px;
-	text-decoration: none;
+#gallery-data-view {
+	font-size: 1.1em;
 }
 
 /* 
