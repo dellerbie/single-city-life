@@ -34,7 +34,7 @@ class PhotosController < ApplicationController
   def create
     @photo = current_user.photos.build(:uploaded_data => params[:Filedata])
     
-    if @photo.save
+    if @photo.save      
       render :json => {
         :thumb => @photo.public_filename(:thumb),
         :tiny => @photo.public_filename(:tiny),
@@ -53,6 +53,17 @@ class PhotosController < ApplicationController
   def destroy
     @photo = current_user.photos.find(params[:id])
     @photo.destroy
-    redirect_to photos_url
+    
+    respond_to do |format|
+      format.html {
+        redirect_to user_photos_path(current_user)
+      }
+      
+      format.json {
+        render :json => {
+          :success => true
+        }
+      }
+    end
   end
 end

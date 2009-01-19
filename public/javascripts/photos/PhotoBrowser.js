@@ -6,6 +6,7 @@ PhotoBrowser = Ext.extend(Ext.Window, {
     title: 'Photo Browser',
 	closeAction: 'hide',
 	modal: true,
+	constrain: true,
    
     initComponent: function() {
         PhotoBrowser.superclass.initComponent.apply(this, arguments);
@@ -30,6 +31,7 @@ PhotoBrowser = Ext.extend(Ext.Window, {
 		this.imagesView.select(this.selectedIndex);
        
         this.imagesRegion = {
+			id: 'images-region',
             region: 'south',
             split: true,
             height: 150,

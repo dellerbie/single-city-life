@@ -76,17 +76,6 @@ ul.gallery li.photo-over img, ul.gallery li.photo-selected img {
 	color: #3B5998;
 }
 
-.newMedia {
-	float: right;
-	background: transparent url(../images/new_media_button_plus.gif) no-repeat scroll 9px center;
-	color: #333333;
-	display: block;
-	font-weight: bold;
-	padding: 5px 9px 5px 22px;
-}
-
-
-
 #galleryInfo .actions {
 	position: absolute;
 	top: 2px;
