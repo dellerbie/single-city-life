@@ -18,14 +18,21 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo = current_user.photos.build(:uploaded_data => params[:Filedata])
-    if @photo.save      
-      render :json => @photo.to_json_for_gallery.merge!({:success => true})
-    else 
-      render :json => { 
+    if current_user.photos.maxed?
+      render :json => {
         :success => false,
-        :msg => @photo.errors.full_messages
+        :msg => "You have reached the maximum allowed photos (#{MAX_PHOTOS}).  Please delete some photos if you want to upload new ones."
       }
+    else 
+      @photo = current_user.photos.build(:uploaded_data => params[:Filedata])
+      if @photo.save      
+        render :json => @photo.to_json_for_gallery.merge!({:success => true})
+      else 
+        render :json => { 
+          :success => false,
+          :msg => @photo.errors.full_messages
+        }
+      end
     end
   end
 

@@ -97,6 +97,17 @@ ul.gallery li.photo-over img, ul.gallery li.photo-selected img {
 	font-size: 1.1em;
 }
 
+.emptyText {
+	margin: 10px;
+	display: block;
+	text-align: center;
+}
+
+#photoCounter {
+	font-size: 123.1%;
+	font-weight: bold;
+}
+
 /* 
 ------------------------------------------
 =Swfupload

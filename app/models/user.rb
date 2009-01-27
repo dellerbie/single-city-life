@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
       end
       json
     end
+    
+    def maxed?
+      self.size >= MAX_PHOTOS
+    end
   end
   
   after_create :make_profile

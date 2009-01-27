@@ -62,7 +62,7 @@ Ext.apply(SWFUploadHandlers, {
 			progress.setStatus("Complete.");
 			progress.toggleCancel(false);
 		} else {
-			Ext.Msg.alert('Error uploading your photo', serverData.msg);
+			Ext.Msg.alert('Error uploading your photo', json.msg);
 		}
 	},
 
@@ -74,6 +74,7 @@ Ext.apply(SWFUploadHandlers, {
 			progress.setComplete();
 			progress.setStatus("All images received.");
 			progress.toggleCancel(false);
+			SWFUploadHandlers.fadeOutFileProgressContainer.defer(1000);
 		}
 	},
 
@@ -85,17 +86,23 @@ Ext.apply(SWFUploadHandlers, {
 				progress.setCancelled();
 				progress.setStatus("Cancelled");
 				progress.toggleCancel(false);
+				this.fadeOutFileProgressContainer();
 				break;
 			case SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED:
 					progress = new FileProgress(file,  this.customSettings.upload_target);
 					progress.setCancelled();
 					progress.setStatus("Stopped");
 					progress.toggleCancel(true);
+					SWFUploadHandlers.fadeOutFileProgressContainer.defer(1000);
 			case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
 				Ext.Msg.alert('Error Uploading Photo', "Your upload limit has been exceeded");
 				break;
 			default:
 				break;
 		}
+	},
+	
+	fadeOutFileProgressContainer: function() {
+		Ext.fly('fileProgressContainer').fadeOut({duration: 1, useDisplay: true});
 	}
 });

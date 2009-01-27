@@ -32,6 +32,34 @@ Ext.onReady(function() {
 	    root: 'photos',
 	    fields: ['thumb', 'title','full', 'tiny', 'id']
 	});
+	
+	function disableAddBtnIfMaxed() {
+		if(store.getCount() >= MAX_PHOTOS) {
+			Ext.get('addPhotosBtn').dom.disabled = true;
+		}
+	}
+	
+	function updatePhotoCounter() {
+		Ext.fly('photoCounter').update(store.getCount() + '/' + MAX_PHOTOS);
+	}
+	
+	store.on('load', function(store, records, opts) {
+		disableAddBtnIfMaxed();
+		updatePhotoCounter();
+	});
+	
+	store.on('add', function(store, records, index) {
+		disableAddBtnIfMaxed();
+		updatePhotoCounter();
+	});
+	
+	store.on('remove', function(store, record, index) {
+		if(store.getCount() < MAX_PHOTOS) {
+			Ext.get('addPhotosBtn').dom.disabled = false;
+		}
+		updatePhotoCounter();
+	});
+	
 	store.load();
 
 	var tpl = new Ext.XTemplate(

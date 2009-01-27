@@ -13,6 +13,7 @@
 		UPLOAD_URL = "<%= user_photos_path(current_user) -%>?_singles_session=<%= u session.session_id -%>";
 		USER_ID = "<%= current_user.to_param -%>";
 		AUTH_TOKEN = '<%= u form_authenticity_token -%>';
+		MAX_PHOTOS = '<%= MAX_PHOTOS %>';
 	</script>
 <% end %>
 
@@ -21,10 +22,13 @@
 		<h2>Your Photos</h2>
 	</div>
 	
+	
+	
 	<div id="addPhotosContainer">
 		<div id="fileProgressContainer"></div>
 		<input id="addPhotosBtn" type="button" value="Add Photos"/>
 	</div>
 	
+	<div id="photoCounter"></div>
 	<ul class="gallery"></ul>
 </div>
