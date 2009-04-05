@@ -108,6 +108,17 @@ ul.gallery li.photo-over img, ul.gallery li.photo-selected img {
 	font-weight: bold;
 }
 
+#defaultPhoto {
+	height: 50px;
+	position: absolute;
+	right: 0;
+	width: 50px;
+}
+
+.selector {
+	position: relative;
+}
+
 /* 
 ------------------------------------------
 =Swfupload

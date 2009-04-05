@@ -35,9 +35,19 @@ class PhotosController < ApplicationController
       end
     end
   end
+  
+  def create_avatar
+    current_user.avatar = current_user.photos.find(params[:photo_id])
+    if current_user.save
+      render :json => {}
+    else 
+      render :text => '', :status => 500
+    end
+  end
 
   def destroy
     @photo = current_user.photos.find(params[:id])
+    
     @photo.destroy
     respond_to do |format|
       format.json {
