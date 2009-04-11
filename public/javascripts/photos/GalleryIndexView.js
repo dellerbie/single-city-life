@@ -4,24 +4,12 @@ GalleryIndexView = Ext.extend(Ext.DataView, {
     singleSelect: true,
     overClass: 'photo-over',
     itemSelector: 'li.photo',
-    emptyText: '<span class="emptyText">You have not uploaded any photos yet.  Single people REALLY dig photos.</span>',
+    emptyText: '<span class="emptyText">You have not uploaded any photos yet.  What are you waiting for?  Chop chop!</span>',
     
     initComponent: function() {
         GalleryIndexView.superclass.initComponent.apply(this, arguments);
-		this.addEvents({
-			/**
-			 * Fires when the last photo has been deleted
-			 */
-			'deletedlastphoto':true
-		})
         this.on('selectionchange', this.onSelectionChange, this);
-		this.on('deletedlastphoto', this.onDeletedLastPhoto, this);
     },
-
-	onDeletedLastPhoto: function() {
-		this.photoBrowser.hide();
-		this.el.update(this.emptyText);
-	},
     
     onSelectionChange: function(view, selections) {
 	    var selectedIndex = view.getSelectedIndexes()[0];
@@ -46,9 +34,7 @@ GalleryIndexView = Ext.extend(Ext.DataView, {
                                             this.store.remove(record);
                                             if(this.store.getCount() > 0) {
                                                 this.select(0);
-                                            } else if(this.store.getCount() == 0) {
-												this.fireEvent('deletedlastphoto');
-											}
+                                            }
                                         },
                                         failure: function(response) {
                                             Ext.Msg.alert('Error Deleting Photo', 
@@ -62,32 +48,10 @@ GalleryIndexView = Ext.extend(Ext.DataView, {
                     },
                     scope: view
                 },{
-                    text: 'Set As Default',
+                    text: 'Set as Default',
                     handler: function() {
-	                    var records = this.getSelectedRecords();
-	                    if(records) {
-	                        var record = records[0];
-	                        Ext.Ajax.request({
-	                            url: '/users/' + this.userId + '/photos/' + record.data.id + "/assign_default.json",
-	                            method: 'POST',
-	                            params: {
-	                                "_method": "put",
-	                                authenticity_token: this.authenticity_token
-	                            },
-	                            success: function(response) {
-	                                Ext.Msg.alert('Default Photo Set', 
-	                                    'Your default photo has been set.');
-	                            },
-	                            failure: function(response) {
-	                                Ext.Msg.alert('Error Setting Default Photo', 
-	                                    'Could not set your default photo at this time.  Please try again later');
-	                            },
-	                            scope: this
-	                        });
-	                    }
-                     },
-                    scope: view
-	            }],
+                    }
+                }],
                 store: this.store,
                 thumbTemplate: this.tpl
             });

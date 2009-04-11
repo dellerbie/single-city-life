@@ -11,7 +11,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.column :turn_ons,           :string
       t.column :turn_offs,          :string
       t.column :msg_me_if,          :string
-      t.column :completed,          :boolean
+      t.column :completed,         :boolean
       t.timestamps
     end
   end

@@ -31,12 +31,6 @@ class User < ActiveRecord::Base
     end
   end
   
-  def reassign_default_photo
-    new_default_photo = self.photos.first
-    self.default_photo_id = new_default_photo ? new_default_photo.id : nil
-    self.save!
-  end
-  
   protected
   
   def make_profile

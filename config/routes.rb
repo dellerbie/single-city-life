@@ -5,10 +5,6 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :users, :has_one => :profile, :has_many => :photos
   
-  map.resources :users do |u|
-    u.resources :photos, :member => { :assign_default => :put }
-  end
-  
   map.resource :session
   
   map.account 'users/:id/account', :controller => 'account'

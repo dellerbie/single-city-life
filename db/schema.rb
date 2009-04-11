@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(:version => 20090109231626) do
     t.boolean  "enabled",                                  :default => true
     t.date     "birthdate"
     t.string   "gender"
-    t.integer  "default_photo_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
