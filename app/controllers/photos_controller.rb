@@ -26,6 +26,10 @@ class PhotosController < ApplicationController
     else 
       @photo = current_user.photos.build(:uploaded_data => params[:Filedata])
       if @photo.save      
+        unless current_user.default_photo_id
+          current_user.default_photo_id = @photo.id
+          current_user.save!
+        end
         render :json => @photo.to_json_for_gallery.merge!({:success => true})
       else 
         render :json => { 
@@ -36,22 +40,41 @@ class PhotosController < ApplicationController
     end
   end
   
-  def create_avatar
-    current_user.avatar = current_user.photos.find(params[:photo_id])
-    if current_user.save
-      render :json => {}
-    else 
-      render :text => '', :status => 500
+  def assign_default
+    photo = current_user.photos.find(params[:id])
+    if photo
+      current_user.default_photo_id = photo.id
+      if current_user.save
+        render :json => {
+          :success => true,
+          :msg => 'Your default photo has been updated'
+        }
+      else 
+        render :json => {
+          :success => false,
+          :msg => 'Could not set your default photo at this time.  Please try again later.'
+        }
+      end
     end
   end
 
   def destroy
     @photo = current_user.photos.find(params[:id])
-    
+    deleted_photo_id = @photo.id
     @photo.destroy
+    
+    if current_user.default_photo_id == deleted_photo_id
+      new_default_photo = current_user.photos.first
+      current_user.default_photo_id = new_default_photo ? new_default_photo.id : nil
+      current_user.save!
+    end
+    
     respond_to do |format|
       format.json {
-        render :json => {}, :status => 200
+        render :json => {
+          :success => true,
+          :msg => ''
+        }
       }
     end
   end

@@ -31,6 +31,9 @@ class User < ActiveRecord::Base
     end
   end
   
+  def assign_default_photo(photo)
+  end
+  
   protected
   
   def make_profile
