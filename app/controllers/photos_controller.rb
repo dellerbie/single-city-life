@@ -25,7 +25,7 @@ class PhotosController < ApplicationController
       }
     else 
       @photo = current_user.photos.build(:uploaded_data => params[:Filedata])
-      if @photo.save      
+      if @photo.save
         unless current_user.default_photo_id
           current_user.default_photo_id = @photo.id
           current_user.save!
@@ -64,9 +64,7 @@ class PhotosController < ApplicationController
     @photo.destroy
     
     if current_user.default_photo_id == deleted_photo_id
-      new_default_photo = current_user.photos.first
-      current_user.default_photo_id = new_default_photo ? new_default_photo.id : nil
-      current_user.save!
+      current_user.reassign_default_photo
     end
     
     respond_to do |format|
