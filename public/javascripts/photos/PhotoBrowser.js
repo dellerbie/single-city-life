@@ -21,7 +21,7 @@ PhotoBrowser = Ext.extend(Ext.Window, {
             itemSelector: 'li.photo',
 			selectedClass: 'photo-selected',
             singleSelect: true,
-            emptyText: 'You currently have no photos uploaded.',
+            emptyText: 'No photos uploaded.',
             listeners: {
                 selectionchange: this.showImageDetails,
                 scope: this

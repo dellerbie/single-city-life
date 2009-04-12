@@ -4,7 +4,7 @@ GalleryIndexView = Ext.extend(Ext.DataView, {
     singleSelect: true,
     overClass: 'photo-over',
     itemSelector: 'li.photo',
-    emptyText: '<span class="emptyText">You have not uploaded any photos yet.  Single people REALLY dig photos.</span>',
+    emptyText: '<span class="emptyText">You have not uploaded any photos yet.  Single people REALLY dig photos. You should get to uploading.</span>',
     
     initComponent: function() {
         GalleryIndexView.superclass.initComponent.apply(this, arguments);

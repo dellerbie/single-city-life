@@ -175,8 +175,12 @@ a:hover {
 
 .profile .img {
 	float: left;
-	width: 115px;
+	width: 165px;
 	text-align: center;
+}
+
+.profile .img a {
+	display: block;
 }
 
 .profile .img img {	
@@ -188,8 +192,9 @@ a:hover {
 
 .profile .summary {
 	float: left;
-	padding: 2px 0px 0px 10px;
+	padding: 2px 0px 0px 20px;
 	overflow: hidden;
+	width: 400px;
 }
 
 .profile .summary .info {
@@ -246,7 +251,7 @@ a:hover {
 
 .profileWrapper.standalone {
 	border: 1px solid;
-	width: 480px;
+	width: 600px;
 	margin: 0 auto;
 	background: #f7f7f7;
 	border: 1px solid #eee;
@@ -255,6 +260,7 @@ a:hover {
 
 .profileWrapper.standalone .profile {
 	background: #fff;
+	padding: 5px;
 }
 
 .profileInput {

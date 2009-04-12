@@ -31,6 +31,15 @@ class User < ActiveRecord::Base
     end
   end
   
+  def default_photo
+    photo = self.photos.find_by_id(self.default_photo_id)
+    if photo
+      photo = photo.public_filename(:thumb)
+    else
+      photo = BLANK_PHOTO
+    end
+  end
+  
   def reassign_default_photo
     new_default_photo = self.photos.first
     self.default_photo_id = new_default_photo ? new_default_photo.id : nil

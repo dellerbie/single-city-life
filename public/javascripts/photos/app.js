@@ -75,11 +75,6 @@ Ext.onReady(function() {
 	    store: store,
 	    tpl: tpl,
 		authenticity_token: AUTH_TOKEN,
-		userId: USER_ID,
-		listeners: {
-			deletedlastphoto: function() {
-				
-			}
-		}
+		userId: USER_ID
 	});
 });

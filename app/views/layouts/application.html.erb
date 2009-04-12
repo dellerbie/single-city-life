@@ -23,7 +23,10 @@
 					<% if logged_in? %>
 					<div id="primaryNavigation">
 						<div class="navigationNode">
-							<%= link_to 'Profile', edit_user_profile_path(current_user) %>
+							<%= link_to 'View Profile', user_profile_path(current_user) %>
+						</div>
+						<div class="navigationNode">
+							<%= link_to 'Edit Profile', edit_user_profile_path(current_user) %>
 						</div>
 						<div class="navigationNode">
 							<%= link_to 'Photos', user_photos_path(current_user) %>

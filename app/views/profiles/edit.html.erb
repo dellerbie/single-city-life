@@ -1,12 +1,12 @@
 <% content_for(:javascripts) do %>
-	<%= javascript_include_tag "profile/app.js" %>
+	<%= javascript_include_tag "profile/edit" %>
 <% end %>
 
 <div class="yui-g"> 
 	<div class="selector first">
 		<h2>Your Profile</h2>
 	</div>
-	<span class="newMedia"><%=link_to "View Your Profile", user_profile_path(current_user)%></span>
+	
 	<p class="allFieldsRequiredMsg">All fields are required.</p>
 	<p class="tips">Remember to be fun and interesting with your answers!</p>
 	
