@@ -2,60 +2,10 @@
 	<%= stylesheet_link_tag 'photos/photos.css' %>
 <% end %>
 
-<% 
-	n_photos = @user.photos.size
-	has_photos = n_photos > 0 ? true : false
-%>
-
-<% if has_photos %>
-	<% content_for(:javascripts) do %>
-		<%= javascript_include_tag 'photos/PhotoBrowser' %>
-		<%= javascript_include_tag 'profile/show' %>
-		<script type="text/javascript">
-			USER_ID = "<%= @user.to_param -%>";
-		</script>
-	<% end %>
-<% end %>
-
 <div class="yui-g"> 
 	<div class="profileWrapper standalone">
 		<div class="profile">
-			<div class="img">
-				<a href="#" onclick="javascript:void(0);">
-					<img class="articleImage" src="<%= @user.default_photo %>">
-				</a>
-				
-				<%- if has_photos -%>
-					<a class="more" href="#" onclick="javascript:void(0);">View Photos (<%= n_photos %>)</a>
-				<%- end -%>
-			</div>
-
-			<div class="summary">
-				<div class="info">
-					<span class="name"><%= @user.login %>,</span>
-					<span class="age"><%= @user.age %></span> 
-				</div>				
-				<ul class="facts">
-					<li>Best feature is <%= @user.gender == "Male" ? "his" : "her"%> <%= h @user.profile.best_feature.downcase %></li>
-					<li>Loves when <%= h @user.profile.loves_when %></li>
-					<li>Hates when <%= h @user.profile.hates_when %></li>
-				</ul>
-			</div>
-
-			<div class="moreInfo">
-				<div class="info">
-					<h3>Turn Ons:</h3>
-					<p><%= h @user.profile.turn_ons %></p>
-				</div>
-				<div class="info">
-					<h3>Turn Offs:</h3>
-					<p><%= h @user.profile.turn_offs %></p>
-				</div>
-				<div class="info">
-					<h3>Msg Me If:</h3>
-					<p><%= h @user.profile.msg_me_if %></p>
-				</div>
-			</div>
+			<%= render :partial => "users/user", :locals => {:use_li => false} %>
 		</div>
 	</div>
 </div>

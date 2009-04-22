@@ -31,10 +31,10 @@ class User < ActiveRecord::Base
     end
   end
   
-  def default_photo
+  def default_photo(size=:thumb)
     photo = self.photos.find_by_id(self.default_photo_id)
     if photo
-      photo = photo.public_filename(:thumb)
+      photo = photo.public_filename(size)
     else
       photo = BLANK_PHOTO
     end

@@ -14,7 +14,6 @@ PhotoBrowser = Ext.extend(Ext.Window, {
         this.initTemplates();
        
         this.imagesView = new Ext.DataView({
-            xtype: 'dataview',
             store: this.store,
             tpl: this.thumbTemplate,
             overClass: 'photo-over',
@@ -27,8 +26,6 @@ PhotoBrowser = Ext.extend(Ext.Window, {
                 scope: this
             }
         });
-
-		this.imagesView.select(this.selectedIndex);
        
         this.imagesRegion = {
 			id: 'images-region',
@@ -69,6 +66,7 @@ PhotoBrowser = Ext.extend(Ext.Window, {
     },
    
     showImageDetails: function() {
+		console.log('showImageDetails');
         var selNode = this.imagesView.getSelectedNodes();
         var detailEl = Ext.getCmp('img-detail-panel').body;
         if(selNode && selNode.length > 0) {

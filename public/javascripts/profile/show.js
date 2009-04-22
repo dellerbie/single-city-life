@@ -5,23 +5,29 @@ Ext.onReady(function() {
 	var photoBrowser;
 	
 	var store = new Ext.data.JsonStore({
-	    url: '/users/' + USER_ID + '/photos.json',
 	    root: 'photos',
-	    fields: ['thumb', 'title','full', 'tiny', 'id']
+	    fields: ['thumb', 'title', 'full', 'tiny', 'id']
 	});
-	store.load();
 	
 	var morePhotosLinks = Ext.select('.profile .img a');
 	morePhotosLinks.each(function(el) {
 		el.on('click', function() {
+			var userId = Ext.select('.summary .info .name').first().dom.innerHTML;
+			store.proxy.conn.url = "/users/" + userId + "/photos.json";
+			store.load();
+			
 			if(!photoBrowser) {
 				photoBrowser = new PhotoBrowser({
-					title: USER_ID + ' Photos',
+					title: userId + ' Photos',
 					store: store
 				});
 			}
 			photoBrowser.show();
-			photoBrowser.imagesView.select(0);
+			
+			store.on('load', function() {
+				photoBrowser.imagesView.select(0);
+			});
+			
 		});
 	});
 });

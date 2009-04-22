@@ -175,8 +175,12 @@ a:hover {
 
 .profile .img {
 	float: left;
-	width: 165px;
+	width: 110px;
 	text-align: center;
+}
+
+.standalone .profile .img {
+	width: 165px;
 }
 
 .profile .img a {
