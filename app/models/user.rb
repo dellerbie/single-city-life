@@ -46,6 +46,31 @@ class User < ActiveRecord::Base
     self.save!
   end
   
+  def to_json
+    json = {
+      :id => self.id,
+      :login => self.login,
+      :age => self.age,
+      :best_feature => self.profile.best_feature,
+      :loves_when => self.profile.loves_when,
+      :hates_when => self.profile.hates_when,
+      :turn_ons => self.profile.turn_ons,
+      :turn_offs => self.profile.turn_offs,
+      :msg_me_if => self.profile.msg_me_if,
+      :default_photo => self.default_photo,
+      :has_photos => has_photos?,
+      :n_photos => n_photos
+    }
+  end
+  
+  def has_photos?
+    n_photos > 0
+  end
+  
+  def n_photos
+    self.photos.size
+  end
+  
   protected
   
   def make_profile

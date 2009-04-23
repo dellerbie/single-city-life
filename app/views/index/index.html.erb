@@ -2,6 +2,10 @@
 	<%= stylesheet_link_tag 'photos/photos.css' %>
 <% end %>
 
+<% content_for(:javascripts) do %>
+	<%= javascript_include_tag 'homepage/app' %>
+<% end %>
+
 <div id="yui-main">
 	<div class="yui-b">
 		<div class="yui-ge">
@@ -18,11 +22,7 @@
 					<a class="next" href="javascript: void(0);" onclick="mask('roomsList'); return false;">Next</a>
 				</div>
 				<div id="profileWrapper">
-					<ul id="profiles">
-						<%= render :partial => "users/user", :collection => @users, :locals => {:use_li => true} %>
-						<div class="clearfix"></div>
-					</ul>
-
+					<ul id="profiles"></ul>
 				</div>
 				<div class="paginationBox">
 					<span class="nResults">25 result(s)</span>
