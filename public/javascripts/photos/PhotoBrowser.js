@@ -66,7 +66,6 @@ PhotoBrowser = Ext.extend(Ext.Window, {
     },
    
     showImageDetails: function() {
-		console.log('showImageDetails');
         var selNode = this.imagesView.getSelectedNodes();
         var detailEl = Ext.getCmp('img-detail-panel').body;
         if(selNode && selNode.length > 0) {

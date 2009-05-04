@@ -34,7 +34,10 @@ GalleryIndexView = Ext.extend(Ext.DataView, {
                                             this.store.remove(record);
                                             if(this.store.getCount() > 0) {
                                                 this.select(0);
-                                            }
+                                            } else {
+												this.photoBrowser.hide();
+												this.refresh();
+											}
                                         },
                                         failure: function(response) {
                                             Ext.Msg.alert('Error Deleting Photo', 
@@ -50,7 +53,29 @@ GalleryIndexView = Ext.extend(Ext.DataView, {
                 },{
                     text: 'Set as Default',
                     handler: function() {
-                    }
+	                    var records = this.getSelectedRecords();
+	                    if(records) {
+	                        var record = records[0];
+	                        Ext.Ajax.request({
+	                            url: '/users/' + this.userId + '/photos/' + record.data.id + "/assign_default",
+	                            method: 'POST',
+	                            params: {
+	                                "_method": "put",
+	                                authenticity_token: this.authenticity_token
+	                            },
+	                            success: function(response) {
+									var json = Ext.decode(response.responseText);
+	                                Ext.Msg.alert('Default Photo Assigned', json.msg);
+	                            },
+	                            failure: function(response) {
+									var json = Ext.decode(response.responseText);
+	                                Ext.Msg.alert('Error Assigning Default Photo', json.msg);
+	                            },
+	                            scope: this
+	                        });
+	                    }
+                    },
+					scope: this
                 }],
                 store: this.store,
                 thumbTemplate: this.tpl

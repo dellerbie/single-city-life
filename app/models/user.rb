@@ -43,7 +43,14 @@ class User < ActiveRecord::Base
   def reassign_default_photo
     new_default_photo = self.photos.first
     self.default_photo_id = new_default_photo ? new_default_photo.id : nil
-    self.save!
+  end
+  
+  def has_photos?
+    n_photos > 0
+  end
+  
+  def n_photos
+    self.photos.size
   end
   
   def to_json
@@ -62,15 +69,7 @@ class User < ActiveRecord::Base
       :n_photos => n_photos
     }
   end
-  
-  def has_photos?
-    n_photos > 0
-  end
-  
-  def n_photos
-    self.photos.size
-  end
-  
+
   protected
   
   def make_profile

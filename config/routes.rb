@@ -3,7 +3,11 @@ ActionController::Routing::Routes.draw do |map|
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil 
   map.forgot '/forgot', :controller => 'forgot', :action => 'new'
   
-  map.resources :users, :has_one => :profile, :has_many => :photos
+  map.resources :users, :has_one => :profile
+  
+  map.resources :users do |user|
+    user.resources :photos, :member => { :assign_default => :put }
+  end
   
   map.resource :session
   
