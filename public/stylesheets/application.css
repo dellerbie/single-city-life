@@ -176,7 +176,7 @@ a:hover {
 
 .profile .img {
 	float: left;
-	width: 110px;
+	width: 160px;
 	text-align: center;
 }
 
@@ -199,7 +199,7 @@ a:hover {
 	float: left;
 	padding: 2px 0px 0px 20px;
 	overflow: hidden;
-	width: 400px;
+	width: 350px;
 }
 
 .profile .summary .info {
@@ -208,6 +208,10 @@ a:hover {
 
 .profile .summary .info .location {
 	display: block;
+}
+
+.profile .summary .info .name {
+	padding-right: 3px;
 }
 
 .profile .summary .lastLogin {
@@ -239,7 +243,6 @@ a:hover {
 	margin-top: 5px; 
 	padding-top: 5px;
 	padding-left: 10px;
-/*	display: none; */
 }
 
 .profile .moreInfo .info {

@@ -33,7 +33,7 @@ Ext.onReady(function() {
 			'</div>',
 			'<div class="summary">',
 				'<div class="info">',
-					'<span class="name">{login}</span>,',
+					'<span class="name">{login},</span>',
 					'<span class="age">{age}</span>',
 				'</div>',			
 				'<ul class="facts">',

@@ -10,45 +10,39 @@
 	<% end %>
 <% end %>
 
-<% if use_li %>
-<li class="profile">
-<% end %>
-	<div class="img">
-		<a href="#" onclick="javascript:void(0);">
-			<img class="articleImage" src="<%= user.default_photo %>">
-		</a>
-	
-		<%- if has_photos -%>
-			<a class="more" href="#" onclick="javascript:void(0);">View Photos (<%= n_photos %>)</a>
-		<%- end -%>
-	</div>
+<div class="img">
+	<a href="#" onclick="javascript:void(0);">
+		<img class="articleImage" src="<%= user.default_photo %>">
+	</a>
 
-	<div class="summary">
-		<div class="info">
-			<span class="name"><%= user.login %></span>,
-			<span class="age"><%= user.age %></span> 
-		</div>				
-		<ul class="facts">
-			<li>Best feature is <%= user.gender == "Male" ? "his" : "her"%> <%= h user.profile.best_feature.downcase %></li>
-			<li>Loves when <%= h user.profile.loves_when %></li>
-			<li>Hates when <%= h user.profile.hates_when %></li>
-		</ul>
-	</div>
+	<%- if has_photos -%>
+		<a class="more" href="#" onclick="javascript:void(0);">View Photos (<%= n_photos %>)</a>
+	<%- end -%>
+</div>
 
-	<div class="moreInfo">
-		<div class="info">
-			<h3>Turn Ons:</h3>
-			<p><%= h user.profile.turn_ons %></p>
-		</div>
-		<div class="info">
-			<h3>Turn Offs:</h3>
-			<p><%= h user.profile.turn_offs %></p>
-		</div>
-		<div class="info">
-			<h3>Msg Me If:</h3>
-			<p><%= h user.profile.msg_me_if %></p>
-		</div>
+<div class="summary">
+	<div class="info">
+		<span class="name"><%= user.login %>,</span>
+		<span class="age"><%= user.age %></span> 
+	</div>				
+	<ul class="facts">
+		<li>Best feature is <%= user.gender == "Male" ? "his" : "her"%> <%= h user.profile.best_feature.downcase %></li>
+		<li>Loves when <%= h user.profile.loves_when %></li>
+		<li>Hates when <%= h user.profile.hates_when %></li>
+	</ul>
+</div>
+
+<div class="moreInfo">
+	<div class="info">
+		<h3>Turn Ons:</h3>
+		<p><%= h user.profile.turn_ons %></p>
 	</div>
-<% if use_li %>
-</li>
-<% end %>
+	<div class="info">
+		<h3>Turn Offs:</h3>
+		<p><%= h user.profile.turn_offs %></p>
+	</div>
+	<div class="info">
+		<h3>Msg Me If:</h3>
+		<p><%= h user.profile.msg_me_if %></p>
+	</div>
+</div>
