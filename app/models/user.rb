@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
   
   after_create :make_profile
   
+  def self.per_page
+    10
+  end
+  
   def to_param
     self.login
   end

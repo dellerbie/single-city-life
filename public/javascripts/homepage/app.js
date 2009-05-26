@@ -4,6 +4,7 @@ Ext.onReady(function() {
 	var usersStore = new Ext.data.JsonStore({
 		url: '/.json',
 		root: 'users',
+		totalProperty: 'totalCount',
 		fields: [
 			{name: 'login'},
 			{name: 'age'},
@@ -18,7 +19,24 @@ Ext.onReady(function() {
 			{name: 'n_photos', type: 'int'}
 		]
 	});
-	usersStore.load();
+	
+	usersStore.load({params: {start: 1, limit: 10, authenticity_token: AUTH_TOKEN}});
+	
+	var paginator = new Ext.PagingToolbar({
+		pageSize: 10,
+		store: usersStore,
+		listeners: {
+			beforechange: function(paginator, params) {
+				params['authenticity_token'] = AUTH_TOKEN;
+				//params['page'] = paginator.getPageData().activePage;
+				params['page'] = paginator.field.dom.value;
+				console.log(params['page']);
+				paginator.store.load({params:params});
+				return false;
+			}
+		}
+	});
+	
 	
 	var userTpl = new Ext.XTemplate(
 		'<tpl for=".">',
@@ -63,9 +81,16 @@ Ext.onReady(function() {
 	var dataView = new Ext.DataView({
 		store: usersStore,
 		tpl: userTpl,
-		renderTo: Ext.get('profiles'),
+//		renderTo: Ext.get('profiles'),
 		itemSelector: '',
 		singleSelect: true,
 		emptyText: 'Loading users...'
 	});
+	
+	var panel = new Ext.Panel({
+		border: false,
+		items: [dataView],
+		bbar: paginator,
+		renderTo: Ext.get('profiles')
+	})
 });

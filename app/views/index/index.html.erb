@@ -3,6 +3,9 @@
 <% end %>
 
 <% content_for(:javascripts) do %>
+	<script type="text/javascript">
+		AUTH_TOKEN = '<%= u form_authenticity_token -%>';
+	</script>
 	<%= javascript_include_tag 'homepage/app' %>
 <% end %>
 
@@ -10,13 +13,9 @@
 	<div class="yui-b">
 		<div class="yui-ge">
 			<div class="yui-u first">
-				<%= render :partial => "paginator" %>
-
 				<div id="profileWrapper">
 					<ul id="profiles"></ul>
 				</div>
-				
-				<%= render :partial => "paginator" %>
 			</div>
 			<div id="ads" class="yui-u">
 				ads
