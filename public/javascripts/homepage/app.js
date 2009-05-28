@@ -39,11 +39,14 @@ Ext.onReady(function() {
 		'<tpl for=".">',
 		'<li class="profile">',
 			'<div class="img">',
-				'<a href="#" onclick="javascript:void(0);">',
-					'<img class="articleImage" src="{default_photo}">',
-				'</a>',
 				'<tpl if="has_photos == true">',
-					'<a class="more" href="#" onclick="javascript:void(0);">View Photos ({n_photos})</a>',
+					'<a class="show-more-photos" href="#">',
+						'<img class="articleImage" src="{default_photo}">',
+					'</a>',
+					'<a href="#" class="more show-more-photos">View Photos ({n_photos})</a>',
+				'</tpl>',
+				'<tpl if="has_photos == false">',
+					'<img class="articleImage" src="{default_photo}">',
 				'</tpl>',
 			'</div>',
 			'<div class="summary">',
@@ -78,7 +81,8 @@ Ext.onReady(function() {
 	var dataView = new Ext.DataView({
 		store: usersStore,
 		tpl: userTpl,
-		itemSelector: '',
+		itemSelector: 'li.profile',
+		overClass: 'profile-view-over',
 		singleSelect: true,
 		emptyText: 'Loading users...'
 	});
@@ -88,5 +92,36 @@ Ext.onReady(function() {
 		items: [dataView],
 		bbar: paginator,
 		renderTo: Ext.get('profiles')
-	})
+	});
+	
+	/// REFACTOR to reuse same code in profile/show.js ///
+	var photoBrowser;
+	var photoBrowserStore = new Ext.data.JsonStore({
+	    root: 'photos',
+	    fields: ['thumb', 'title', 'full', 'tiny', 'id']
+	});
+	
+	var profiles = Ext.get('profiles');
+	profiles.on('click', function(e, t) {
+		var target = e.getTarget('a.show-more-photos');
+		if(target) {
+			var profile = e.getTarget('.profile', 10, true);
+			var login = profile.select('.summary .info .name').first();
+			var userId = login.dom.innerHTML;
+			photoBrowserStore.proxy.conn.url = "/users/" + userId + "/photos.json";
+			photoBrowserStore.load();
+			
+			if(!photoBrowser) {
+				photoBrowser = new PhotoBrowser({
+					title: userId + ' Photos',
+					store: photoBrowserStore
+				});
+			}
+			photoBrowser.show();
+			
+			photoBrowserStore.on('load', function() {
+				photoBrowser.imagesView.select(0);
+			});
+		}
+	});
 });

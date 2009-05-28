@@ -173,6 +173,10 @@ a:hover {
 	background: #fff;
 }
 
+#profiles .profile-view-over {
+	background: #f7f7f7;
+}
+
 .profile .img {
 	float: left;
 	width: 160px;
