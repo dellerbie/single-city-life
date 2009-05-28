@@ -2,7 +2,7 @@ class IndexController < ApplicationController
   skip_before_filter :login_required, :login_from_cookie
   
   def index
-    @users = User.paginate :all, :page => params[:page] || nil, :limit => params[:limit]
+    @users = User.paginate :all, :page => params[:page] || 1, :limit => params[:limit]
     respond_to do |format|
       format.html
       format.json {

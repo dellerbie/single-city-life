@@ -20,7 +20,7 @@ Ext.onReady(function() {
 		]
 	});
 	
-	usersStore.load({params: {start: 1, limit: 10, authenticity_token: AUTH_TOKEN}});
+	usersStore.load({params: {page: 1, limit: 10, authenticity_token: AUTH_TOKEN, start: 0}});
 	
 	var paginator = new Ext.PagingToolbar({
 		pageSize: 10,
@@ -28,15 +28,12 @@ Ext.onReady(function() {
 		listeners: {
 			beforechange: function(paginator, params) {
 				params['authenticity_token'] = AUTH_TOKEN;
-				//params['page'] = paginator.getPageData().activePage;
-				params['page'] = paginator.field.dom.value;
-				console.log(params['page']);
+				params['page'] = Math.floor(params.start / params.limit) + 1;
 				paginator.store.load({params:params});
 				return false;
 			}
 		}
 	});
-	
 	
 	var userTpl = new Ext.XTemplate(
 		'<tpl for=".">',
@@ -81,7 +78,6 @@ Ext.onReady(function() {
 	var dataView = new Ext.DataView({
 		store: usersStore,
 		tpl: userTpl,
-//		renderTo: Ext.get('profiles'),
 		itemSelector: '',
 		singleSelect: true,
 		emptyText: 'Loading users...'
