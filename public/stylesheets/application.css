@@ -136,7 +136,7 @@ a:hover {
 	color: #000;
 }
 
-#filters input.submit {
+#filters button.submit {
 	display: block;
 	margin-top: 10px;
 }

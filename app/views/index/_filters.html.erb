@@ -2,23 +2,21 @@
 	<h2>Profile Search</h2>
 	<div class="filter">
 		<h4 class="title">Username</h4>
-		<form id="usernameForm" name="usernameForm" action="return false;">
+		<form id="usernameForm" name="usernameForm">
 			<input type="text" name="username"/>
-			<input type="submit" value="Search" class="submit"/>
+			<button class="submit">Search</button>
 		</form>
 	</div>
+	<form id="filtersForm" name="filtersForm">
 	<div class="filter">
 		<h4 class="title">Sex</h4>
-		<form id="sexForm" name="sexForm" action="return false;">
-			<input type="checkbox" name="sex" value="m" id="sexMale"/>
+			<input type="checkbox" name="sex" value="m" />
 			<label for="sexMale">M</label>
-			<input type="checkbox" name="sex" value="f" id="sexFemale"/>
+			<input type="checkbox" name="sex" value="f" />
 			<label for="sexFemale">F</label>
-		</form>
 	</div>
 	<div class="filter">
 		<h4 class="title">Age</h4>
-		<form id="ageForm" name="ageForm" action="return false;">
 			<select name="ageBegin"> 
 				<option value="18">18</option>
 				<option value="18">18</option>
@@ -42,76 +40,62 @@
 				<option value="18">18</option>
 				<option value="18">18</option>
 			</select>
-			<input class="submit" type="submit" value="Update" />
-		</form>
 	</div>
 	<div class="filter">
 		<h4 class="title">Body Type</h4>
-		<form id="bodyTypeForm" name="bodyTypeForm" action="return false;">
-			<input type="checkbox" name="bodyType" value="any" id="btAny"/>
-			<label for="btAny">Any</label><br/>
-			<input type="checkbox" name="bodyType" value="p" id="btSlim"/>
+			<input type="checkbox" name="bodyType" value="p"/>
 			<label for="btSlim">Slim</label><br/>
-			<input type="checkbox" name="bodyType" value="p" id="btPetite"/>
+			<input type="checkbox" name="bodyType" value="p"/>
 			<label for="btPetite">Petite</label><br/>
-			<input type="checkbox" name="bodyType" value="a" id="btAthletic"/>
+			<input type="checkbox" name="bodyType" value="a"/>
 			<label for="btAthletic">Athletic</label><br/>
-			<input type="checkbox" name="bodyType" value="t" id="btThick"/>
+			<input type="checkbox" name="bodyType" value="t"/>
 			<label for="btThick">Thick</label><br/>
-			<input type="checkbox" name="bodyType" value="le" id="btLittleExtra"/>
+			<input type="checkbox" name="bodyType" value="le"/>
 			<label for="btLittleExtra">Little Extra</label><br/>
-			<input type="checkbox" name="bodyType" value="big" id="btBig"/>
+			<input type="checkbox" name="bodyType" value="big"/>
 			<label for="btBig">Big</label>
-		</form>
 	</div>
 	<div class="filter">
 		<h4 class="title">Best Feature</h4>
-		<form id="bestFeatureForm" name="bestFeatureForm" action="return false;">
-			<input type="checkbox" name="bodyType" value="any" id="btAny"/>
-			<label for="btAny">Any</label><br/>
-			<input type="checkbox" name="bodyType" value="p" id="btSlim"/>
+			<input type="checkbox" name="bodyType" value="p"/>
 			<label for="btSlim">Smile</label><br/>
-			<input type="checkbox" name="bodyType" value="p" id="btPetite"/>
+			<input type="checkbox" name="bodyType" value="p"/>
 			<label for="btPetite">Butt</label><br/>
-			<input type="checkbox" name="bodyType" value="a" id="btAthletic"/>
+			<input type="checkbox" name="bodyType" value="a"/>
 			<label for="btAthletic">Chest</label><br/>
-			<input type="checkbox" name="bodyType" value="t" id="btThick"/>
+			<input type="checkbox" name="bodyType" value="t"/>
 			<label for="btThick">Legs</label><br/>
-			<input type="checkbox" name="bodyType" value="le" id="btLittleExtra"/>
+			<input type="checkbox" name="bodyType" value="le"/>
 			<label for="btLittleExtra">Hair</label><br/>
-			<input type="checkbox" name="bodyType" value="big" id="btBig"/>
+			<input type="checkbox" name="bodyType" value="big"/>
 			<label for="btBig">Appendages</label>
-		</form>
 	</div>
 	<div class="filter">
 		<h4 class="title">Ethnicity</h4>
-		<form id="ethnicityForm" name="ethnicityForm" action="return false;">
-			<input type="checkbox" name="ethnicity" value="any" id="ethAny"/>
-			<label for="ethAny">Any</label><br/>
-			<input type="checkbox" name="ethnicity" value="a" id="ethAsian"/>
+			<input type="checkbox" name="ethnicity" value="a"/>
 			<label for="ethAsian">Asian</label><br/>
-			<input type="checkbox" name="ethnicity" value="p" id="ethBlack"/>
+			<input type="checkbox" name="ethnicity" value="p"/>
 			<label for="ethBlack">Black</label><br/>
-			<input type="checkbox" name="ethnicity" value="a" id="ethHispanic"/>
+			<input type="checkbox" name="ethnicity" value="a"/>
 			<label for="ethHispanic">Hispanic</label><br/>
-			<input type="checkbox" name="ethnicity" value="t" id="ethIndian"/>
+			<input type="checkbox" name="ethnicity" value="t"/>
 			<label for="ethIndian">Indian</label><br/>
-			<input type="checkbox" name="ethnicity" value="le" id="ethMixed"/>
+			<input type="checkbox" name="ethnicity" value="le"/>
 			<label for="ethMixed">Mixed</label><br/>
-			<input type="checkbox" name="ethnicity" value="big" id="ethWhite"/>
+			<input type="checkbox" name="ethnicity" value="big"/>
 			<label for="ethWhite">White</label><br/>
-			<input type="checkbox" name="ethnicity" value="big" id="ethOther"/>
+			<input type="checkbox" name="ethnicity" value="big"/>
 			<label for="ethOther">Other</label>
-		</form>
 	</div>
 	<div class="filter last">
 		<h4 class="title">Has Pic?</h4>
-		<form id="hasPicForm" name="hasPicForm" action="return false;">
-			<input type="checkbox" name="hasPic" value="y" id="hasPicYes"/>
+			<input type="checkbox" name="hasPic" value="y"/>
 			<label for="hasPicYes">Y</label>
-			<input type="checkbox" name="hasPic" value="n" id="hasPicNo"/>
+			<input type="checkbox" name="hasPic" value="n"/>
 			<label for="hasPicNo">N</label>
-		</form>
+			<button type="button" id="filterBtn" class="submit">Update</button>
 	</div>
+	</form>
 	<div class="clearfix"></div>
 </div>

@@ -124,4 +124,9 @@ Ext.onReady(function() {
 			});
 		}
 	});
+	
+	Ext.get('filterBtn').on('click', function() {
+		console.log(document.filtersForm.sex.checked);
+	});
+	
 });
