@@ -125,8 +125,33 @@ Ext.onReady(function() {
 		}
 	});
 	
-	Ext.get('filterBtn').on('click', function() {
-		console.log(document.filtersForm.sex.checked);
+	Ext.get('filtersForm').on('submit', function(e) {
+		var params = Ext.Ajax.serializeForm('filtersForm');
+		console.log(params);
+		e.preventDefault();
+	});
+	
+	Ext.get('loginSearchForm').on('submit', function(e) {
+		var params = Ext.Ajax.serializeForm('loginSearchForm');
+		console.log(params);
+		e.preventDefault();
+		var query = Ext.get('loginSearch').dom.value.trim();
+		if(query != '') {
+			Ext.Ajax.request({
+				url: '/find_by_login',
+				method: 'POST',
+				form: 'loginSearchForm',
+				params: {
+					page: 1, 
+					limit: 10, 
+					authenticity_token: AUTH_TOKEN, 
+					start: 0
+				},
+				success: function(response) {
+					console.log(response.responseText);
+				}
+			});
+		}
 	});
 	
 });
