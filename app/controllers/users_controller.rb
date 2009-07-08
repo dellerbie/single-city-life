@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :only => [:show, :edit, :update]
+  before_filter :login_required, :only => [:edit, :update]
   
   def index
     @users = User.find(:all)

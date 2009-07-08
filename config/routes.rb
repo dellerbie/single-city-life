@@ -15,4 +15,5 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
   map.connect '/.:format', :controller => 'index', :action => 'index'
+  map.connect '/:action', :controller => 'index'
 end

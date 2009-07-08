@@ -17,4 +17,13 @@ class IndexController < ApplicationController
       }
     end
   end
+  
+  def find_by_login
+    @user = User.find_by_login(params[:username])
+    json = {
+      :totalCount => @user ? 1 : 0,
+      :users => @user ? [@user.to_json] : []
+    }
+    render :json => json
+  end
 end

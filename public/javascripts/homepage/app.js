@@ -51,7 +51,7 @@ Ext.onReady(function() {
 			'</div>',
 			'<div class="summary">',
 				'<div class="info">',
-					'<span class="name">{login},</span>',
+					'<span class="name">{login}</span>,',
 					'<span class="age">{age}</span>',
 				'</div>',			
 				'<ul class="facts">',
@@ -84,7 +84,7 @@ Ext.onReady(function() {
 		itemSelector: 'li.profile',
 		overClass: 'profile-view-over',
 		singleSelect: true,
-		emptyText: 'Loading users...'
+		emptyText: 'No users to show you.'
 	});
 	
 	var panel = new Ext.Panel({
@@ -125,30 +125,27 @@ Ext.onReady(function() {
 		}
 	});
 	
-	Ext.get('filtersForm').on('submit', function(e) {
+/*	Ext.get('filtersForm').on('submit', function(e) {
 		var params = Ext.Ajax.serializeForm('filtersForm');
 		console.log(params);
 		e.preventDefault();
 	});
+*/
 	
-	Ext.get('loginSearchForm').on('submit', function(e) {
-		var params = Ext.Ajax.serializeForm('loginSearchForm');
+	Ext.get('usernameForm').on('submit', function(e) {
+		var params = Ext.Ajax.serializeForm('usernameForm');
 		console.log(params);
 		e.preventDefault();
-		var query = Ext.get('loginSearch').dom.value.trim();
+		var query = Ext.get('usernameInput').dom.value.trim();
 		if(query != '') {
-			Ext.Ajax.request({
-				url: '/find_by_login',
-				method: 'POST',
-				form: 'loginSearchForm',
+			usersStore.proxy.conn.url = "/find_by_login";
+			usersStore.load({
 				params: {
 					page: 1, 
 					limit: 10, 
 					authenticity_token: AUTH_TOKEN, 
-					start: 0
-				},
-				success: function(response) {
-					console.log(response.responseText);
+					start: 0,
+					username: query
 				}
 			});
 		}

@@ -1,8 +1,10 @@
 class PhotosController < ApplicationController
+  before_filter :login_required, :except => [:index, :show]
   session :cookie_only => false, :only => :create
 
   def index
-    @photos = current_user.photos.latest
+    @user = User.find_by_login params[:user_id]
+    @photos = @user.photos.latest
     respond_to do |format|
       format.html
       format.json  { render :json => @photos.to_json_for_gallery  }
@@ -10,7 +12,8 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = current_user.photos.find(params[:id])
+    @user = User.find_by_login params[:user_id]
+    @photo = @user.photos.find(params[:id])
   end
 
   def new
