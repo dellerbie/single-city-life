@@ -2,100 +2,57 @@
 	<h2>Profile Search</h2>
 	<div class="filter">
 		<h4 class="title">Username</h4>
-		<form id="usernameForm" name="usernameForm">
+		<form id="usernameForm" name="usernameForm" method="GET" action="#">
 			<input type="text" name="username" id="usernameInput"/>
-			<button class="submit">Search</button>
+			<input type="submit" class="submit" value="Submit"/>
 		</form>
 	</div>
-	<form id="filtersForm" name="filtersForm">
-	<div class="filter">
-		<h4 class="title">Sex</h4>
-			<input type="checkbox" name="sex" value="m" />
-			<label for="sexMale">M</label>
-			<input type="checkbox" name="sex" value="f" />
-			<label for="sexFemale">F</label>
-	</div>
-	<div class="filter">
-		<h4 class="title">Age</h4>
-			<select name="ageBegin"> 
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-			</select>
-			to
-			<select name="ageEnd"> 
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-				<option value="18">18</option>
-			</select>
-	</div>
-	<div class="filter">
-		<h4 class="title">Body Type</h4>
-			<input type="checkbox" name="bodyType" value="p"/>
-			<label for="btSlim">Slim</label><br/>
-			<input type="checkbox" name="bodyType" value="p"/>
-			<label for="btPetite">Petite</label><br/>
-			<input type="checkbox" name="bodyType" value="a"/>
-			<label for="btAthletic">Athletic</label><br/>
-			<input type="checkbox" name="bodyType" value="t"/>
-			<label for="btThick">Thick</label><br/>
-			<input type="checkbox" name="bodyType" value="le"/>
-			<label for="btLittleExtra">Little Extra</label><br/>
-			<input type="checkbox" name="bodyType" value="big"/>
-			<label for="btBig">Big</label>
-	</div>
-	<div class="filter">
-		<h4 class="title">Best Feature</h4>
-			<input type="checkbox" name="bodyType" value="p"/>
-			<label for="btSlim">Smile</label><br/>
-			<input type="checkbox" name="bodyType" value="p"/>
-			<label for="btPetite">Butt</label><br/>
-			<input type="checkbox" name="bodyType" value="a"/>
-			<label for="btAthletic">Chest</label><br/>
-			<input type="checkbox" name="bodyType" value="t"/>
-			<label for="btThick">Legs</label><br/>
-			<input type="checkbox" name="bodyType" value="le"/>
-			<label for="btLittleExtra">Hair</label><br/>
-			<input type="checkbox" name="bodyType" value="big"/>
-			<label for="btBig">Appendages</label>
-	</div>
-	<div class="filter">
-		<h4 class="title">Ethnicity</h4>
-			<input type="checkbox" name="ethnicity" value="a"/>
-			<label for="ethAsian">Asian</label><br/>
-			<input type="checkbox" name="ethnicity" value="p"/>
-			<label for="ethBlack">Black</label><br/>
-			<input type="checkbox" name="ethnicity" value="a"/>
-			<label for="ethHispanic">Hispanic</label><br/>
-			<input type="checkbox" name="ethnicity" value="t"/>
-			<label for="ethIndian">Indian</label><br/>
-			<input type="checkbox" name="ethnicity" value="le"/>
-			<label for="ethMixed">Mixed</label><br/>
-			<input type="checkbox" name="ethnicity" value="big"/>
-			<label for="ethWhite">White</label><br/>
-			<input type="checkbox" name="ethnicity" value="big"/>
-			<label for="ethOther">Other</label>
-	</div>
-	<div class="filter last">
-		<h4 class="title">Has Pic?</h4>
-			<input type="checkbox" name="hasPic" value="y"/>
-			<label for="hasPicYes">Y</label>
-			<input type="checkbox" name="hasPic" value="n"/>
-			<label for="hasPicNo">N</label>
-			<button type="button" id="filterBtn" class="submit">Update</button>
-	</div>
-	</form>
+	<% form_tag({:action => 'filter'}, {:id => 'filtersForm'}) do %>
+		<div class="filter">
+			<h4 class="title">Sex</h4>
+			
+			<%= check_box_tag(:sex, User::VALID_GENDERS[0]) %>
+			<%= label_tag(:sex, "M") %>
+			
+			<%= check_box_tag(:sex, User::VALID_GENDERS[1]) %>
+			<%= label_tag(:sex, "F") %>
+		</div>
+		<div class="filter">
+			<h4 class="title">Age</h4>
+			<%= select_tag(:ageBegin, options_for_select(User::VALID_AGES)) %> to 
+			<%= select_tag(:ageEnd, options_for_select(User::VALID_AGES)) %>
+		</div>
+		<div class="filter">
+			<h4 class="title">Body Type</h4>		
+			<% Profile::BODY_TYPES.each do |type| %>
+				<%= check_box_tag(:bodyType, type) %>
+				<%= label_tag(:bodyType, type) %><br/>
+			<% end %>
+		</div>
+		<div class="filter">
+			<h4 class="title">Best Feature</h4>
+			<% Profile::BEST_FEATURES.each do |feature| %>
+				<%= check_box_tag(:bestFeature, feature) %>
+				<%= label_tag(:bestFeature, feature) %><br/>
+			<% end %>
+		</div>
+		<div class="filter">
+			<h4 class="title">Ethnicity</h4>
+			<% Profile::ETHNICITIES.each do |ethnicity| %>
+				<%= check_box_tag(:ethnicity, ethnicity) %>
+				<%= label_tag(:ethnicity, ethnicity) %><br/>
+			<% end %>
+		</div>
+		<div class="filter last">
+			<h4 class="title">Has Pic?</h4>
+				<%= radio_button_tag (:hasPic, "y") %>
+				<%= label_tag(:hasPic, "Y") %>
+				
+				<%= radio_button_tag (:hasPic, "n") %>
+				<%= label_tag(:hasPic, "N") %>
+				
+				<input type="submit" value="Update" class="submit" />
+		</div>
+	<% end %>
 	<div class="clearfix"></div>
 </div>

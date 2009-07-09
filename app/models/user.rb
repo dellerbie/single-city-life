@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   after_create :make_profile
   
   def self.per_page
-    10
+    15
   end
   
   def to_param

@@ -134,21 +134,18 @@ Ext.onReady(function() {
 	
 	Ext.get('usernameForm').on('submit', function(e) {
 		var params = Ext.Ajax.serializeForm('usernameForm');
-		console.log(params);
 		e.preventDefault();
 		var query = Ext.get('usernameInput').dom.value.trim();
-		if(query != '') {
-			usersStore.proxy.conn.url = "/find_by_login";
-			usersStore.load({
-				params: {
-					page: 1, 
-					limit: 10, 
-					authenticity_token: AUTH_TOKEN, 
-					start: 0,
-					username: query
-				}
-			});
-		}
+		usersStore.proxy.conn.url = "/find_by_login";
+		usersStore.load({
+			params: {
+				page: 1, 
+				limit: 10, 
+				authenticity_token: AUTH_TOKEN, 
+				start: 0,
+				username: query
+			}
+		});
 	});
 	
 });
