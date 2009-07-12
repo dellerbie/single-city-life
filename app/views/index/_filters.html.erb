@@ -9,49 +9,49 @@
 	</div>
 	<% form_tag({:action => 'filter'}, {:id => 'filtersForm'}) do %>
 		<div class="filter">
-			<h4 class="title">Sex</h4>
+			<h4 class="title">Gender</h4>
 			
-			<%= check_box_tag(:sex, User::VALID_GENDERS[0]) %>
-			<%= label_tag(:sex, "M") %>
+			<%= check_box_tag("gender[]", User::VALID_GENDERS[0]) %>
+			<%= label_tag("gender[]", "M") %>
 			
-			<%= check_box_tag(:sex, User::VALID_GENDERS[1]) %>
-			<%= label_tag(:sex, "F") %>
+			<%= check_box_tag("gender[]", User::VALID_GENDERS[1]) %>
+			<%= label_tag("gender[]", "F") %>
 		</div>
 		<div class="filter">
 			<h4 class="title">Age</h4>
-			<%= select_tag(:ageBegin, options_for_select(User::VALID_AGES)) %> to 
-			<%= select_tag(:ageEnd, options_for_select(User::VALID_AGES)) %>
+			<%= select_tag(:age_begin, options_for_select(User::VALID_AGES)) %> to 
+			<%= select_tag(:age_end, options_for_select(User::VALID_AGES)) %>
 		</div>
 		<div class="filter">
 			<h4 class="title">Body Type</h4>		
 			<% Profile::BODY_TYPES.each do |type| %>
-				<%= check_box_tag(:bodyType, type) %>
-				<%= label_tag(:bodyType, type) %><br/>
+				<%= check_box_tag("body_type[]", type) %>
+				<%= label_tag("body_type[]", type) %><br/>
 			<% end %>
 		</div>
 		<div class="filter">
 			<h4 class="title">Best Feature</h4>
 			<% Profile::BEST_FEATURES.each do |feature| %>
-				<%= check_box_tag(:bestFeature, feature) %>
-				<%= label_tag(:bestFeature, feature) %><br/>
+				<%= check_box_tag("best_feature[]", feature) %>
+				<%= label_tag("best_feature[]", feature) %><br/>
 			<% end %>
 		</div>
 		<div class="filter">
 			<h4 class="title">Ethnicity</h4>
 			<% Profile::ETHNICITIES.each do |ethnicity| %>
-				<%= check_box_tag(:ethnicity, ethnicity) %>
-				<%= label_tag(:ethnicity, ethnicity) %><br/>
+				<%= check_box_tag("ethnicity[]", ethnicity) %>
+				<%= label_tag("ethnicity[]", ethnicity) %><br/>
 			<% end %>
 		</div>
 		<div class="filter last">
 			<h4 class="title">Has Pic?</h4>
-				<%= radio_button_tag (:hasPic, "y") %>
-				<%= label_tag(:hasPic, "Y") %>
-				
-				<%= radio_button_tag (:hasPic, "n") %>
-				<%= label_tag(:hasPic, "N") %>
-				
-				<input type="submit" value="Update" class="submit" />
+			<%= radio_button_tag (:has_pic, "y") %>
+			<%= label_tag(:has_pic, "Y") %>
+			
+			<%= radio_button_tag (:has_pic, "n") %>
+			<%= label_tag(:has_pic, "N") %>
+			
+			<%= submit_tag "Show", :class => 'submit' %>
 		</div>
 	<% end %>
 	<div class="clearfix"></div>
