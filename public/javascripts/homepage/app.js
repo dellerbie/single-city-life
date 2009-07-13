@@ -17,16 +17,17 @@ Ext.onReady(function() {
 			{name: 'default_photo'},
 			{name: 'has_photos', type: 'boolean'},
 			{name: 'n_photos', type: 'int'}
-		],
-		baseParams: {
+		]
+	});
+	
+	usersStore.load({
+		params: {
 			page: 1,
 			limit: 10, 
 			authenticity_token: AUTH_TOKEN,
-			start: 0
+			start: 0	
 		}
 	});
-	
-	usersStore.load();
 	
 	var paginator = new Ext.PagingToolbar({
 		pageSize: 10,
@@ -134,18 +135,32 @@ Ext.onReady(function() {
 	Ext.get('filtersForm').on('submit', function(e) {
 		e.preventDefault();
 		var params = Ext.Ajax.serializeForm('filtersForm');
+		params = Ext.urlDecode(params);
+		Ext.apply(params, {
+			page: 1,
+			start: 0,
+			limit: 10,
+			authenticity_token: AUTH_TOKEN
+		});
 		usersStore.proxy.conn.url = "/filter";
 		usersStore.load({
-			params: Ext.urlDecode(params)
+			params: params
 		});
 	});
 	
 	Ext.get('usernameForm').on('submit', function(e) {
 		e.preventDefault();
 		var params = Ext.Ajax.serializeForm('usernameForm');
+		params = Ext.urlDecode(params);
+		Ext.apply(params, {
+			page: 1,
+			start: 0,
+			limit: 10,
+			authenticity_token: AUTH_TOKEN
+		});
 		usersStore.proxy.conn.url = "/find_by_login";
 		usersStore.load({
-			params: Ext.urlDecode(params)
+			params: params
 		});
 	});
 	
