@@ -4,6 +4,9 @@ Ext.onReady(function() {
 	Ext.History.init();
 	var tokenDelimeter = ':';
 	
+	var FIND_BY_LOGIN_URL = '/find_by_login';
+	var FILTER_URL = '/filter';
+	
 	var usersStore = new Ext.data.JsonStore({
 		url: '/.json',
 		root: 'users',
@@ -139,7 +142,7 @@ Ext.onReady(function() {
 		e.preventDefault();
 		var params = Ext.Ajax.serializeForm('filtersForm');
 		
-		Ext.History.add('/filter' + tokenDelimeter + params);
+		Ext.History.add(FILTER_URL + tokenDelimeter + params);
 	
 		params = Ext.urlDecode(params);
 		Ext.apply(params, {
@@ -148,7 +151,7 @@ Ext.onReady(function() {
 			limit: 10,
 			authenticity_token: AUTH_TOKEN
 		});
-		usersStore.proxy.conn.url = "/filter";
+		usersStore.proxy.conn.url = FILTER_URL;
 		usersStore.load({
 			params: params
 		});
@@ -158,7 +161,7 @@ Ext.onReady(function() {
 		e.preventDefault();
 		var params = Ext.Ajax.serializeForm('usernameForm');
 		
-		Ext.History.add('/find_by_login' + tokenDelimeter + params);
+		Ext.History.add(FIND_BY_LOGIN_URL + tokenDelimeter + params);
 		
 		params = Ext.urlDecode(params);
 		Ext.apply(params, {
@@ -167,7 +170,7 @@ Ext.onReady(function() {
 			limit: 10,
 			authenticity_token: AUTH_TOKEN
 		});
-		usersStore.proxy.conn.url = "/find_by_login";
+		usersStore.proxy.conn.url = FIND_BY_LOGIN_URL;
 		usersStore.load({
 			params: params
 		});
@@ -187,7 +190,7 @@ Ext.onReady(function() {
 			usersStore.proxy.conn.url = url;
 			usersStore.load({
 				params: params
-			})
+			});
 		} else {
 			usersStore.load({
 				params: {
