@@ -140,12 +140,13 @@ a:hover {
 	display: block;
 	margin-top: 10px;
 }
-
-#zipcodeForm .milesWrapper {
-	margin-bottom: 5px;
-}
-
-#zipcodeForm .zipcodeWrapper {
+#x-history-frame {
+	height: 1px;
+	left: 0;
+	position: absolute;
+	top: -1px;
+	visibility: hidden;
+	width: 1px;
 }
 
 /* 

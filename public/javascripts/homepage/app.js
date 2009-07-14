@@ -1,6 +1,9 @@
 Ext.BLANK_IMAGE_URL = '/javascripts/ext-2.2/resources/images/default/s.gif';
 
 Ext.onReady(function() {	
+	Ext.History.init();
+	var tokenDelimeter = ':';
+	
 	var usersStore = new Ext.data.JsonStore({
 		url: '/.json',
 		root: 'users',
@@ -135,6 +138,9 @@ Ext.onReady(function() {
 	Ext.get('filtersForm').on('submit', function(e) {
 		e.preventDefault();
 		var params = Ext.Ajax.serializeForm('filtersForm');
+		
+		Ext.History.add('/filter' + tokenDelimeter + params);
+	
 		params = Ext.urlDecode(params);
 		Ext.apply(params, {
 			page: 1,
@@ -151,6 +157,9 @@ Ext.onReady(function() {
 	Ext.get('usernameForm').on('submit', function(e) {
 		e.preventDefault();
 		var params = Ext.Ajax.serializeForm('usernameForm');
+		
+		Ext.History.add('/find_by_login' + tokenDelimeter + params);
+		
 		params = Ext.urlDecode(params);
 		Ext.apply(params, {
 			page: 1,
@@ -162,6 +171,33 @@ Ext.onReady(function() {
 		usersStore.load({
 			params: params
 		});
+	});
+	
+	Ext.History.on('change', function(token) {
+		if(token) {
+			var parts = token.split(tokenDelimeter);
+			var url = parts[0];
+			var params = Ext.urlDecode(parts[1]);
+			Ext.apply(params, {
+				page: 1,
+				start: 0,
+				limit: 10,
+				authenticity_token: AUTH_TOKEN
+			});
+			usersStore.proxy.conn.url = url;
+			usersStore.load({
+				params: params
+			})
+		} else {
+			usersStore.load({
+				params: {
+					page: 1,
+					limit: 10, 
+					authenticity_token: AUTH_TOKEN,
+					start: 0	
+				}
+			});
+		}
 	});
 	
 });

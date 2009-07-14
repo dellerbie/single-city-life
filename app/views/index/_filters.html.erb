@@ -1,4 +1,8 @@
 <div id="filters">
+	
+    <input type="hidden" id="x-history-field" />
+    <iframe id="x-history-frame"></iframe>
+
 	<h2>Profile Search</h2>
 	<div class="filter">
 		<h4 class="title">Username</h4>
@@ -11,10 +15,10 @@
 		<div class="filter">
 			<h4 class="title">Gender</h4>
 			
-			<%= check_box_tag("gender[]", User::VALID_GENDERS[0]) %>
+			<input type="checkbox" name="gender[]" value="<%= User::VALID_GENDERS[0] %>"/>
 			<%= label_tag("gender[]", "M") %>
 			
-			<%= check_box_tag("gender[]", User::VALID_GENDERS[1]) %>
+			<input type="checkbox" name="gender[]" value="<%= User::VALID_GENDERS[1] %>"/>
 			<%= label_tag("gender[]", "F") %>
 		</div>
 		<div class="filter">
@@ -25,21 +29,21 @@
 		<div class="filter">
 			<h4 class="title">Body Type</h4>		
 			<% Profile::BODY_TYPES.each do |type| %>
-				<%= check_box_tag("body_type[]", type) %>
+				<input type="checkbox" name="body_type[]" value="<%= type %>"/>
 				<%= label_tag("body_type[]", type) %><br/>
 			<% end %>
 		</div>
 		<div class="filter">
 			<h4 class="title">Best Feature</h4>
 			<% Profile::BEST_FEATURES.each do |feature| %>
-				<%= check_box_tag("best_feature[]", feature) %>
+				<input type="checkbox" name="best_feature[]" value="<%= feature %>"/>
 				<%= label_tag("best_feature[]", feature) %><br/>
 			<% end %>
 		</div>
 		<div class="filter">
 			<h4 class="title">Ethnicity</h4>
 			<% Profile::ETHNICITIES.each do |ethnicity| %>
-				<%= check_box_tag("ethnicity[]", ethnicity) %>
+				<input type="checkbox" name="ethnicity[]" value="<%= ethnicity %>"/>
 				<%= label_tag("ethnicity[]", ethnicity) %><br/>
 			<% end %>
 		</div>
