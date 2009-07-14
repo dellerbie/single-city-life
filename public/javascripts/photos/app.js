@@ -6,7 +6,7 @@ Ext.onReady(function() {
 		post_params : {
 			authenticity_token : AUTH_TOKEN
 		},
-		flash_url : '/flash/swfupload_f9.swf',
+		flash_url : '/flash/swfupload.swf',
 		file_size_limit : '3 MB',
 		file_types : '*.jpg',
 		file_types_description : 'JPG Images',
@@ -17,14 +17,14 @@ Ext.onReady(function() {
 		upload_error_handler : SWFUploadHandlers.uploadError,
 		upload_success_handler : SWFUploadHandlers.uploadSuccess,
 		upload_complete_handler : SWFUploadHandlers.uploadComplete,
+		button_placeholder_id: 'addPhotosBtn',
+		button_image_url : "/images/XPButtonUploadText_61x22.png",
+		button_width: 61,
+		button_height: 22,
 		custom_settings : { 
 			upload_target : "fileProgressContainer"
 		},
 		debug: false
-	});
-	
-	Ext.get('addPhotosBtn').on('click', function() {
-		swfu.selectFiles();
 	});
 	
 	var store = new Ext.data.JsonStore({
@@ -35,7 +35,7 @@ Ext.onReady(function() {
 	
 	function disableAddBtnIfMaxed() {
 		if(store.getCount() >= MAX_PHOTOS) {
-			Ext.get('addPhotosBtn').dom.disabled = true;
+			swfu.setButtonDisabled(true);
 		}
 	}
 	
@@ -55,7 +55,7 @@ Ext.onReady(function() {
 	
 	store.on('remove', function(store, record, index) {
 		if(store.getCount() < MAX_PHOTOS) {
-			Ext.get('addPhotosBtn').dom.disabled = false;
+			swfu.setButtonDisabled(false);
 		}
 		updatePhotoCounter();
 	});
