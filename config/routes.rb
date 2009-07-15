@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  
   map.root :controller => 'index'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil 
   map.forgot '/forgot', :controller => 'forgot', :action => 'new'
@@ -14,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.account 'users/:id/account/', :controller => 'account'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
-  map.connect '/.:format', :controller => 'index', :action => 'index'
+  
   map.connect '/:action', :controller => 'index'
+  map.connect '/.json', :controller => 'index', :action => 'index', :format => 'json'
 end

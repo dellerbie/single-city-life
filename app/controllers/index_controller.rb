@@ -2,7 +2,7 @@ class IndexController < ApplicationController
   skip_before_filter :login_required, :login_from_cookie
   
   def index
-    @users = User.paginate :all, :page => params[:page] || 1, :order => 'id DESC'
+    @users = User.paginate :all, :page => params[:page] || 1, :order => 'id DESC', :conditions => ['enabled = ?', true]
     respond_to do |format|
       format.html
       format.json {
@@ -14,7 +14,7 @@ class IndexController < ApplicationController
   def find_by_login
     username = params[:username]
     if username.blank?
-      @users = User.paginate :all, :page => 1, :order => 'id DESC'
+      @users = User.paginate :all, :page => 1, :order => 'id DESC', :conditions => ['enabled = ?', true]
       json = get_users_json(@users)
       render :json => json
     else
@@ -41,7 +41,7 @@ class IndexController < ApplicationController
     query.profile.and.best_feature_in(params[:best_feature]) if params[:best_feature]
     query.profile.and.body_type_in(params[:body_type]) if params[:body_type]
     query.profile.and.ethnicity_in(params[:ethnicity]) if params[:ethnicity]
-    users = query.paginate :page => params[:page] || 1, :order => 'users.id DESC'
+    users = query.paginate :page => params[:page] || 1, :order => 'users.id DESC', :conditions => ['enabled = ?', true]
 
     render :json => get_users_json(users)
   end

@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(:version => 20090109231626) do
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
     t.string   "password_reset_code",       :limit => 40
-    t.boolean  "enabled",                                  :default => true
+    t.boolean  "enabled",                                  :default => false
     t.date     "birthdate"
     t.string   "gender"
     t.integer  "default_photo_id"

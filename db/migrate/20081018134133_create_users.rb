@@ -12,7 +12,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :activation_code,            :string, :limit => 40
       t.column :activated_at,               :datetime
       t.column :password_reset_code,        :string, :limit => 40
-      t.column :enabled,                    :boolean, :default => true
+      t.column :enabled,                    :boolean, :default => false
       t.column :birthdate,                  :date
       t.column :gender,                     :string
       t.column :default_photo_id,           :integer

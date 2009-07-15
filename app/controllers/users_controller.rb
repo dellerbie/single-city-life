@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => [:edit, :update]
   
   def index
-    @users = User.find(:all)
+    @users = User.find(:all, :conditions => ['enabled = :enabled', true])
   end
   
   def show
@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     case
     when (!params[:activation_code].blank?) && user && !user.active?
       user.activate!
+      user.update_attribute(:enabled, true)
       flash[:notice] = "Signup complete! Please sign in to continue."
       redirect_to new_session_path
     when params[:activation_code].blank?
