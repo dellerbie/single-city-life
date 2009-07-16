@@ -14,7 +14,7 @@
 		<%= yield :javascripts %>
 	</head>
 	<body>
-		<div id="doc4" class="yui-t1">
+		<div id="doc4" class="yui-t4"> 
 			<div id="hd">
 				<div id="logo">
 					<%= link_to "Singles", root_url %>
@@ -30,6 +30,9 @@
 						</div>
 						<div class="navigationNode">
 							<%= link_to 'Photos', user_photos_path(current_user) %>
+						</div>
+						<div class="navigationNode">
+							<%= link_to 'Messages', inbox_user_messages_path(current_user) %>
 						</div>
 					</div>
 					<% end %>

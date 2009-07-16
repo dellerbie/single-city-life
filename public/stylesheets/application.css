@@ -156,9 +156,9 @@ a:hover {
 #profileWrapper {
 	border-left: 1px solid #eee; 
 	border-right: 1px solid #eee; 
-	padding: 10px;
 	background: #f7f7f7;
 	float: left;
+	margin-left: 10px;
 }
 
 #profiles {

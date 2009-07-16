@@ -12,18 +12,16 @@
 
 <div id="yui-main">
 	<div class="yui-b">
-		<div class="yui-ge">
+		<div class="yui-gf">
 			<div class="yui-u first">
-				<div id="profileWrapper">
-					<ul id="profiles"></ul>
-				</div>
+				<%= render :partial => "filters" %>
 			</div>
-			<div id="ads" class="yui-u">
-				ads
+			<div id="profileWrapper" class="yui-u">
+				<ul id="profiles"></ul>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="yui-b">
-	<%= render :partial => "filters" %>
+<div id="ads" class="yui-b">
+	ads
 </div>

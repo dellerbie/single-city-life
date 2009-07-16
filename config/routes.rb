@@ -8,6 +8,10 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :users do |user|
     user.resources :photos, :member => { :assign_default => :put }
+    user.resources :messages, :collection => {
+      :inbox => :get,
+      :outbox => :get
+    }
   end
   
   map.resource :session

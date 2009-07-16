@@ -1,0 +1,76 @@
+<div id="yui-main">
+	<div class="yui-b">
+		<div class="yui-g">
+			<ul id="mailboxes">
+				<li id="inboxMailbox">
+					<a href="<%= inbox_user_messages_path(current_user) %>">Inbox (322)</a>
+				</li>
+				<li id="sentMailbox">
+					<a href="<%= outbox_user_messages_path(current_user) %>">Sent Messages</a>
+				</li>
+				<div class="clearfix"></div>
+			</ul>
+			<div id="messageDetails">
+				<div id="messageHeader">
+					<p class="subject">Hey Wassup</p>
+					<span class="between">
+						Between <a href="#">You</a> and <a href="#">Nadia</a>
+					</span>
+				</div>
+				<ul class="messages">
+					<li>
+						<div class="photo">
+							<a href="#"><img class="articleImage" width="70" height="70" alt="" src="http://l.yimg.com/ds/orion/us/trend_hunter537/1216278000/1:trend_hunter537:8f4fb143c87d30ba65587aae253b2a3a/megan_fox.jpg"></a>
+						</div>
+
+						<div class="metadata">
+							<a class="from" href="#">Nadia</a>
+							<span class="sentOn">September 3 @ 5:50pm</span>
+						</div>
+			
+						<div class="message">
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							</p>
+						</div>
+					</li>
+					<li>
+						<div class="photo">
+							<a href="#"><img class="articleImage" width="70" height="70" alt="" src="http://l.yimg.com/ds/orion/us/trend_hunter537/1216278000/1:trend_hunter537:8f4fb143c87d30ba65587aae253b2a3a/megan_fox.jpg"></a>
+						</div>
+
+						<div class="metadata">
+							<a class="from" href="#">Nadia</a>
+							<span class="sentOn">September 3 @ 5:50pm</span>
+						</div>
+			
+						<div class="message">
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							</p>
+						</div>
+						<div class="clearfix"></div>
+					</li>
+				</ul>
+				
+				<div id="replyWrapper" style="clear: both;">
+					<form id="reply" action="" class="standardForm">
+						<div class="formRow">
+							<label for="message">Reply:</label> 
+							<textarea name="message" style="width: 60%; height: 100px;"></textarea>
+						</div>
+						<div class="formRow">
+							<input type="submit" value="Send" name="commit" class="submit" />
+							or <%= link_to "Back to Inbox", user_messages_path(current_user) %>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div id="ads" class="yui-b">
+	Ads
+</div>
+</div>
