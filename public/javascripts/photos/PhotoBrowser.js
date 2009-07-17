@@ -77,5 +77,5 @@ PhotoBrowser = Ext.extend(Ext.Window, {
         } else {
             detailEl.update('');
         }
-    },
+    }
 }); 

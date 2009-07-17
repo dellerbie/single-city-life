@@ -53,13 +53,17 @@ Ext.onReady(function() {
 		'<li class="profile">',
 			'<div class="img">',
 				'<tpl if="has_photos == true">',
-					'<a class="show-more-photos" href="#">',
-						'<img class="articleImage" src="{default_photo}">',
+					'<a class="show-pics" href="#">',
+						'<img src="{default_photo}">',
 					'</a>',
-					'<a href="#" class="more show-more-photos">View Photos ({n_photos})</a>',
+					'<div class="actions">',
+						'<a href="#" class="show-pics">Pics ({n_photos})</a>',
+						'<span class="separator">|</span>',
+						'<a href="#" class="send-msg">Msg</a>',
+					'</div>',
 				'</tpl>',
 				'<tpl if="has_photos == false">',
-					'<img class="articleImage" src="{default_photo}">',
+					'<img src="{default_photo}">',
 				'</tpl>',
 			'</div>',
 			'<div class="summary">',
@@ -114,10 +118,48 @@ Ext.onReady(function() {
 	    fields: ['thumb', 'title', 'full', 'tiny', 'id']
 	});
 	
+	var sendMsgWindow;
+	var sendMsgForm = new Ext.form.FormPanel({
+		frame: true,
+		autoHeight: true,
+	 	labelAlign: 'right',
+		url: '',
+		bodyStyle: 'text-align: left',
+		buttonAlign: 'right',
+		items:[{
+			xtype: 'fieldset',
+			title: 'Compose Message',
+			autoHeight: true,
+			defaultType: 'textfield',
+			defaults: {
+				anchor: '100%'
+			},
+		    items: [{
+				fieldLabel: 'Subject',
+				name: 'subject',
+				fieldClass: 'mediumFont'
+			},{
+				xtype: 'textarea',
+				fieldLabel: 'Message',
+				name: 'message'
+			}]
+		}],
+		buttons: [{
+		    text: 'Send',
+			handler: function() {
+				sendMsgWindow.close();
+			}
+	    },{
+		    text: 'Cancel',
+			handler: function() {
+				sendMsgWindow.close();
+			}
+	    }]	
+	});
+	
 	var profiles = Ext.get('profiles');
 	profiles.on('click', function(e, t) {
-		var target = e.getTarget('a.show-more-photos');
-		if(target) {
+		if(e.getTarget('a.show-pics')) {
 			var profile = e.getTarget('.profile', 10, true);
 			var login = profile.select('.summary .info .name').first();
 			var userId = login.dom.innerHTML;
@@ -135,6 +177,21 @@ Ext.onReady(function() {
 			photoBrowserStore.on('load', function() {
 				photoBrowser.imagesView.select(0);
 			});
+		} else if(e.getTarget('a.send-msg')) {
+			if(!sendMsgWindow) {
+				sendMsgWindow = new Ext.Window({
+					title: 'Send A Message',
+				    closable: true,
+					closeAction: 'hide',
+					resizable: false,
+					draggable: false,
+				    layout: 'fit',
+					width: 450,
+				    modal: true,
+				    items: sendMsgForm
+				});
+			}
+			sendMsgWindow.show();
 		}
 	});
 	

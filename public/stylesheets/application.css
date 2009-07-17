@@ -19,6 +19,14 @@ a:hover {
 	text-decoration: underline;
 }
 
+.green {
+	color: #009900;
+}
+
+.red {
+	color: #990000;
+}
+
 /* 
 ------------------------------------------
 =HEADER
@@ -188,8 +196,8 @@ a:hover {
 	width: 165px;
 }
 
-.profile .img a {
-	display: block;
+.profile .img .separator {
+	padding: 0px 5px;
 }
 
 .profile .img img {	
@@ -622,7 +630,7 @@ p.allFieldsRequiredMsg {
 	padding: 10px;
 }
 
-ul.messages li {
+#messages li {
 	background: #fff;
 	border: 1px solid #ddd;
 	padding: 5px;
@@ -631,60 +639,59 @@ ul.messages li {
 	margin-bottom: 10px;
 }
 
-.messages .photo {
+#messages .photo {
 	float: left;
 	width: 80px;
 	text-align: center;
 	padding-right: 15px;
 }
 
-.messages .photo img {
+#messages .photo img {
 	padding: 4px;
 	background: #fff;
 	border: 1px solid #ccc;
 }
 
-.messages .metadata {
+#messages .metadata {
 	float: left;
 	width: 175px;
 }
 
-.messages .metadata .from {
+#messages .metadata .from {
 	display: block;
 }
 
-.messages .metadata .sentOn {
+#messages .metadata .sentOn {
 	display: block;
 	color: #777;
 	font-size: 85%;
 }
 
-.messages .message {
+#messages .message {
 	float: left;
 	width: 400px;
 }
 
-.messages .message .subject {
+#messages .message .subject {
 	display: block;
 }
 
-.messages .message .snippet {
-	display: block;
+#messages .message .snippet {
 	color: #8D9CCF;
 }
 
-.messages .messageActions {
+#messages .messageActions {
 	float: right;
 }
 
-.messages a.delete {
+#messages a.delete {
 	background: transparent url(../images/x_to_hide.gif) no-repeat scroll 0%;
 	display: block;
 	height: 14px;
 	width: 13px;
 }
 
-.messages a.delete:hover {
+#messages a.delete:hover {
 	background: #3B5998 url(../images/x_to_hide_hover.gif) no-repeat scroll 0%;
 }
 
@@ -696,6 +703,14 @@ ul.messages li {
 	text-align: center;
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 5px;
+}
+
+#replyWrapper {
+	clear: both;
+}
+
+#messageStatus {
+	padding-left: 5px;
 }
 
 /* 

@@ -1,3 +1,7 @@
+<% content_for(:javascripts) do %>
+	<%= javascript_include_tag 'messages/show' %>
+<% end %>
+
 <div id="yui-main">
 	<div class="yui-b">
 		<div class="yui-g">
@@ -17,7 +21,7 @@
 						Between <a href="#">You</a> and <a href="#">Nadia</a>
 					</span>
 				</div>
-				<ul class="messages">
+				<ul id="messages">
 					<li>
 						<div class="photo">
 							<a href="#"><img class="articleImage" width="70" height="70" alt="" src="http://l.yimg.com/ds/orion/us/trend_hunter537/1216278000/1:trend_hunter537:8f4fb143c87d30ba65587aae253b2a3a/megan_fox.jpg"></a>
@@ -53,8 +57,8 @@
 					</li>
 				</ul>
 				
-				<div id="replyWrapper" style="clear: both;">
-					<form id="reply" action="" class="standardForm">
+				<div id="replyWrapper">
+					<form id="reply" action="#" method="POST" class="standardForm">
 						<div class="formRow">
 							<label for="message">Reply:</label> 
 							<textarea name="message" style="width: 60%; height: 100px;"></textarea>
@@ -62,6 +66,7 @@
 						<div class="formRow">
 							<input type="submit" value="Send" name="commit" class="submit" />
 							or <%= link_to "Back to Inbox", user_messages_path(current_user) %>
+							<span id="messageStatus">Sending message...</span>
 						</div>
 					</form>
 				</div>

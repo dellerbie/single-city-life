@@ -1,3 +1,6 @@
+<% content_for(:javascripts) do %>
+	<%= javascript_include_tag 'messages/mailboxes' %>
+<% end %>
 <div id="yui-main">
 	<div class="yui-b">
 		<div class="yui-g">
@@ -12,7 +15,7 @@
 			</ul>
 	
 			<div id="inbox">
-				<ul class="messages">
+				<ul id="messages">
 					<li>
 						<div class="photo">
 							<a href="<%= user_message_path(current_user, 1) %>"><img class="articleImage" width="70" height="70" alt="" src="http://l.yimg.com/ds/orion/us/trend_hunter537/1216278000/1:trend_hunter537:8f4fb143c87d30ba65587aae253b2a3a/megan_fox.jpg"></a>
