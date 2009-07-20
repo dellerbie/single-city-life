@@ -16,44 +16,7 @@
 	
 			<div id="inbox">
 				<ul id="messages">
-					<li>
-						<div class="photo">
-							<a href="<%= user_message_path(current_user, 1) %>"><img class="articleImage" width="70" height="70" alt="" src="http://l.yimg.com/ds/orion/us/trend_hunter537/1216278000/1:trend_hunter537:8f4fb143c87d30ba65587aae253b2a3a/megan_fox.jpg"></a>
-						</div>
-
-						<div class="metadata">
-							<a class="from" href="#">Nadia</a>
-							<span class="sentOn">September 3 @ 5:50pm</span>
-						</div>
-
-						<div class="message">
-							<a href="message_details.html" class="subject">Hey Wassup</a>
-							<a href="message_details.html" class="snippet">Hey I liked what </a>
-						</div>
-
-						<div class="messageActions">
-							<a href="#" class="delete"></a>
-						</div>
-					</li>
-					<li>
-						<div class="photo">
-							<a href="message_details.html"><img class="articleImage" width="70" height="70" alt="" src="http://l.yimg.com/ds/orion/us/trend_hunter537/1216278000/1:trend_hunter537:8f4fb143c87d30ba65587aae253b2a3a/megan_fox.jpg"></a>
-						</div>
-
-						<div class="metadata">
-							<a class="from" href="#">Nadia</a>
-							<span class="sentOn">September 3 @ 5:50pm</span>
-						</div>
-
-						<div class="message">
-							<a href="message_details.html" class="subject">Hey Wassup</a>
-							<a href="message_details.html" class="snippet">Hey I liked what I saw so I decided to write you a message.Hey I liked what I saw so I decided to write you a message...</a>
-						</div>
-
-						<div class="messageActions">
-							<a href="#" class="delete"></a>
-						</div>
-					</li>
+					<%= render :partial => "message", :collection => @messages %>
 					<div class="clearfix"></div>
 				</ul>
 			</div>

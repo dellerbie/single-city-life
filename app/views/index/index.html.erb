@@ -4,7 +4,8 @@
 
 <% content_for(:javascripts) do %>
 	<script type="text/javascript">
-		AUTH_TOKEN = '<%= u form_authenticity_token -%>';
+		var AUTH_TOKEN = '<%= u form_authenticity_token -%>';
+		var USER_ID = "<%= current_user.to_param -%>";
 	</script>
 	<%= javascript_include_tag 'photos/PhotoBrowser' %>
 	<%= javascript_include_tag 'index/app' %>

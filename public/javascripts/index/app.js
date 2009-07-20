@@ -53,19 +53,19 @@ Ext.onReady(function() {
 		'<li class="profile">',
 			'<div class="img">',
 				'<tpl if="has_photos == true">',
-					'<a class="show-pics" href="#">',
+					'<a class="show-pics" href="javascript:void(0);">',
 						'<img src="{default_photo}">',
 					'</a>',
 					'<div class="actions">',
-						'<a href="#" class="show-pics">Pics ({n_photos})</a>',
+						'<a href="javascript:void(0);" class="show-pics">Pics ({n_photos})</a>',
 						'<span class="separator">|</span>',
-						'<a href="#" class="send-msg">Msg</a>',
+						'<a href="javascript:void(0);" class="send-msg">Msg</a>',
 					'</div>',
 				'</tpl>',
 				'<tpl if="has_photos == false">',
 					'<img src="{default_photo}">',
 					'<div class="actions">',
-						'<a href="#" class="send-msg">Msg</a>',
+						'<a href="javascript:void(0);" class="send-msg">Msg</a>',
 					'</div>',
 				'</tpl>',
 			'</div>',
@@ -126,7 +126,6 @@ Ext.onReady(function() {
 		frame: true,
 		autoHeight: true,
 	 	labelAlign: 'right',
-		url: '',
 		bodyStyle: 'text-align: left',
 		buttonAlign: 'right',
 		items:[{
@@ -139,30 +138,64 @@ Ext.onReady(function() {
 			},
 		    items: [{
 				fieldLabel: 'Subject',
+				allowBlank: false,
+				maxLength: 50,
+				emptyText: 'Type in your subject.  Max is 50 characters.',
 				name: 'subject',
 				fieldClass: 'mediumFont'
 			},{
 				xtype: 'textarea',
 				fieldLabel: 'Message',
-				name: 'message'
+				name: 'message',
+				allowBlank: false,
+				emptyText: 'Your message here'
 			}]
 		}],
 		buttons: [{
 		    text: 'Send',
 			handler: function() {
-				sendMsgWindow.close();
+				sendMsgForm.getForm().submit({
+					url: '/users/' + USER_ID + '/messages',
+					waitMsg: 'Sending message...',
+					params: {
+						authenticity_token: AUTH_TOKEN,
+						receiver_id: sendMsgForm.receiver_id,
+						method: 'POST'
+					},
+					success: function(form, action) {
+						sendMsgWindow.hide();
+						form.reset();
+					},
+				    failure: function(form, action) {
+				        switch (action.failureType) {
+				            case Ext.form.Action.CLIENT_INVALID:
+				                Ext.Msg.alert('Failure', 'Form fields may not be submitted with invalid values');
+				                break;
+				            case Ext.form.Action.CONNECT_FAILURE:
+				                Ext.Msg.alert('Failure', 'Communication with the server failed.  Please try again later.');
+				                break;
+				            case Ext.form.Action.SERVER_INVALID:
+				               Ext.Msg.alert('Failure', action.result.msg);
+				       }
+				    }
+				});
 			}
 	    },{
 		    text: 'Cancel',
 			handler: function() {
-				sendMsgWindow.close();
+				sendMsgWindow.hide();
+				sendMsgForm.getForm().reset();
 			}
 	    }]	
 	});
 	
 	var profiles = Ext.get('profiles');
 	profiles.on('click', function(e, t) {
-		if(e.getTarget('a.show-pics')) {
+		e.preventDefault();		
+		var sendMsgLink = e.getTarget('a.send-msg');
+		var showPicsLink = e.getTarget('a.show-pics');
+		
+		if(showPicsLink) {
 			var profile = e.getTarget('.profile', 10, true);
 			var login = profile.select('.summary .info .name').first();
 			var userId = login.dom.innerHTML;
@@ -176,25 +209,32 @@ Ext.onReady(function() {
 				});
 			}
 			photoBrowser.show();
-			
 			photoBrowserStore.on('load', function() {
 				photoBrowser.imagesView.select(0);
 			});
-		} else if(e.getTarget('a.send-msg')) {
-			if(!sendMsgWindow) {
-				sendMsgWindow = new Ext.Window({
-					title: 'Send A Message',
-				    closable: true,
-					closeAction: 'hide',
-					resizable: false,
-					draggable: false,
-				    layout: 'fit',
-					width: 450,
-				    modal: true,
-				    items: sendMsgForm
-				});
+		} else if(sendMsgLink) {
+			var profile = e.getTarget('.profile', 10, true);
+			var login = profile.select('.summary .info .name').first().dom.innerHTML;
+			
+			if(!LOGGED_IN) {
+				Ext.Msg.alert("Login Required", "Please login or register.");
+			} else {
+				if(!sendMsgWindow) {
+					sendMsgWindow = new Ext.Window({
+						title: 'Send A Message to: ' + login,
+					    closable: true,
+						closeAction: 'hide',
+						resizable: false,
+						draggable: false,
+					    layout: 'fit',
+						width: 450,
+					    modal: true,
+					    items: sendMsgForm
+					});
+				}
+				sendMsgForm.receiver_id = login;
+				sendMsgWindow.show();
 			}
-			sendMsgWindow.show();
 		}
 	});
 	

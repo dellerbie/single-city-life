@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   concerned_with :authentication
   has_one :profile, :dependent => :destroy
+  
+  has_many :sent_messages, :class_name => "Message", :foreign_key => :sender_id, :dependent => :destroy, :order => 'created_at DESC'
+  has_many :received_messages, :class_name => "Message", :foreign_key => :receiver_id, :dependent => :destroy, :order => 'created_at DESC'
+  
   has_many :photos, :dependent => :destroy do
     def to_json_for_gallery
       json = {}
@@ -72,6 +76,14 @@ class User < ActiveRecord::Base
       :has_photos => has_photos?,
       :n_photos => n_photos
     }
+  end
+  
+  def inbox_size
+    Message.count :conditions => ["receiver_id = ?", id]
+  end
+  
+  def outbox_size
+    Message.count :conditions => ["sender_id = ?", id]
   end
 
   protected

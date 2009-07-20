@@ -11,6 +11,9 @@
 		
 		<%= javascript_include_tag "ext-2.2/adapter/ext/ext-base.js"%>
 		<%= javascript_include_tag "ext-2.2/ext-all-debug.js"%>
+		<script type="text/javascript">
+			var LOGGED_IN = <%= logged_in? %>;
+		</script>
 		<%= yield :javascripts %>
 	</head>
 	<body>

@@ -1,0 +1,9 @@
+<ul id="mailboxes">
+	<li id="inboxMailbox">
+		<a href="<%= inbox_user_messages_path(current_user) %>">Inbox (<%= current_user.inbox_size %>)</a>
+	</li>
+	<li id="sentMailbox">
+		<a href="<%= outbox_user_messages_path(current_user) %>">Sent Messages (<%= current_user.outbox_size %>)</a>
+	</li>
+	<div class="clearfix"></div>
+</ul>

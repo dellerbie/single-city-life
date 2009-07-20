@@ -1,40 +1,72 @@
 Ext.onReady(function() {
 	var replyForm = Ext.get('reply');
+	var submitBtn = replyForm.query('input[type=submit]')[0];
+	submitBtn.disabled = false;
+	
+	var textarea = replyForm.query('textarea')[0];
+	textarea.disabled = false;
+	
 	replyForm.on('submit', function(e) {
 		e.preventDefault();
+
+		var params = Ext.Ajax.serializeForm('reply');
+		console.log(params);
+		params = Ext.urlDecode(params);
+		Ext.apply(params, {
+			authenticity_token: AUTH_TOKEN
+		});
+		console.log(params);
 		
-		// disable the form
-		var submitBtn = replyForm.query('input[type=submit]')[0];
-		submitBtn.disabled = true;
+		if(params.message.trim() == "") {
+			Ext.Msg.alert("Failed to send message", "You must write a message in order to send.");
+		} else {
+			submitBtn.disabled = true;
+			textarea.disabled = true;
+
+			Ext.get('messageStatus').update('Sending message...').replaceClass('red', 'green');
 		
-		var textarea = replyForm.query('textarea')[0];
-		textarea.disabled = true;
+			var tpl = new Ext.XTemplate(
+				'<li>',
+					'<div class="photo">',
+						'<a href="/users/{sender}/profile"><img src="{sender_default_photo}"></a>',
+					'</div>',
+					'<div class="metadata">',
+						'<a class="from" href="/users/{sender}/profile">{sender}</a>',
+						'<span class="sentOn">{sent_on}</span>',
+					'</div>',
+					'<div class="message">',
+						'<p>{message}</p>',
+					'</div>',
+				'</li>'
+			);
+			
+			Ext.Ajax.request({
+				url: '/users/' + USER_ID + '/messages/reply',
+				method: 'POST',
+				params: params,
+				success: function(response) {
+					var data = Ext.decode(response.responseText);
+					if(data.success == true) {
+						var msgs = Ext.get('messages');
+					
+						tpl.append(msgs, data);
+						Ext.get('messageStatus').update('').hide();
+						submitBtn.disabled = false;
+						textarea.disabled = false;
+						textarea.value = "";
+					} else {
+						Ext.get('messageStatus').update(data.msg).replaceClass('green', 'red');
+					}
+					submitBtn.disabled = false;
+					textarea.disabled = false;
+				}
+			});
+		}
 		
-		Ext.get('messageStatus').update('Sending message...').replaceClass('red', 'green');
+
 		
-		// send ajax request 
+
 		
-		var tpl = new Ext.XTemplate(
-			'<li>',
-				'<div class="photo">',
-					'<a href="#"><img class="articleImage" width="70" height="70" alt="" src="http://l.yimg.com/ds/orion/us/trend_hunter537/1216278000/1:trend_hunter537:8f4fb143c87d30ba65587aae253b2a3a/megan_fox.jpg"></a>',
-				'</div>',
-				'<div class="metadata">',
-					'<a class="from" href="#">Nadia</a>',
-					'<span class="sentOn">September 3 @ 5:50pm</span>',
-				'</div>',
-				'<div class="message">',
-					'<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-				'</div>',
-			'</li>'
-		);
-		
-		var msgs = Ext.get('messages');
-		tpl.append(msgs);
-		
-		Ext.get('messageStatus').update('').hide();
-		submitBtn.disabled = false;
-		textarea.disabled = false;
-		
+
 	});
 });

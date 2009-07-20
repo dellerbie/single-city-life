@@ -1,17 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
-  
   map.root :controller => 'index'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil 
   map.forgot '/forgot', :controller => 'forgot', :action => 'new'
   
   map.resources :users, :has_one => :profile
-  
   map.resources :users do |user|
     user.resources :photos, :member => { :assign_default => :put }
-    user.resources :messages, :collection => {
-      :inbox => :get,
-      :outbox => :get
-    }
+    user.resources :messages, :collection => { :inbox => :get, :outbox => :get, :reply => :post }
   end
   
   map.resource :session
