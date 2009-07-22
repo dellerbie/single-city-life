@@ -1,17 +1,23 @@
-<li>
+<%
+	is_showing_message ||= false
+	showing_outbox = is_showing_message && !@from_inbox
+	user_to_show = showing_outbox ? message.sender : message.receiver
+%>
+
+<li id="<%= message.id %>">
 	<div class="photo">
-		<a href="<%= user_profile_path(message.sender) %>">
-			<%= image_tag message.sender.default_photo %>
+		<a href="<%= user_profile_path(user_to_show) %>">
+			<%= image_tag user_to_show.default_photo %>
 		</a>
 	</div>
 
 	<div class="metadata">
-		<%= link_to message.sender.login, user_profile_path(message.sender.login), :class => "from" %>
+		<%= link_to user_to_show.login, user_profile_path(user_to_show.login), :class => "from" %>
 		<span class="sentOn"><%= message.created_at.to_formatted_s(:long) %></span>
 	</div>
 
 	<div class="message">
-		<% if is_showing %>
+		<% if is_showing_message %>
 			<%= h message.message %>
 		<% else %>
 			<%= link_to h(truncate(message.subject, :length => 30)), user_message_path(current_user, message), :class => "subject" %>
@@ -19,7 +25,7 @@
 		<% end %>
 	</div>
 
-	<% unless is_showing %>
+	<% unless is_showing_message %>
 		<div class="messageActions">
 			<a href="javascript:void(0);" class="delete"></a>
 		</div>

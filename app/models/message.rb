@@ -12,4 +12,25 @@ class Message < ActiveRecord::Base
   def root
     root = self.parent == nil ? self : self.parent.root
   end
+  
+  # returns an array of messages that represent the entire conversational thread
+  # that this message is in
+  def thread
+    msgs = []
+    if self.parent
+      append_message_and_children self.parent, msgs
+    else 
+      append_message_and_children self, msgs
+    end
+  end
+  
+  private 
+  
+  def append_message_and_children(msg, msgs)
+    msgs << msg
+    msg.children.each do |m|
+      msgs << m
+    end
+    msgs
+  end
 end

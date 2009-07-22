@@ -169,7 +169,8 @@ Ext.onReady(function() {
 				    failure: function(form, action) {
 				        switch (action.failureType) {
 				            case Ext.form.Action.CLIENT_INVALID:
-				                Ext.Msg.alert('Failure', 'Form fields may not be submitted with invalid values');
+								var msg = action.result.msg ? action.result.msg : 'Form fields may not be submitted with invalid values'
+				                Ext.Msg.alert('Failure', msg);
 				                break;
 				            case Ext.form.Action.CONNECT_FAILURE:
 				                Ext.Msg.alert('Failure', 'Communication with the server failed.  Please try again later.');

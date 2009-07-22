@@ -1,4 +1,9 @@
 Ext.onReady(function() {
+	var currentMsg = Ext.get(MESSAGE_ID);
+	currentMsg.scrollIntoView().highlight();
+	
+	if(!SHOWING_INBOX) return;
+	
 	var replyForm = Ext.get('reply');
 	var submitBtn = replyForm.query('input[type=submit]')[0];
 	submitBtn.disabled = false;
@@ -26,7 +31,7 @@ Ext.onReady(function() {
 			Ext.get('messageStatus').update('Sending message...').replaceClass('red', 'green');
 		
 			var tpl = new Ext.XTemplate(
-				'<li>',
+				'<li id={id}>',
 					'<div class="photo">',
 						'<a href="/users/{sender}/profile"><img src="{sender_default_photo}"></a>',
 					'</div>',

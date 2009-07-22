@@ -3,13 +3,16 @@
 	<script type="text/javascript">
 		var AUTH_TOKEN = '<%= u form_authenticity_token -%>';
 		var USER_ID = '<%= current_user.login %>';
+		var MESSAGE_ID = '<%= @message.id %>';
+		var SHOWING_INBOX = <%= @from_inbox %>;
 	</script>
 <% end %>
 
 <div id="yui-main">
 	<div class="yui-b">
 		<div class="yui-g">
-			<%= render :partial => "mailboxes" %>
+			<%= render :partial => "mailboxes", :locals => { :highlight_current_mailbox => false } %>
+			
 			<div id="messageDetails">
 				<div id="messageHeader">
 					<p class="subject"><%= h @message.subject %></p>
@@ -20,37 +23,29 @@
 					</span>
 				</div>
 				<ul id="messages">
-					<% if @message.parent %>
-						<%= render :partial => "message", :locals => { :is_showing => true }, :collection => @message.root.children %>
-					<% else %>
-						<%= render :partial => "message", :locals => { :is_showing => true } %>
-						<%= render :partial => "message", :locals => { :is_showing => true }, :collection => @message.children %>
-					<% end %>
+					<%= render :partial => "message", :locals => { :is_showing_message => true }, :collection => @message.thread %>
 					<div class="clearfix"></div>
 				</ul>
 				
-				<div id="replyWrapper">
-					<form id="reply" action="#" method="POST" class="standardForm">
-						<input type="hidden" name="parent_id" value="<%= @message.id %>" />
-						<input type="hidden" name="receiver_id" value="<%= receiver.login %>" />
-						<input type="hidden" name="sender_id" value="<%= current_user.login %>" />
-						<input type="hidden" name="subject" value="<%= @message.subject %>" />
-						<div class="formRow">
-							<label for="message">Reply:</label> 
-							<textarea name="message" style="width: 60%; height: 100px;"></textarea>
-						</div>
-						<div class="formRow">
-							<input type="submit" value="Send" class="submit" />
-							or 
-							<% if @from_inbox %>
-								<%= link_to "Back to Inbox", inbox_user_messages_path(current_user) %>
-							<% else %>
-								<%= link_to "Back to Outbox", outbox_user_messages_path(current_user) %>
-							<% end %>
-							<span id="messageStatus"></span>
-						</div>
-					</form>
-				</div>
+				<% if @from_inbox %>
+					<div id="replyWrapper">
+						<form id="reply" action="#" method="POST" class="standardForm">
+							<input type="hidden" name="parent_id" value="<%= @message.parent.id ? @message.parent.id : @message.id %>" />
+							<input type="hidden" name="receiver_id" value="<%= receiver.login %>" />
+							<input type="hidden" name="sender_id" value="<%= current_user.login %>" />
+							<input type="hidden" name="subject" value="<%= @message.subject %>" />
+							<div class="formRow">
+								<label for="message">Reply:</label> 
+								<textarea name="message" style="width: 60%; height: 100px;"></textarea>
+							</div>
+							<div class="formRow">
+								<input type="submit" value="Send" class="submit" />
+								or <%= link_to "Back to Inbox", inbox_user_messages_path(current_user) %>
+								<span id="messageStatus"></span>
+							</div>
+						</form>
+					</div>
+				<% end %>
 			</div>
 
 		</div>

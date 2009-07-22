@@ -3,44 +3,70 @@ class MessagesController < ApplicationController
   
   def inbox
     @messages = current_user.received_messages :order => 'created_at DESC'
+    @from_inbox = true
+    render :template => "messages/mailbox"
   end
   
   def outbox  
-    @messages = current_user.sent_messages
+    @messages = current_user.sent_messages :order => 'created_at DESC'
+    @from_inbox = false
+    render :template => "messages/mailbox"
   end
   
   def show
     @message = current_user.received_messages.find_by_id params[:id]
-    @from_inbox = true
-    unless @message
-      @message = current_user.sent_messages.find_by_id params[:id]
+    if @message
+      # showing an inbox message
+      @from_inbox = true
+      @message.update_attribute(:read, true)
+    else 
+      # showing an outbox message
       @from_inbox = false
+      @message = current_user.sent_messages.find_by_id params[:id]
+      unless @message
+        flash[:notice] = "Could not find the message you are trying to view."
+        redirect_to :action => inbox
+      end
     end
-    @message.update_attribute(:read, true) if @message
   end
   
   def create
+    receiver = User.find_by_login(params[:receiver_id])
+    json = {}
     message = Message.new(
       :sender => current_user,
-      :receiver => User.find_by_login(params[:receiver_id]),
+      :receiver => receiver,
       :subject => params[:subject],
       :message => params[:message],
       :read => false
     )
-    
-    if message.save
-      render :json => { :success => true }
+    if receiver.nil?
+      json = {
+        :success => false,
+        :message => "The user you are trying to send a message to does not exist.",
+        :errors => "The user you are trying to send a message to does not exist."
+      }
+    elsif receiver.id == current_user.id
+      json = {
+        :success => false,
+        :msg => "You can not send a message to yourself.",
+        :errors => "You can not send a message to yourself."
+      }
+    elsif message.save
+      json = { :success => true }
     else 
-      render :json => {
+      json = {
         :success => false,
         :msg => message.errors.full_messages,
         :errors => message.errors.full_messages
       }
-    end    
+    end
+    
+    render :json => json
   end
   
   def reply 
-    parent = Message.find_by_id params[:parent_id]
+    parent = Message.find :first, :conditions => ["receiver_id = :receiver_id and id = :id", {:receiver_id => current_user.id, :id => params[:parent_id]}]
     receiver = User.find_by_login params[:receiver_id]
     if parent and receiver
       new_msg = parent.children.create(
@@ -53,6 +79,7 @@ class MessagesController < ApplicationController
       
       if new_msg.valid?
         render :json => { 
+          :id => new_msg.id,
           :success => true,
           :sender_default_photo => new_msg.sender.default_photo,
           :sender => new_msg.sender.login,

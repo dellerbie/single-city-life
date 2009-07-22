@@ -1,9 +1,13 @@
+<%
+	highlight_current_mailbox ||= true
+%>
+
 <ul id="mailboxes">
 	<li id="inboxMailbox">
-		<a href="<%= inbox_user_messages_path(current_user) %>">Inbox (<%= current_user.inbox_size %>)</a>
+		<a href="<%= inbox_user_messages_path(current_user) %>" <%= @from_inbox && highlight_current_mailbox ? 'class="current"' : '' %> >Inbox (<%= current_user.inbox_size %>)</a>
 	</li>
 	<li id="sentMailbox">
-		<a href="<%= outbox_user_messages_path(current_user) %>">Sent Messages (<%= current_user.outbox_size %>)</a>
+		<a href="<%= outbox_user_messages_path(current_user) %>" <%= @from_inbox && highlight_current_mailbox ? '' : 'class="current"' %> >Sent (<%= current_user.outbox_size %>)</a>
 	</li>
 	<div class="clearfix"></div>
 </ul>

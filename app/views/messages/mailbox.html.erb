@@ -1,0 +1,24 @@
+<% content_for(:javascripts) do %>
+	<%= javascript_include_tag 'messages/mailboxes' %>
+<% end %>
+
+<div id="yui-main">
+	<div class="yui-b">
+		<div class="yui-g">
+			<%= render :partial => "mailboxes" %>
+			<div id="mailbox">
+				<% if @messages.empty? %>
+					<span class="noMessages">You have no messages in your <%= @from_inbox ? 'inbox' : 'outbox' %>.</span>
+				<% else %>
+					<ul id="messages" class="messages">
+						<%= render :partial => "message", :locals => {:is_showing_message => false }, :collection => @messages %>
+						<div class="clearfix"></div>
+					</ul>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="ads" class="yui-b">
+	Ads
+</div>

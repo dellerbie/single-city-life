@@ -622,7 +622,7 @@ p.allFieldsRequiredMsg {
 	text-decoration: none;
 }
 
-#inbox, #messageDetails {
+#mailbox, #messageDetails {
 	background: #F7F7F7;
 	border: 1px solid #ddd;
 	border-top: 1px solid #ccc;
