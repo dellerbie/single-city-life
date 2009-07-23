@@ -17,7 +17,9 @@ ActiveRecord::Schema.define(:version => 20090719172107) do
     t.integer  "parent_id"
     t.string   "subject"
     t.string   "message"
-    t.boolean  "read"
+    t.boolean  "read",             :default => false
+    t.boolean  "sender_deleted",   :default => false
+    t.boolean  "receiver_deleted", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

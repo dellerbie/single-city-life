@@ -101,17 +101,15 @@ class MessagesController < ApplicationController
   end
   
   def destroy 
-    @message = current_user.messages.find(params[:id])
+    @message = current_user.received_messages.find_by_id params[:id]
     if @message
-      @message.destroy
-      render :json => {
-        :success => true
-      }
-    else 
-      render :json => {
-        :success => false,
-        :msg => "Could not find the message you are trying to delete."
-      }
+      @message.update_attribute(:receiver_deleted, true)
+    else
+      @message = current_user.sent_messages.find_by_id params[:id]
+      @message.update_attribute(:sender_deleted, true)
     end
+    
+    # even if there's an error, no big deal
+    render :json => { :success => true } 
   end
 end

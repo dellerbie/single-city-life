@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.load_paths += %W( #{RAILS_ROOT}/app/middleware )
-  config.time_zone = 'UTC'
+  config.time_zone = 'Eastern Time (US & Canada)'
   
   config.action_controller.session_store = :active_record_store
   config.action_controller.session = {

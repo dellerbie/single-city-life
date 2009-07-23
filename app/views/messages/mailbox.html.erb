@@ -1,5 +1,9 @@
 <% content_for(:javascripts) do %>
 	<%= javascript_include_tag 'messages/mailboxes' %>
+	<% javascript_tag do -%>
+		var AUTH_TOKEN = '<%= u form_authenticity_token -%>';
+		var USER_ID = '<%= current_user.login %>';
+	<% end -%>
 <% end %>
 
 <div id="yui-main">

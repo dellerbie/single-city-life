@@ -29,5 +29,37 @@ namespace :db do
         profile.msg_me_if = Populator.sentences(1)
       end
     end
+    
+  end
+  
+  task :populate_messages => :environment do 
+    require 'populator'
+    require 'faker'
+    
+    Message.delete_all
+    
+    derrick = User.find_by_login('derrick')
+    receiver = User.first :conditions => "login != 'derrick'"
+    
+    Message.populate 20 do |message|
+      message.sender_id = derrick.id
+      message.receiver_id = receiver.id
+      message.subject = Populator.sentences(1)
+      message.message = Populator.sentences(3)
+      message.read = true
+      message.sender_deleted = false
+      message.receiver_deleted = false
+      
+      Message.populate 1 do |reply|
+        reply.parent_id = message.id
+        reply.sender_id = receiver.id
+        reply.receiver_id = derrick.id
+        reply.subject = message.subject
+        reply.message = Populator.sentences(2)
+        reply.read = true
+        reply.sender_deleted = false
+        reply.receiver_deleted = false
+      end
+    end    
   end
 end

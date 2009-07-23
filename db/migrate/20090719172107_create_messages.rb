@@ -7,7 +7,8 @@ class CreateMessages < ActiveRecord::Migration
       t.string :subject
       t.string :message
       t.boolean :read, :default => false
-      t.integer :children_count
+      t.boolean :sender_deleted, :default => false
+      t.boolean :receiver_deleted, :default => false
 
       t.timestamps
     end

@@ -1,7 +1,10 @@
 <%
 	is_showing_message ||= false
-	showing_outbox = is_showing_message && !@from_inbox
-	user_to_show = showing_outbox ? message.sender : message.receiver
+	if @from_inbox
+		user_to_show = message.sender
+	else
+		user_to_show = is_showing_message ? message.sender : message.receiver
+	end
 %>
 
 <li id="<%= message.id %>">

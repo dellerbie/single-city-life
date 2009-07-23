@@ -2,8 +2,17 @@ class User < ActiveRecord::Base
   concerned_with :authentication
   has_one :profile, :dependent => :destroy
   
-  has_many :sent_messages, :class_name => "Message", :foreign_key => :sender_id, :dependent => :destroy, :order => 'created_at DESC'
-  has_many :received_messages, :class_name => "Message", :foreign_key => :receiver_id, :dependent => :destroy, :order => 'created_at DESC'
+  has_many  :sent_messages,
+            :class_name => "Message", 
+            :foreign_key => :sender_id, 
+            :conditions => "sender_deleted = false",
+            :order => 'created_at DESC'
+                            
+  has_many  :received_messages,
+            :class_name => "Message", 
+            :foreign_key => :receiver_id, 
+            :conditions => "receiver_deleted = false",
+            :order => 'created_at DESC'
   
   has_many :photos, :dependent => :destroy do
     def to_json_for_gallery
