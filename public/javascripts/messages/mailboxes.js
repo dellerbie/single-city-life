@@ -17,7 +17,11 @@ Ext.onReady(function() {
 							authenticity_token: AUTH_TOKEN
 						},
 						success: function() {
-							Ext.fly(messageLI).remove();
+							
+							Ext.fly(messageLI).fadeOut({
+								duration: 0.50,
+								remove: true
+							})
 							if(msgs.select('li').getCount() == 0) {
 								msgs.update('You have no messages.');
 							}
