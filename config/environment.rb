@@ -23,6 +23,6 @@ Rails::Initializer.run do |config|
   MAX_PHOTOS = 20
   BLANK_PHOTO = "/images/default-user-110-90.jpg"
   
-  ENV['RECAPTCHA_PUBLIC_KEY'] = "6LdZkAMAAAAAAI0ZOvmOykwOMZlrX1Z2bF8--HWx"
-  ENV['RECAPTCHA_PRIVATE_KEY'] = "6LdZkAMAAAAAAOBXoLmPfFWxcls4BUB_FLOiUU0V"
+  ENV['RECAPTCHA_PUBLIC_KEY'] = "6LdhiwcAAAAAAOmlgzZuAaktWl6HGwB2gZwEhxaN"
+  ENV['RECAPTCHA_PRIVATE_KEY'] = "6LdhiwcAAAAAAPLXvhOPgfzq6Ys8k3gJy6-1jTu5"
 end
