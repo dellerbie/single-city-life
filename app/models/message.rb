@@ -9,6 +9,10 @@ class Message < ActiveRecord::Base
   validates_length_of     :subject, :maximum => 50, :allow_blank => false
   validates_length_of     :message, :minimum => 1
   
+  def self.per_page
+    10
+  end
+  
   def root
     root = self.parent == nil ? self : self.parent.root
   end

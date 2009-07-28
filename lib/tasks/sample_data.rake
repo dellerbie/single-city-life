@@ -8,7 +8,7 @@ namespace :db do
     TABLES = %w(users profiles)
     
     # Starting id for the sample data
-    DERRICK_ID = 1000
+    USER_IDS = 1000
     
     desc "Load sample data"
     task :load => :environment do |t|
@@ -25,8 +25,8 @@ namespace :db do
     
     desc "Remove sample data"
     task :delete => :environment do |t|
-      Profile.delete_all("id = #{DERRICK_ID}")
-      User.delete_all("id = #{DERRICK_ID}")
+      Profile.delete_all("id > #{USER_IDS}")
+      User.delete_all("id > #{USER_IDS}")
     end
   end
 end

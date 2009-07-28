@@ -18,6 +18,7 @@
 						<%= render :partial => "message", :locals => {:is_showing_message => false }, :collection => @messages %>
 						<div class="clearfix"></div>
 					</ul>
+					<%= will_paginate @messages %>
 				<% end %>
 			</div>
 		</div>

@@ -5,9 +5,11 @@
 	else
 		user_to_show = is_showing_message ? message.sender : message.receiver
 	end
+	
+	unread_cls = (message.read? || is_showing_message || @from_inbox == false) ? '':'unread'
 %>
 
-<li id="<%= message.id %>">
+<li id="<%= message.id %>" class="<%= unread_cls %>">
 	<div class="photo">
 		<a href="<%= user_profile_path(user_to_show) %>">
 			<%= image_tag user_to_show.default_photo %>
@@ -16,7 +18,7 @@
 
 	<div class="metadata">
 		<%= link_to user_to_show.login, user_profile_path(user_to_show.login), :class => "from" %>
-		<span class="sentOn"><%= message.created_at.to_formatted_s(:long) %></span>
+		<span class="sentOn"><%= message.created_at.strftime("%b %d, %Y @ %I:%M:%S %p") %></span>
 	</div>
 
 	<div class="message">

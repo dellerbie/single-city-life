@@ -35,7 +35,7 @@
 							<%= link_to 'Photos', user_photos_path(current_user) %>
 						</div>
 						<div class="navigationNode">
-							<%= link_to 'Messages', inbox_user_messages_path(current_user) %>
+							<%= link_to "Messages #{num_unread_messages}", inbox_user_messages_path(current_user) %>
 						</div>
 					</div>
 					<% end %>

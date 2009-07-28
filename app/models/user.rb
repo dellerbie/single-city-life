@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
             :foreign_key => :receiver_id, 
             :conditions => "receiver_deleted = false",
             :order => 'created_at DESC'
-  
+            
   has_many :photos, :dependent => :destroy do
     def to_json_for_gallery
       json = {}
@@ -87,12 +87,9 @@ class User < ActiveRecord::Base
     }
   end
   
-  def inbox_size
-    Message.count :conditions => ["receiver_id = ?", id]
-  end
-  
-  def outbox_size
-    Message.count :conditions => ["sender_id = ?", id]
+  def num_unread_messages
+    #Message.count :conditions => ["receiver_id = ?", id]
+    received_messages.count :conditions => ["messages.read = ?", false]
   end
 
   protected

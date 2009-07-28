@@ -2,17 +2,18 @@ class MessagesController < ApplicationController
   before_filter :login_required
   
   def inbox
-    @messages = current_user.received_messages :order => 'created_at DESC'
+    @messages = current_user.received_messages.paginate :all, :page => params[:page] || 1, :order => 'created_at DESC'
     @from_inbox = true
     render :template => "messages/mailbox"
   end
   
   def outbox  
-    @messages = current_user.sent_messages :order => 'created_at DESC'
+    @messages = current_user.sent_messages.paginate :all, :page => params[:page] || 1, :order => 'created_at DESC'
     @from_inbox = false
     render :template => "messages/mailbox"
   end
   
+  # going to need some pagination in here, but more tricky
   def show
     @message = current_user.received_messages.find_by_id params[:id]
     if @message

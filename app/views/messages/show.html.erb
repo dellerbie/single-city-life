@@ -11,8 +11,7 @@
 <div id="yui-main">
 	<div class="yui-b">
 		<div class="yui-g">
-			<%= render :partial => "mailboxes", :locals => { :highlight_current_mailbox => false } %>
-			
+			<%= render :partial => "mailboxes"%>
 			<div id="messageDetails">
 				<div id="messageHeader">
 					<p class="subject"><%= h @message.subject %></p>
@@ -30,7 +29,7 @@
 				<% if @from_inbox %>
 					<div id="replyWrapper">
 						<form id="reply" action="#" method="POST" class="standardForm">
-							<input type="hidden" name="parent_id" value="<%= @message.parent.id ? @message.parent.id : @message.id %>" />
+							<input type="hidden" name="parent_id" value="<%= @message.parent ? @message.parent.id : @message.id %>" />
 							<input type="hidden" name="receiver_id" value="<%= receiver.login %>" />
 							<input type="hidden" name="sender_id" value="<%= current_user.login %>" />
 							<input type="hidden" name="subject" value="<%= @message.subject %>" />

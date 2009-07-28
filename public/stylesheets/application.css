@@ -222,10 +222,6 @@ a:hover {
 	display: block;
 }
 
-.profile .summary .info .name {
-	padding-right: 3px;
-}
-
 .profile .summary .lastLogin {
 	color: #aaa;
 	font-size: 93%;
@@ -610,7 +606,7 @@ p.allFieldsRequiredMsg {
 	border-width: 1px 1px 1px 0pt;
 }
 
-#mailboxes li a.current {
+#mailboxes #inbox a, #mailboxes #outbox a {
 	background: #6D84B4;
 	color: #fff;
 	border: 1px solid #3B5998;
@@ -618,7 +614,7 @@ p.allFieldsRequiredMsg {
 	border-right: 1px solid #5973A9;
 }
 
-#mailboxes li a.current:hover {
+#mailboxes #inbox a:hover, #mailboxes #outbox a:hover {
 	text-decoration: none;
 }
 
@@ -637,6 +633,10 @@ p.allFieldsRequiredMsg {
 	float: left;
 	width: 695px;
 	margin-bottom: 10px;
+}
+
+#messages li.unread {
+	background: #E4E8F1;
 }
 
 #messages .photo {
