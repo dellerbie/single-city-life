@@ -18,6 +18,6 @@ production:
   adapter: mysql
   encoding: utf8
   database: singles_production
-  username: root
-  password: 
+  username: singles
+  password: mauisun6
   host: localhost
