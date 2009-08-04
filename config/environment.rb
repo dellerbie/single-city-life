@@ -1,4 +1,4 @@
-RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 
 require File.join(File.dirname(__FILE__), 'boot')
 
@@ -13,6 +13,12 @@ Rails::Initializer.run do |config|
   }
   
   config.active_record.observers = :user_observer
+  
+  config.gem "rmagick"
+  config.gem "populator"
+  config.gem "faker"
+  config.gem "rspec"
+  config.gem "rspec-rails"
   
   APP_NAME = "Singles"
   DB_STRING_MAX_LENGTH = 255
