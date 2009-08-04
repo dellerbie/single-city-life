@@ -14,12 +14,6 @@ Rails::Initializer.run do |config|
   
   config.active_record.observers = :user_observer
   
-  config.gem "rmagick"
-  config.gem "populator"
-  config.gem "faker"
-  config.gem "rspec"
-  config.gem "rspec-rails"
-  
   APP_NAME = "Singles"
   DB_STRING_MAX_LENGTH = 255
   DB_TEXT_MAX_LENGTH = 40000

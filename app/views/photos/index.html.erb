@@ -8,7 +8,7 @@
 	<%= javascript_include_tag 'photos/SWFUploadHandlers' %>
 	<%= javascript_include_tag 'photos/PhotoBrowser' %>
 	<%= javascript_include_tag 'photos/GalleryIndexView' %>
-	<%= javascript_include_tag 'photos/App' %>
+	<%= javascript_include_tag 'photos/app' %>
 	<script type="text/javascript">
 		UPLOAD_URL = "<%= user_photos_path(current_user) -%>?_singles_session=<%= u request.session_options[:id] -%>";
 		USER_ID = "<%= current_user.to_param -%>";
