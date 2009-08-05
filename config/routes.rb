@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :users, :has_one => :profile
   map.resources :users do |user|
-    user.resources :photos, :member => { :assign_default => :put }
+    user.resources :photos, :member => { :assign_default => :put}, :collection => { :for_user => :get }
     user.resources :messages, :collection => { :inbox => :get, :outbox => :get, :reply => :post }
   end
   

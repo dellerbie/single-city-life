@@ -28,7 +28,7 @@ Ext.onReady(function() {
 	});
 	
 	var store = new Ext.data.JsonStore({
-	    url: '/users/' + USER_ID + '/photos.json',
+	    url: '/users/' + USER_ID + '/photos/for_user.json',
 	    root: 'photos',
 	    fields: ['thumb', 'title','full', 'tiny', 'id']
 	});

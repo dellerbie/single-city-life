@@ -13,7 +13,7 @@ Ext.onReady(function() {
 	morePhotosLinks.each(function(el) {
 		el.on('click', function() {
 			var userId = Ext.select('.summary .info .name').first().dom.innerHTML;
-			store.proxy.conn.url = "/users/" + userId + "/photos.json";
+			store.proxy.conn.url = "/users/" + userId + "/photos/for_user.json";
 			store.load();
 			
 			if(!photoBrowser) {
