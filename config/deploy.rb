@@ -65,7 +65,8 @@ namespace :backups do
   
   desc 'Backs up the photos'
   task :photos do
-    run "tar -czvf #{photos_backups_path}/photos_#{Time.now.strftime '%Y%m%dT%:%H%M%S'}.tgz #{shared_path}/photos"
+    filename = "photos_#{Time.now.strftime '%Y%m%dT%:%H%M%S'}.tgz" 
+    run "tar -czvf #{photos_backups_path}/#{filename} #{shared_path}/photos"
     get "#{photos_backups_path}/#{filename}", "/Users/derrick/backup/#{filename}"
   end
   
