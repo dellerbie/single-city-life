@@ -47,7 +47,7 @@ end
 desc 'Clears out outdated sessions > 12.hours.ago'
 task :clear_stale_sessions do 
   run <<-EOC
-    cd #{current_path} && ./script/runner -e #{rails_env} 'ActiveRecord::SessionStore::Session.delete_all(["updated_at < ?", 30.seconds.ago])'
+    cd #{current_path} && ./script/runner -e #{rails_env} 'ActiveRecord::SessionStore::Session.delete_all(["updated_at < ?", 12.hours.ago])'
   EOC
 end
 

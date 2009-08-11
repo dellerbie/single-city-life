@@ -14,15 +14,6 @@ Rails::Initializer.run do |config|
   
   config.active_record.observers = :user_observer
   
-  APP_NAME = "Singles"
-  DB_STRING_MAX_LENGTH = 255
-  DB_TEXT_MAX_LENGTH = 40000
-  HTML_TEXT_FIELD_SIZE = 20
-  TEXT_ROWS = 10
-  TEXT_COLS = 40
-  MAX_PHOTOS = 20
-  BLANK_PHOTO = "/images/default-user-110-90.jpg"
-  
   ENV['RECAPTCHA_PUBLIC_KEY'] = "6LdhiwcAAAAAAOmlgzZuAaktWl6HGwB2gZwEhxaN"
   ENV['RECAPTCHA_PRIVATE_KEY'] = "6LdhiwcAAAAAAPLXvhOPgfzq6Ys8k3gJy6-1jTu5"
 end
