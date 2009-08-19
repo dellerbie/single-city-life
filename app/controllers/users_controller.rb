@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     case
     when (!params[:activation_code].blank?) && user && !user.active?
       user.activate!
-      user.update_attribute(:enabled, true)
+      user.update_attributes!({:enabled => true})
       flash[:notice] = "Signup complete! Please sign in to continue."
       redirect_to new_session_path
     when params[:activation_code].blank?

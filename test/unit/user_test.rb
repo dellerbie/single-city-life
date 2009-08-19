@@ -15,6 +15,12 @@ class UserTest < ActiveSupport::TestCase
     user.reload
     assert_not_nil user.activation_code
   end
+  
+  def test_should_make_profile_upon_creation
+    user = create_user
+    user.reload
+    assert_not_nil user.profile
+  end
 
   def test_should_require_login
     assert_no_difference 'User.count' do
@@ -41,6 +47,13 @@ class UserTest < ActiveSupport::TestCase
     assert_no_difference 'User.count' do
       u = create_user(:email => nil)
       assert u.errors.on(:email)
+    end
+  end
+  
+  def test_should_require_email_confirmation
+    assert_no_difference 'User.count' do
+      u = create_user(:email_confirmation => nil)
+      assert u.errors.on(:email_confirmation)
     end
   end
 
@@ -146,24 +159,48 @@ class UserTest < ActiveSupport::TestCase
     assert u.errors.on(:email)
   end
   
+  def test_wtf
+    assert false
+  end
+  
   def test_should_change_email
     u = create_user
     params = {:user => {:email => 'quire@e.com', :email_confirmation => 'quire@e.com'}}
     u.change_email(params)
     assert u.valid?
   end
+  
+  def test_should_be_disabled_before_activation
+    u = create_user
+    assert !u.enabled?
+  end
+  
+  def test_to_param_should_return_login
+    u = create_user
+    assert_equal create_user.login, u.login
+  end
+  
+  def test_should_have_default_photo_upon_creation
+    assert_equal BLANK_PHOTO, create_user().default_photo
+  end
+  
+  def test_should_not_have_any_photos_upon_creation
+    assert !create_user().has_photos?
+  end
 
   protected
   def create_user(options = {})
-    record = User.new({ :login => 'qquire',
+    record = User.new({ 
+      :login => 'qquire',
       :email => 'quire@example.com',
       :email_confirmation => 'quire@example.com',
       :password => 'quire69',
       :password_confirmation => 'quire69',
       :birthdate => Date.new(1981, 9, 11),
       :gender => "Female",
-    :zipcode => "90210" }.merge(options))
-    record.save
+      :zipcode => "90210" 
+    }.merge(options))
+    record.save!
     record
   end
 end

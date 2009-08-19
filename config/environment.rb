@@ -14,6 +14,14 @@ Rails::Initializer.run do |config|
   
   config.active_record.observers = :user_observer
   
+  config.gem 'faker', :version => '>= 0.3.1', :lib => false
+  config.gem 'populator', :version => '>= 0.2.5', :lib => false
+  config.gem 'mysql', :version => '>= 2.7', :lib => false
+  config.gem 'rmagick', :version => '>= 2.11.0', :lib => false
+  config.gem 'rspec', :version => '>= 1.2.8', :lib => 'spec'
+  config.gem 'rspec-rails', :version => '>= 1.2.7.1', :lib => 'spec/rails'
+  config.gem 'passenger', :version => '>= 2.2.4', :lib => false
+  
   ENV['RECAPTCHA_PUBLIC_KEY'] = "6LdhiwcAAAAAAOmlgzZuAaktWl6HGwB2gZwEhxaN"
   ENV['RECAPTCHA_PRIVATE_KEY'] = "6LdhiwcAAAAAAPLXvhOPgfzq6Ys8k3gJy6-1jTu5"
 end

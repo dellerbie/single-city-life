@@ -5,7 +5,7 @@
 <div class="yui-g"> 
 	<div class="profileWrapper standalone">
 		<div class="profile">
-			<%= render :partial => "users/user" %>
+			<%= render :partial => "users/user", :locals => { :user => @user } %>
 		</div>
 	</div>
 </div>

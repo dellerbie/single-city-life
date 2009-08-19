@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
-  before_filter :login_required, :except => [:user_photos, :show]
-  session :cookie_only => false, :only => :create
+  before_filter :login_required, :except => [:for_user, :show]
+#  session :cookie_only => false, :only => :create
 
   def index
     respond_to do |format|

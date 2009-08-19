@@ -200,12 +200,12 @@ Ext.onReady(function() {
 			var profile = e.getTarget('.profile', 10, true);
 			var login = profile.select('.summary .info .name').first();
 			var userId = login.dom.innerHTML;
-			photoBrowserStore.proxy.conn.url = "/users/" + userId + "/photos.json";
+			photoBrowserStore.proxy.conn.url = "/users/" + userId + "/photos/for_user.json";
 			photoBrowserStore.load();
 			
 			if(!photoBrowser) {
 				photoBrowser = new PhotoBrowser({
-					title: userId + ' Photos',
+					title: userId + ' photos',
 					store: photoBrowserStore
 				});
 			}

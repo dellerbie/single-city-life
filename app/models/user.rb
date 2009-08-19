@@ -88,7 +88,6 @@ class User < ActiveRecord::Base
   end
   
   def num_unread_messages
-    #Message.count :conditions => ["receiver_id = ?", id]
     received_messages.count :conditions => ["messages.read = ?", false]
   end
 

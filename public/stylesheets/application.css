@@ -36,18 +36,20 @@ a:hover {
 	font-size: 93%;
 }
 
-#hd #logo {
+#logo {
 	display: block;
 	float: left;
-	width: 105px;
+	width: 135px;
+	margin-right: 20px;
+	font-weight: bold;
 }
 
-#hd #logo a {
+#logo a {
 	color: #fff;
 	text-decoration: none;
 	font-size: 153.9%;
 	display: block;
-	padding: 3px 0px 5px 15px;
+	padding: 1px 0px 5px 15px;
 }
 
 #primaryNavigation {
