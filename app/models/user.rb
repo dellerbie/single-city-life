@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
       :turn_offs => self.profile.turn_offs,
       :msg_me_if => self.profile.msg_me_if,
       :default_photo => self.default_photo,
-      :has_photos => has_photos?,
+      #:has_photos => has_photos?,
       :n_photos => n_photos
     }
   end

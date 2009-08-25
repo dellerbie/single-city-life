@@ -1,2 +1,5 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+Ext.onReady(function() {
+	Ext.Ajax.on('requestexception', function() {
+		Ext.Msg.alert('We suck', 'Sorry there was an error processing your request.  Please try again later.');
+	})
+});

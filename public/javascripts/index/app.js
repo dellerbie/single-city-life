@@ -235,6 +235,7 @@ Ext.onReady(function() {
 				}
 				sendMsgForm.receiver_id = login;
 				sendMsgWindow.show();
+				sendMsgWindow.center();
 			}
 		}
 	});
@@ -252,6 +253,9 @@ Ext.onReady(function() {
 			limit: 10,
 			authenticity_token: AUTH_TOKEN
 		});
+		
+		console.log('url from submit: ' + FILTER_URL);
+		console.dir(params);
 		usersStore.proxy.conn.url = FILTER_URL;
 		usersStore.load({
 			params: params
@@ -288,6 +292,9 @@ Ext.onReady(function() {
 				limit: 10,
 				authenticity_token: AUTH_TOKEN
 			});
+			console.log('url => ' + url);
+			console.log('params');
+			console.dir(params);
 			usersStore.proxy.conn.url = url;
 			usersStore.load({
 				params: params

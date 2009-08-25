@@ -11,6 +11,8 @@ config.action_view.cache_template_loading            = true
 
 config.logger = Logger.new(config.log_path, 10, 10.megabytes)
 
+config.gem 'passenger', :version => '>= 2.2.4', :lib => false
+
 HOST = "http://www.singlecitylife.com"
 
 # See everything in the log (default is :info)

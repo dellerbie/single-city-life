@@ -2,7 +2,11 @@ class IndexController < ApplicationController
   skip_before_filter :login_required, :login_from_cookie
   
   def index
-    @users = User.paginate :all, :page => params[:page] || 1, :order => 'id DESC', :conditions => ['enabled = ?', true]
+    @users = User.paginate  :all, 
+                            :page => params[:page] || 1, 
+                            :order => 'users.id DESC', 
+                            :include => [:profile],
+                            :conditions => ['users.enabled = ? and profiles.completed = ?', true, true]
     respond_to do |format|
       format.html
       format.json {
@@ -41,7 +45,7 @@ class IndexController < ApplicationController
     query.profile.and.best_feature_in(params[:best_feature]) if params[:best_feature]
     query.profile.and.body_type_in(params[:body_type]) if params[:body_type]
     query.profile.and.ethnicity_in(params[:ethnicity]) if params[:ethnicity]
-    users = query.paginate :page => params[:page] || 1, :order => 'users.id DESC', :conditions => ['enabled = ?', true]
+    users = query.paginate :all, :page => params[:page] || 1, :order => 'users.id DESC', :include => [:profile], :conditions => ['users.enabled = ?', true]
 
     render :json => get_users_json(users)
   end
@@ -53,6 +57,7 @@ class IndexController < ApplicationController
     if users
       json[:totalCount] = users.total_entries
       json[:users] = users.collect do |user|
+        puts user.attributes
         user.to_json
       end
     end

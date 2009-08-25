@@ -6,7 +6,8 @@ class Photo < ActiveRecord::Base
                     :thumbnails     => { :thumb => '160x120', :small => '110x90', :tiny => '50>' },
                     :max_size       => 3.megabytes,
                     :content_type   => :image,
-                    :processor      => 'Rmagick'               
+                    :processor      => 'Rmagick'
+                    
   validates_as_attachment
   
   named_scope :latest, :order => 'created_at DESC'

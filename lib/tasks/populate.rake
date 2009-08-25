@@ -1,10 +1,17 @@
 namespace :db do
+  
   desc "Erase and fill database"
-  task :populate => :environment do
+  task :populate => [:environment, :unpopulate, :populate_dummy_users, :populate_test_users, :populate_messages]
+  
+  desc "Erases the data in the database"
+  task :unpopulate do
+    [User, Profile, Message].each(&:delete_all)
+  end
+  
+  desc "Erase and fill database"
+  task :populate_dummy_users => :environment do
     require 'populator'
     require 'faker'
-    
-    [User, Profile].each(&:delete_all)
     
     User.populate 100 do |user|
       user.login = Faker::Name.name
@@ -27,12 +34,13 @@ namespace :db do
         profile.turn_ons = Populator.sentences(1)
         profile.turn_offs = Populator.sentences(1)
         profile.msg_me_if = Populator.sentences(1)
+        profile.completed = true
       end
-    end
-    
+    end  
   end
   
-  task :populate_messages => :environment do 
+  desc "Loads up test private messages"
+  task :populate_messages do 
     require 'populator'
     require 'faker'
     
@@ -61,5 +69,22 @@ namespace :db do
         reply.receiver_deleted = false
       end
     end    
+  end
+  
+  desc "Load test users"
+  task :populate_test_users do |t|
+      DATA_DIRECTORY = "#{RAILS_ROOT}/lib/tasks/sample_data"
+      TABLES = %w(users profiles)
+      USER_IDS = 1000
+    
+      class_name = nil  # Use nil to get Rails to figure out the class name
+      TABLES.each do |table_name|
+        fixture = Fixtures.new(ActiveRecord::Base.connection,
+                               table_name, 
+                               class_name, 
+                               File.join(DATA_DIRECTORY, table_name.to_s))
+        fixture.insert_fixtures
+        puts "Loaded data from #{table_name}.yml"
+      end
   end
 end

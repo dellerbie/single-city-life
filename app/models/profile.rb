@@ -7,7 +7,7 @@ class Profile < ActiveRecord::Base
   INTERESTED_IN = ["Men", "Women", "Both"]
   ETHNICITIES = [ "African-American", "White", "Asian", "Indian", "Pacific Islander", "Hispanic", "Carribbean", "Native American"].sort!
   BODY_TYPES = ["Thin", "Petite", "Athletic", "Curvy", "Little Extra", "Big"]
-  BEST_FEATURES = ["Smile", "Face", "Hair", "Stomache", "Legs", "Personality", "Butt", "Chest"].sort!
+  BEST_FEATURES = ["Smile", "Face", "Hair", "Stomach", "Legs", "Personality", "Butt", "Chest"].sort!
   STRING_FIELDS = %w(loves_when hates_when turn_ons turn_offs msg_me_if)
   MAX_STRING_LENGTH = 150
   
