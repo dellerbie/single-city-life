@@ -67,10 +67,10 @@ class MessagesController < ApplicationController
   end
   
   def reply 
-    parent = Message.find :first, :conditions => ["receiver_id = :receiver_id and id = :id", {:receiver_id => current_user.id, :id => params[:parent_id]}]
+    reply_to_message = Message.find :first, :conditions => ["receiver_id = :receiver_id and id = :id", {:receiver_id => current_user.id, :id => params[:message_id]}]
     receiver = User.find_by_login params[:receiver_id]
-    if parent and receiver
-      new_msg = parent.children.create(
+    if reply_to_message and receiver
+      new_msg = reply_to_message.parent.children.create(
         :subject => params[:subject],
         :message => params[:message],
         :receiver => receiver,

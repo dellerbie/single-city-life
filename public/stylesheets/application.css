@@ -728,6 +728,15 @@ p.allFieldsRequiredMsg {
 	font-weight: bold;
 }
 
+.error {
+	border: 1px solid #E2223B;
+	padding: 10px;
+	margin: 0.5em auto;
+	width: 450px;
+	background: #F6BCC3;
+	font-weight: bold;
+}
+
 /* 
 ------------------------------------------
 =MISC

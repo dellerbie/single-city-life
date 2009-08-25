@@ -64,8 +64,10 @@
 				<div class="clearfix"></div>
 			</div>
 			<div id="bd">
-				<% if flash[:notice] || flash[:error] -%>
-					<p class="notice"><%= flash[:notice] || flash[:error] %></p>
+				<% if flash[:notice] -%>
+					<p class="notice"><%= flash[:notice] %></p>
+				<% elsif flash[:error] -%>
+					<p class="error"><%= flash[:error] %></p>
 				<% end -%>
 				<%= @content_for_layout %>
 			</div>

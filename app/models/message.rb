@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
   validates_presence_of   :sender
   validates_presence_of   :receiver
   validates_length_of     :subject, :maximum => 50, :allow_blank => false
-  validates_length_of     :message, :minimum => 1
+  validates_presence_of   :message
   
   def self.per_page
     10

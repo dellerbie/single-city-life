@@ -2,14 +2,15 @@ class IndexController < ApplicationController
   skip_before_filter :login_required, :login_from_cookie
   
   def index
-    @users = User.paginate  :all, 
-                            :page => params[:page] || 1, 
-                            :order => 'users.id DESC', 
-                            :include => [:profile],
-                            :conditions => ['users.enabled = ? and profiles.completed = ?', true, true]
     respond_to do |format|
       format.html
       format.json {
+        @users = User.paginate :all, 
+                        :page => params[:page] || 1, 
+                        :order => 'users.id DESC', 
+                        :include => [:profile],
+                        :conditions => ['users.enabled = ? and profiles.completed = ?', true, true]
+                        
         render :json => get_users_json(@users)
       }
     end
@@ -18,7 +19,7 @@ class IndexController < ApplicationController
   def find_by_login
     username = params[:username]
     if username.blank?
-      @users = User.paginate :all, :page => 1, :order => 'id DESC', :conditions => ['enabled = ?', true]
+      @users = User.paginate :all, :page => 1, :order => 'users.id DESC', :include => [:profile], :conditions => ['users.enabled = ? and profiles.completed = ?', true, true]
       json = get_users_json(@users)
       render :json => json
     else
@@ -33,19 +34,19 @@ class IndexController < ApplicationController
   
   def filter
     query = User.query
-    query.and.gender_in(params[:gender]) if params[:gender]
-    query.and.default_photo_id_is_not_null if params[:has_pic] == 'y' 
-
-    age_ranges = get_age_ranges(params[:age_begin], params[:age_end])
-    unless age_ranges.empty?
-      query.and.birthdate_lte(age_ranges[:age_begin]).birthdate_gte(age_ranges[:age_end])
-    end
+     query.and.gender_in(params[:gender]) if params[:gender]
+     query.and.default_photo_id_is_not_null if params[:has_pic] == 'y' 
     
-    query.join(:profile)
-    query.profile.and.best_feature_in(params[:best_feature]) if params[:best_feature]
-    query.profile.and.body_type_in(params[:body_type]) if params[:body_type]
-    query.profile.and.ethnicity_in(params[:ethnicity]) if params[:ethnicity]
-    users = query.paginate :all, :page => params[:page] || 1, :order => 'users.id DESC', :include => [:profile], :conditions => ['users.enabled = ?', true]
+     age_ranges = get_age_ranges(params[:age_begin], params[:age_end])
+     unless age_ranges.empty?
+       query.and.birthdate_lte(age_ranges[:age_begin]).birthdate_gte(age_ranges[:age_end])
+     end
+     
+     query.join(:profile)
+     query.profile.and.best_feature_in(params[:best_feature]) if params[:best_feature]
+     query.profile.and.body_type_in(params[:body_type]) if params[:body_type]
+     query.profile.and.ethnicity_in(params[:ethnicity]) if params[:ethnicity]
+     users = query.paginate :all, :page => params[:page] || 1, :order => 'users.id DESC', :include => [:profile], :conditions => ['users.enabled = ?', true]
 
     render :json => get_users_json(users)
   end
@@ -57,7 +58,6 @@ class IndexController < ApplicationController
     if users
       json[:totalCount] = users.total_entries
       json[:users] = users.collect do |user|
-        puts user.attributes
         user.to_json
       end
     end

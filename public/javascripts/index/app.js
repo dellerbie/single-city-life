@@ -40,6 +40,8 @@ Ext.onReady(function() {
 		store: usersStore,
 		listeners: {
 			beforechange: function(paginator, params) {
+				// remember the last query
+				Ext.applyIf(params, usersStore.lastOptions.params);
 				params['authenticity_token'] = AUTH_TOKEN;
 				params['page'] = Math.floor(params.start / params.limit) + 1;
 				paginator.store.load({params:params});
@@ -245,6 +247,7 @@ Ext.onReady(function() {
 		var params = Ext.Ajax.serializeForm('filtersForm');
 		
 		Ext.History.add(FILTER_URL + tokenDelimeter + params);
+		CHANGE_HISTORY = false;
 	
 		params = Ext.urlDecode(params);
 		Ext.apply(params, {
@@ -254,12 +257,10 @@ Ext.onReady(function() {
 			authenticity_token: AUTH_TOKEN
 		});
 		
-		console.log('url from submit: ' + FILTER_URL);
-		console.dir(params);
 		usersStore.proxy.conn.url = FILTER_URL;
 		usersStore.load({
 			params: params
-		});
+		}); 
 	});
 	
 	Ext.get('usernameForm').on('submit', function(e) {
@@ -267,7 +268,7 @@ Ext.onReady(function() {
 		var params = Ext.Ajax.serializeForm('usernameForm');
 		
 		Ext.History.add(FIND_BY_LOGIN_URL + tokenDelimeter + params);
-		
+		CHANGE_HISTORY = false;
 		params = Ext.urlDecode(params);
 		Ext.apply(params, {
 			page: 1,
@@ -282,6 +283,10 @@ Ext.onReady(function() {
 	});
 	
 	Ext.History.on('change', function(token) {
+		if(CHANGE_HISTORY === false) {
+			CHANGE_HISTORY = true;
+			return;
+		}
 		if(token) {
 			var parts = token.split(tokenDelimeter);
 			var url = parts[0];
@@ -292,9 +297,6 @@ Ext.onReady(function() {
 				limit: 10,
 				authenticity_token: AUTH_TOKEN
 			});
-			console.log('url => ' + url);
-			console.log('params');
-			console.dir(params);
 			usersStore.proxy.conn.url = url;
 			usersStore.load({
 				params: params

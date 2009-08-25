@@ -30,6 +30,7 @@
 					<div id="replyWrapper">
 						<form id="reply" action="#" method="POST" class="standardForm">
 							<input type="hidden" name="parent_id" value="<%= @message.parent ? @message.parent.id : @message.id %>" />
+							<input type="hidden" name="message_id" value="<%= @message.id %>" />
 							<input type="hidden" name="receiver_id" value="<%= receiver.login %>" />
 							<input type="hidden" name="sender_id" value="<%= current_user.login %>" />
 							<input type="hidden" name="subject" value="<%= @message.subject %>" />
