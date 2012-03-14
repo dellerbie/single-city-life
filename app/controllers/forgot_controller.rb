@@ -51,7 +51,7 @@ class ForgotController < ApplicationController
     
     if param_posted?(:user) && @user.update_attributes(params[:user])
         flash[:notice] = "Your password has been reset."
-        redirect_to new_session_path
+        redirect_to users_path
     else 
       render :action => "edit", :id => reset_code
     end

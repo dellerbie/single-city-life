@@ -1,3 +1,0 @@
-r14 - 27 Sep 2007
-
-Added "where" alias for "query" method, so this is possible: User.where.name_like "%max%"

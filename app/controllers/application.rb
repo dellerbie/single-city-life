@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   before_filter :login_required 
   
-#  protect_from_forgery :secret => '_singles_session'
+  protect_from_forgery :secret => '_singles_session'
   
   helper :all
   

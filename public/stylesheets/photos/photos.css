@@ -201,7 +201,7 @@ ul.gallery li.photo-over img, ul.gallery li.photo-selected img {
 }
 
 a.progressCancel {
-	background-image:url(/images/cancelbutton.gif);
+	background-image:url(../images/cancelbutton.gif);
 	background-position:-14px 0;
 	background-repeat:no-repeat;
 	display:block;

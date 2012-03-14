@@ -19,14 +19,6 @@ a:hover {
 	text-decoration: underline;
 }
 
-.green {
-	color: #009900;
-}
-
-.red {
-	color: #990000;
-}
-
 /* 
 ------------------------------------------
 =HEADER
@@ -36,20 +28,18 @@ a:hover {
 	font-size: 93%;
 }
 
-#logo {
+#hd #logo {
 	display: block;
 	float: left;
-	width: 135px;
-	margin-right: 20px;
-	font-weight: bold;
+	width: 105px;
 }
 
-#logo a {
+#hd #logo a {
 	color: #fff;
 	text-decoration: none;
 	font-size: 153.9%;
 	display: block;
-	padding: 1px 0px 5px 15px;
+	padding: 3px 0px 5px 15px;
 }
 
 #primaryNavigation {
@@ -121,7 +111,7 @@ a:hover {
 ------------------------------------------*/
 #filters {
 	background: #F7F7F7;
-	padding: 5px;
+	padding: 10px 10px 10px 10px;
 	font-size: 85%;
 	border: 1px solid #eee;
 }
@@ -146,17 +136,16 @@ a:hover {
 	color: #000;
 }
 
-#filters .submit {
+#filters input.submit {
 	display: block;
 	margin-top: 10px;
 }
-#x-history-frame {
-	height: 1px;
-	left: 0;
-	position: absolute;
-	top: -1px;
-	visibility: hidden;
-	width: 1px;
+
+#zipcodeForm .milesWrapper {
+	margin-bottom: 5px;
+}
+
+#zipcodeForm .zipcodeWrapper {
 }
 
 /* 
@@ -166,9 +155,10 @@ a:hover {
 #profileWrapper {
 	border-left: 1px solid #eee; 
 	border-right: 1px solid #eee; 
+	padding: 10px;
 	background: #f7f7f7;
+	margin: 10px 0px;
 	float: left;
-	margin-left: 10px;
 }
 
 #profiles {
@@ -184,13 +174,9 @@ a:hover {
 	background: #fff;
 }
 
-#profiles .profile-view-over {
-	background: #f7f7f7;
-}
-
 .profile .img {
 	float: left;
-	width: 160px;
+	width: 110px;
 	text-align: center;
 }
 
@@ -198,8 +184,8 @@ a:hover {
 	width: 165px;
 }
 
-.profile .img .separator {
-	padding: 0px 5px;
+.profile .img a {
+	display: block;
 }
 
 .profile .img img {	
@@ -213,7 +199,7 @@ a:hover {
 	float: left;
 	padding: 2px 0px 0px 20px;
 	overflow: hidden;
-	width: 350px;
+	width: 400px;
 }
 
 .profile .summary .info {
@@ -253,6 +239,7 @@ a:hover {
 	margin-top: 5px; 
 	padding-top: 5px;
 	padding-left: 10px;
+/*	display: none; */
 }
 
 .profile .moreInfo .info {
@@ -608,7 +595,7 @@ p.allFieldsRequiredMsg {
 	border-width: 1px 1px 1px 0pt;
 }
 
-#mailboxes #inbox a, #mailboxes #outbox a {
+#mailboxes li a.current {
 	background: #6D84B4;
 	color: #fff;
 	border: 1px solid #3B5998;
@@ -616,11 +603,11 @@ p.allFieldsRequiredMsg {
 	border-right: 1px solid #5973A9;
 }
 
-#mailboxes #inbox a:hover, #mailboxes #outbox a:hover {
+#mailboxes li a.current:hover {
 	text-decoration: none;
 }
 
-#mailbox, #messageDetails {
+#inbox, #messageDetails {
 	background: #F7F7F7;
 	border: 1px solid #ddd;
 	border-top: 1px solid #ccc;
@@ -628,7 +615,7 @@ p.allFieldsRequiredMsg {
 	padding: 10px;
 }
 
-#messages li {
+ul.messages li {
 	background: #fff;
 	border: 1px solid #ddd;
 	padding: 5px;
@@ -637,63 +624,60 @@ p.allFieldsRequiredMsg {
 	margin-bottom: 10px;
 }
 
-#messages li.unread {
-	background: #E4E8F1;
-}
-
-#messages .photo {
+.messages .photo {
 	float: left;
-	width: 160px;
+	width: 80px;
 	text-align: center;
 	padding-right: 15px;
 }
 
-#messages .photo img {
+.messages .photo img {
 	padding: 4px;
 	background: #fff;
 	border: 1px solid #ccc;
 }
 
-#messages .metadata {
+.messages .metadata {
 	float: left;
 	width: 175px;
 }
 
-#messages .metadata .from {
+.messages .metadata .from {
 	display: block;
 }
 
-#messages .metadata .sentOn {
+.messages .metadata .sentOn {
 	display: block;
 	color: #777;
 	font-size: 85%;
 }
 
-#messages .message {
+.messages .message {
 	float: left;
-	width: 320px;
+	width: 400px;
 }
 
-#messages .message .subject {
+.messages .message .subject {
 	display: block;
 }
 
-#messages .message .snippet {
+.messages .message .snippet {
+	display: block;
 	color: #8D9CCF;
 }
 
-#messages .messageActions {
+.messages .messageActions {
 	float: right;
 }
 
-#messages a.delete {
+.messages a.delete {
 	background: transparent url(../images/x_to_hide.gif) no-repeat scroll 0%;
 	display: block;
 	height: 14px;
 	width: 13px;
 }
 
-#messages a.delete:hover {
+.messages a.delete:hover {
 	background: #3B5998 url(../images/x_to_hide_hover.gif) no-repeat scroll 0%;
 }
 
@@ -707,14 +691,6 @@ p.allFieldsRequiredMsg {
 	padding-bottom: 5px;
 }
 
-#replyWrapper {
-	clear: both;
-}
-
-#messageStatus {
-	padding-left: 5px;
-}
-
 /* 
 ------------------------------------------
 =FLASH NOTICES
@@ -725,15 +701,6 @@ p.allFieldsRequiredMsg {
 	margin: 0.5em auto;
 	width: 450px;
 	background: #FFF9D7;
-	font-weight: bold;
-}
-
-.error {
-	border: 1px solid #E2223B;
-	padding: 10px;
-	margin: 0.5em auto;
-	width: 450px;
-	background: #F6BCC3;
 	font-weight: bold;
 }
 

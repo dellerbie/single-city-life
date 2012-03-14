@@ -7,9 +7,7 @@ class User
 
   VALID_GENDERS = ["Male", "Female"]
   START_YEAR = 1900
-  END_YEAR = Time.now.years_ago(18).year
   VALID_DATES = DateTime.new(START_YEAR)..DateTime.now
-  VALID_AGES = (18..100).to_a
 
   validates_presence_of     :login
   validates_uniqueness_of   :login

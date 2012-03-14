@@ -9,20 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090719172107) do
-
-  create_table "messages", :force => true do |t|
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
-    t.integer  "parent_id"
-    t.string   "subject"
-    t.string   "message"
-    t.boolean  "read",             :default => false
-    t.boolean  "sender_deleted",   :default => false
-    t.boolean  "receiver_deleted", :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20090109231626) do
 
   create_table "photos", :force => true do |t|
     t.integer  "user_id"
@@ -78,10 +65,9 @@ ActiveRecord::Schema.define(:version => 20090719172107) do
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
     t.string   "password_reset_code",       :limit => 40
-    t.boolean  "enabled",                                  :default => false
+    t.boolean  "enabled",                                  :default => true
     t.date     "birthdate"
     t.string   "gender"
-    t.integer  "default_photo_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

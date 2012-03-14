@@ -1,5 +1,11 @@
 class AccountController < ApplicationController
    
+  def index
+  end
+  
+  def edit
+  end
+  
   def update_password
     @user = current_user
     @user.change_password(params)

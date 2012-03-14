@@ -11,17 +11,13 @@
 		
 		<%= javascript_include_tag "ext-2.2/adapter/ext/ext-base.js"%>
 		<%= javascript_include_tag "ext-2.2/ext-all-debug.js"%>
-		<%= javascript_include_tag "application.js"%>
-		<script type="text/javascript">
-			var LOGGED_IN = <%= logged_in? %>;
-		</script>
 		<%= yield :javascripts %>
 	</head>
 	<body>
-		<div id="doc4" class="yui-t4"> 
+		<div id="doc4" class="yui-t1">
 			<div id="hd">
 				<div id="logo">
-					<%= link_to "SingleCityLife", root_url %>
+					<%= link_to "Singles", root_url %>
 				</div>
 				<div id="navigation">
 					<% if logged_in? %>
@@ -36,7 +32,7 @@
 							<%= link_to 'Photos', user_photos_path(current_user) %>
 						</div>
 						<div class="navigationNode">
-							<%= link_to "Messages #{num_unread_messages}", inbox_user_messages_path(current_user) %>
+							<a href="messages.html">Messages (322)</a>
 						</div>
 					</div>
 					<% end %>
@@ -64,10 +60,8 @@
 				<div class="clearfix"></div>
 			</div>
 			<div id="bd">
-				<% if flash[:notice] -%>
-					<p class="notice"><%= flash[:notice] %></p>
-				<% elsif flash[:error] -%>
-					<p class="error"><%= flash[:error] %></p>
+				<% if flash[:notice] || flash[:error] -%>
+					<p class="notice"><%= flash[:notice] || flash[:error] %></p>
 				<% end -%>
 				<%= @content_for_layout %>
 			</div>

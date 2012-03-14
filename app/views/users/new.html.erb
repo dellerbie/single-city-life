@@ -15,7 +15,7 @@
 					<%= f.text_field 'email' %>
 				</div>
 				<div class="formRow">
-					<%= label_tag 'email_confirmation', 'Confirm Email' %>
+					<%= label_tag 'email_confirmation', 'Confirm' %>
 					<%= f.text_field "email_confirmation" %>
 				</div>
 				<div class="formRow">
@@ -35,7 +35,7 @@
 					<%= label_tag 'birthdate' %>
 					<%= f.date_select 	:birthdate,
 										:start_year => User::START_YEAR,
-										:end_year => User::END_YEAR,
+										:end_year => Time.now.year,
 										:order => [:month, :day, :year], 
 										:include_blank => true %>
 				</div>

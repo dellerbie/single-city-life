@@ -8,9 +8,9 @@
 	<%= javascript_include_tag 'photos/SWFUploadHandlers' %>
 	<%= javascript_include_tag 'photos/PhotoBrowser' %>
 	<%= javascript_include_tag 'photos/GalleryIndexView' %>
-	<%= javascript_include_tag 'photos/app' %>
+	<%= javascript_include_tag 'photos/App' %>
 	<script type="text/javascript">
-		UPLOAD_URL = "<%= user_photos_path(current_user) -%>?_singles_session=<%= u request.session_options[:id] -%>";
+		UPLOAD_URL = "<%= user_photos_path(current_user) -%>?_singles_session=<%= u session.session_id -%>";
 		USER_ID = "<%= current_user.to_param -%>";
 		AUTH_TOKEN = '<%= u form_authenticity_token -%>';
 		MAX_PHOTOS = '<%= MAX_PHOTOS %>';
@@ -20,11 +20,12 @@
 <div class="yui-g">
 	<div class="selector">
 		<h2>Your Photos</h2>
+		<img id="defaultPhoto" src="/images/dee.jpg" width="160" height="120" />
 	</div>
 	
 	<div id="addPhotosContainer">
 		<div id="fileProgressContainer"></div>
-		<div id="addPhotosBtn"></div>
+		<input id="addPhotosBtn" type="button" value="Add Photos"/>
 	</div>
 	
 	<div id="photoCounter"></div>

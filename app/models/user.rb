@@ -1,19 +1,6 @@
 class User < ActiveRecord::Base
   concerned_with :authentication
   has_one :profile, :dependent => :destroy
-  
-  has_many  :sent_messages,
-            :class_name => "Message", 
-            :foreign_key => :sender_id, 
-            :conditions => "sender_deleted = false",
-            :order => 'created_at DESC'
-                            
-  has_many  :received_messages,
-            :class_name => "Message", 
-            :foreign_key => :receiver_id, 
-            :conditions => "receiver_deleted = false",
-            :order => 'created_at DESC'
-            
   has_many :photos, :dependent => :destroy do
     def to_json_for_gallery
       json = {}
@@ -29,10 +16,6 @@ class User < ActiveRecord::Base
   end
   
   after_create :make_profile
-  
-  def self.per_page
-    10
-  end
   
   def to_param
     self.login
@@ -60,14 +43,7 @@ class User < ActiveRecord::Base
   def reassign_default_photo
     new_default_photo = self.photos.first
     self.default_photo_id = new_default_photo ? new_default_photo.id : nil
-  end
-  
-  def has_photos?
-    n_photos > 0
-  end
-  
-  def n_photos
-    self.photos.size
+    self.save!
   end
   
   def to_json
@@ -87,10 +63,14 @@ class User < ActiveRecord::Base
     }
   end
   
-  def num_unread_messages
-    received_messages.count :conditions => ["messages.read = ?", false]
+  def has_photos?
+    n_photos > 0
   end
-
+  
+  def n_photos
+    self.photos.size
+  end
+  
   protected
   
   def make_profile
